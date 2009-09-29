@@ -530,7 +530,7 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
         filterGeometry = wktReader.Read(geomstr);
       }
       STRING geometryname = ClassDef->GetDefaultGeometryPropertyName();
-      INT32 selectionVariant = MgFeatureSpatialOperations::EnvelopeIntersects;
+      
       
       if( geometryname.length() >0 )
       {
@@ -542,8 +542,9 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
         if( filterGeometry.p != NULL )
         {
           //GEOMETRY ENVELOPEINTERSECTS GeomFromText(' POLYGON(())')
-          //FilterStr = geometryname + L" ENVELOPEINTERSECTS GeomFromText('" + fgeomstr + L"')";
-          FilterStr = geometryname + L" INTERSECTS GeomFromText('" + fgeomstr + L"')";
+          FilterStr = geometryname + L" ENVELOPEINTERSECTS GeomFromText('" + fgeomstr + L"')";
+          //FilterStr = geometryname + L" INTERSECTS GeomFromText('" + fgeomstr + L"')";
+          INT32 selectionVariant = MgFeatureSpatialOperations::EnvelopeIntersects;
           if( qryOptions ) qryOptions->SetSpatialFilter(geometryname,filterGeometry,selectionVariant);
         }
       }
@@ -558,7 +559,7 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
     {
        // create geometry spatial filter
       STRING geometryname = ClassDef->GetDefaultGeometryPropertyName();
-      INT32 selectionVariant = MgFeatureSpatialOperations::EnvelopeIntersects;
+      
       
       if( geometryname.length() >0 )
       {
@@ -576,6 +577,7 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
         {
           //GEOMETRY ENVELOPEINTERSECTS GeomFromText(' POLYGON(())')
           FilterStr = geometryname + L" INTERSECTS GeomFromText('" + geomstr + L"')";
+          INT32 selectionVariant = MgFeatureSpatialOperations::Intersects;
           if( qryOptions ) qryOptions->SetSpatialFilter(geometryname,filterGeometry,selectionVariant);
         }
       }
@@ -594,7 +596,7 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
       {
       // create geometry spatial filter
         STRING geometryname = ClassDef->GetDefaultGeometryPropertyName();
-        INT32 selectionVariant = MgFeatureSpatialOperations::EnvelopeIntersects;
+        
         
         if( geometryname.length() >0 )
         {
@@ -612,6 +614,7 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
           {
             //GEOMETRY ENVELOPEINTERSECTS GeomFromText(' POLYGON(())')
             FilterStr = geometryname + L" ENVELOPEINTERSECTS GeomFromText('" + geomstr + L"')";
+            INT32 selectionVariant = MgFeatureSpatialOperations::EnvelopeIntersects;
             if( qryOptions ) qryOptions->SetSpatialFilter(geometryname,filterGeometry,selectionVariant);
           }
         }
