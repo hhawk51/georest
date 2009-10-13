@@ -860,7 +860,8 @@ void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_Re
         string uriquery;
         MgUtil::WideCharToMultiByte(wuriquery,uriquery);
         
-        string prev_uri = UriBase + rest_uri_part + resturiparam + "/" + ".html" + "?" + uriquery;
+        //string prev_uri = UriBase + rest_uri_part + resturiparam + "/" + ".html" + "?" + uriquery;
+        string prev_uri = "?" + uriquery; // use only query part so link will be correct in case of url rewrites
         
         ctemplate::TemplateDictionary* dict_section = dict_main.AddSectionDictionary("PREVIOUS_PAGE_SECTION");
         string dictkey = "PREVIOUS_PAGE";  
@@ -900,7 +901,10 @@ void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_Re
         
         
         
-        string next_uri = UriBase + rest_uri_part + resturiparam + "/" + ".html" + "?" + uriquery;
+        
+        
+        //string next_uri = UriBase + rest_uri_part + resturiparam + "/" + ".html" + "?" + uriquery;
+        string next_uri = "?" + uriquery; // use only query part so link will be correct in case of url rewrites
         
         ctemplate::TemplateDictionary* dict_section = dict_main.AddSectionDictionary("NEXT_PAGE_SECTION");
         string dictkey = "NEXT_PAGE";          
