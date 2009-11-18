@@ -608,6 +608,119 @@ MgByteReader * c_FeatureReaderToHtml::ToKmz(c_RestDataReader* FeatureReader, c_R
   return breader;
 }
 
+void GetPropertyAsBase64(c_RestDataReader* FeatureReader,CREFSTRING PropName,std::string& StringValue)
+{
+  try
+  {
+    StringValue = "";
+    MgMemoryStreamHelper stream;
+
+    int ptype = FeatureReader->GetPropertyType(PropName);
+    switch( ptype )
+    {
+    case MgPropertyType::Geometry:
+      {
+        //Ptr<MgByteReader> bytes = FeatureReader->GetGeometry(propname);
+        //Ptr<MgGeometryProperty> prop = new MgGeometryProperty(propname,bytes);
+        //prop_coll->Add(prop);
+      }
+      break;
+    case MgPropertyType::Int32:
+      {
+        if( FeatureReader->IsNull(PropName) )
+        {
+          StringValue = "";
+        }
+        else
+        {
+          stream.WriteUINT32(FeatureReader->GetInt32(PropName));
+
+        }
+      }
+      break;
+    case MgPropertyType::Int16:
+      {
+        if( FeatureReader->IsNull(PropName) )
+        {
+          StringValue = "";
+        }
+        else
+        {
+          stream.WriteUINT16(FeatureReader->GetInt16(PropName));
+        }
+
+      }
+      break;
+    case MgPropertyType::Single:
+      {
+        if( FeatureReader->IsNull(PropName) )
+        {
+          StringValue = "";
+        }
+        else
+        {
+          //float val = FeatureReader->GetSingle(PropName);
+          stream.WriteSingle(FeatureReader->GetSingle(PropName));
+
+        }
+
+      }
+      break;
+    case MgPropertyType::Double:
+      {
+        if( FeatureReader->IsNull(PropName) )
+        {
+          StringValue = "";
+        }
+        else
+        {
+          //double val = FeatureReader->GetDouble(PropName);
+          //MgUtil::DoubleToString(val,StringValue);
+          stream.WriteDouble(FeatureReader->GetDouble(PropName));
+        }
+
+      }
+      break;
+    case MgPropertyType::DateTime:
+      {
+        if( FeatureReader->IsNull(PropName) )
+        {
+          StringValue = "";
+        }
+        else
+        {
+          Ptr<MgDateTime> dateTime = FeatureReader->GetDateTime(PropName);
+          Ptr<MgStream> tempStream = new MgStream(&stream);
+          dateTime->Serialize(tempStream);
+
+        }
+
+      }
+      break;
+    case MgPropertyType::String:
+      {
+        if( FeatureReader->IsNull(PropName) )
+        {
+          StringValue = "";
+        }
+        else
+        {
+          //StringValue = FeatureReader->GetString(PropName);    
+          stream.WriteNullTermString(FeatureReader->GetString(PropName));  
+
+        }
+      }
+      break;
+    }
+
+    StringValue = stream.ToBase64();
+    //UnicodeString::MultiByteToWideChar(stream.ToBase64().c_str(), StringValue);
+  }
+  catch(...)
+  {
+  }  
+}
+
 void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_RestRequest* RestRequest
                             , const string& AgentUri,const string& UriBase
                             ,string& HtmlStr,int StartIndex,int MaxCount)
@@ -770,6 +883,12 @@ void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_Re
             dictkey = nameprefix + "REST_JSON";  
             val = UriBase + rest_uri_part + resturiparam + "/" + mb_strval + ".json";  
             dict_section->SetValue(dictkey,val);
+            
+            // create feature identifier value as base64 coded
+            string ident_base64;
+            GetPropertyAsBase64(Reader,identname,ident_base64);
+            dictkey = nameprefix + "REST_IDENT_BASE64";  
+            dict_section->SetValue(dictkey,ident_base64);
             
           }
           

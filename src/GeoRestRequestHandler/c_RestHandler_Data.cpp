@@ -1366,7 +1366,7 @@ void c_RestHandler_Data::Execute_Get_Image_Png(c_RestResponse& HttpResponse,MgEn
   STRING mapname;
   Ptr<MgMap> map;
   Ptr<MgSelection> selection;
-  
+  STRING imageformat = MgImageFormats::Png8;
   Ptr<MgPropertyCollection> mapviewcommands = new MgPropertyCollection();
   {
     STRING sessionid;
@@ -1506,6 +1506,7 @@ void c_RestHandler_Data::Execute_Get_Image_Png(c_RestResponse& HttpResponse,MgEn
       }
       
       
+      
       MgUtil::DoubleToString(cx,strval);
       prop = new MgStringProperty(L"SETVIEWCENTERX",strval);
       mapviewcommands->Add(prop);
@@ -1555,10 +1556,18 @@ void c_RestHandler_Data::Execute_Get_Image_Png(c_RestResponse& HttpResponse,MgEn
       MgUtil::DoubleToString(scale,strval);
       prop = new MgStringProperty(L"SETVIEWSCALE",strval);
       mapviewcommands->Add(prop);
-    
+  
+      if( coll_params->Contains(L"FORMAT" ) )
+      {
+        imageformat = coll_params->GetValue(L"FORMAT");   
+
+      }  
   }
   
-  Ptr<MgByteReader> mapimage = c_RestFetchImage::GetDynamicMapOverlayImage_ViewCommands(mgsiteconn,mapname, MgImageFormats::Png, true,mapviewcommands);
+  
+  
+  
+  Ptr<MgByteReader> mapimage = c_RestFetchImage::GetDynamicMapOverlayImage_ViewCommands(mgsiteconn,mapname, imageformat , true,mapviewcommands);
   //Ptr<MgByteReader> mapimage = controller.GetMapImage(map,selection, MgImageFormats::Png, mapviewcommands,true,true);
 
   // Set the result

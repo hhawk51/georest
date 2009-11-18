@@ -1276,7 +1276,14 @@ MgGeometricPropertyDefinition* c_MgServerFeatureUtil::GetGeometricPropertyDefini
         geomTypeColl.Add((INT32)specificGeomTypes[i]);
     }
     Ptr<MgGeometryTypeInfo> geomTypeInfo = new MgGeometryTypeInfo;
-    geomTypeInfo->SetTypes(&geomTypeColl);
+    
+    #ifdef _MG_ENT_2010 // for build fro MapGuide Enterprise 2010, there are other (previous version) libraries and headers
+      geomTypeInfo->SetTypes((INT32*)specificGeomTypes,specificGeomCount);
+    #else
+      geomTypeInfo->SetTypes(&geomTypeColl);
+    
+    #endif
+    
     propDef->SetGeometryTypes((INT32)geomTypes);
     propDef->SetSpecificGeometryTypes(geomTypeInfo);
     propDef->SetHasElevation(hasElev);
