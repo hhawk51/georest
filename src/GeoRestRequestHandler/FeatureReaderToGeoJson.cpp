@@ -193,7 +193,8 @@ void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string
                 {
                 // check if this geomrty is default (main) geometry
                   if( class_geomname == propname )
-                  {       
+                  {    
+                    prop_val = "null";   
                     MG_TRY()                     
                     Ptr<MgByteReader> bytereader = FeatureReader->GetGeometry(propname);
                     if (bytereader != NULL)

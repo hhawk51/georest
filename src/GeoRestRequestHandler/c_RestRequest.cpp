@@ -85,7 +85,7 @@ void c_RestRequest::REST_Request_Hello(c_RestRequest *RestRequest,c_RestResponse
 
   hResult = HttpResponse.GetResult();
 
-STRING ecshostr = L"Hello back from GeoREST - GeoSpatial RESTful Web Services v1.3";
+STRING ecshostr = L"Hello back from GeoREST - GeoSpatial RESTful Web Services v1.0.1";
 
 Ptr<c_RestUriRequestParam> queryparams = GetRequestParam();
 STRING callback = queryparams->GetParameterValue(D_REST_JSONP_CALLBACK_STR);

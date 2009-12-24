@@ -466,6 +466,9 @@ void FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NameP
           BYTE_ARRAY_OUT geombytes = FeatureReader->GetGeometry(propname,geomlength);
           Ptr<MgByteReader> bytes = new MgByteReader( geombytes,geomlength,L"" );
           */
+          try
+          {
+          
           Ptr<MgByteReader> bytes = FeatureReader->GetGeometry(propname);
           
           MgAgfReaderWriter agfReader;                
@@ -520,7 +523,10 @@ void FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NameP
           
           ::sprintf(buff, "%.7g", (ll->GetY()+ur->GetY())/2.0);
           Dict->SetValue(dictkey+"_BBOX_MID_Y",buff);
-  
+          }
+          catch (...) // just ignore in case of invalid geometries
+          {
+          }
           
         }
         break;
