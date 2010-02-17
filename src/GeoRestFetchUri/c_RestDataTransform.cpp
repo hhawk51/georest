@@ -177,6 +177,43 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
               propcoll->Add(prop);
             }
             break;
+            case MgPropertyType::Double:
+              {
+                double val = _wtof(str_val.c_str());
+                Ptr<MgDoubleProperty> prop = new MgDoubleProperty(str_name,val);
+                propcoll->Add(prop);
+              }
+              break;
+            case MgPropertyType::Single:
+              {
+                double val = _wtof(str_val.c_str());
+                Ptr<MgSingleProperty> prop = new MgSingleProperty(str_name,val);
+                propcoll->Add(prop);
+              }
+              break;
+            case MgPropertyType::DateTime:
+              {
+
+                MgDateTime val(str_val);
+
+                Ptr<MgDateTimeProperty> prop = new MgDateTimeProperty(str_name,&val);
+                propcoll->Add(prop);
+              }
+              break;
+            case MgPropertyType::Byte:
+              {
+                int val = _wtoi(str_val.c_str());
+                Ptr<MgByteProperty> prop = new MgByteProperty(str_name,val);
+                propcoll->Add(prop);
+              }
+              break;
+            case MgPropertyType::Boolean:
+              {
+                int val = _wtoi(str_val.c_str());
+                Ptr<MgBooleanProperty> prop = new MgBooleanProperty(str_name,val);
+                propcoll->Add(prop);
+              }
+              break;
           }
         }
         break;
