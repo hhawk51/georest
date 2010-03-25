@@ -24,6 +24,8 @@ c_CfgRepresentation::c_CfgRepresentation(e_RepresentationType RepresentationType
   m_Pattern = Pattern;
   m_MimeType = MimeType;
   
+  m_OrderDirection = e_Asc;
+  
   m_Cached_GET=NULL;
   //m_IsMaxBBoxHeight=false;
   //m_IsMaxBBoxWidth=false;;
