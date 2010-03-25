@@ -344,6 +344,24 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
   
   }
   
+  if( query_params ->ContainsParameter(L"orderfields") )
+  {
+    STRING paramval = query_params->GetParameterValue(L"orderfields");
+    Ptr<MgStringCollection> ofields = MgStringCollection::ParseCollection(paramval,L",");
+    
+    STRING paramdir = query_params->GetParameterValue(L"orderdir");
+    int direction;
+    if( _wcsicmp(paramdir.c_str(), L"desc") == 0 )
+    {
+      direction = MgOrderingOption::Descending;
+    }
+    else
+      direction = MgOrderingOption::Ascending;
+      
+    if( qryOptions ) qryOptions->SetOrderingFilter(ofields,direction);
+
+  }
+  
 // beside filter string check for filter_ parameters  in URL
 // filter arameter is constructed from 5 parts like :
 // filter_n_booloper_operation_property
@@ -885,7 +903,16 @@ void c_RestHandler_Data::Execute_Get_Feature_FDO(c_RestResponse& HttpResponse)
     }
   }
   
-  
+  if( m_RestRequest->m_CfgRepresentation->m_OrderFields.length() != 0 )
+  {
+    Ptr<MgStringCollection> strcoll = MgStringCollection::ParseCollection( m_RestRequest->m_CfgRepresentation->m_OrderFields,L",");
+    int direction = MgOrderingOption::Ascending; 
+    if(m_RestRequest->m_CfgRepresentation->m_OrderDirection==c_CfgRepresentation::e_Desc )
+    {
+      direction = MgOrderingOption::Descending; 
+    }
+    qryOptions->SetOrderingFilter(strcoll, direction);
+  }
   //if( m_Filter.length() > 0 )
   {
     
@@ -998,6 +1025,17 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
 
   MgResourceIdentifier resId(mg_fsource->m_MgFeatureSource);
   Ptr<MgFeatureQueryOptions> qryOptions = new MgFeatureQueryOptions();
+  
+  if( m_RestRequest->m_CfgRepresentation->m_OrderFields.length() != 0 )
+  {
+    Ptr<MgStringCollection> strcoll = MgStringCollection::ParseCollection( m_RestRequest->m_CfgRepresentation->m_OrderFields,L",");
+    int direction = MgOrderingOption::Ascending; 
+    if(m_RestRequest->m_CfgRepresentation->m_OrderDirection==c_CfgRepresentation::e_Desc )
+    {
+      direction = MgOrderingOption::Descending; 
+    }
+    qryOptions->SetOrderingFilter(strcoll, direction);
+  }
 
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest-> GetRequestParam();
   Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();

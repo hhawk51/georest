@@ -611,6 +611,27 @@ c_CfgRepresentation* c_RestConfig::ParseRepresentation_v2( Poco::XML::Element* X
     }
   }
   
+  // for Representation read order
+  if( representaion )
+  {
+    Poco::XML::Element* order = XmlRepresentation->getChildElement("Order");    
+    if( order )
+    {
+      std::wstring fields;
+      GetElementAttribute(order,"fields",fields);
+      representaion->SetOrderFields(fields.c_str());
+      
+      std::wstring direction;
+      GetElementAttribute(order,"direction",direction);
+      if( direction.length() > 0)
+      {      
+        if( wcsicmp( direction.c_str(),L"DESC")==0 ) // built-in XML representation of data
+          representaion->SetOrderDirection(c_CfgRepresentation::e_Desc);   
+        else
+          representaion->SetOrderDirection(c_CfgRepresentation::e_Asc);   
+      }
+    }
+  }
   
   return representaion;
 }

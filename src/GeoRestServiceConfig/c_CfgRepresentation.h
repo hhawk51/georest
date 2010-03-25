@@ -137,6 +137,11 @@ public:
     e_Sitemap,
   };
   
+  enum e_OrderDirection {
+    e_Asc,
+    e_Desc
+  };
+  
 public:
   c_CfgRepresentation(e_RepresentationType RepresentationType,const wchar_t* Pattern,const wchar_t* MimeType);
 public:
@@ -157,6 +162,8 @@ public:
   bool IsWidthInsideLimit(double Width) const;
   bool IsHeightInsideLimit(double Height) const;
 
+  void SetOrderFields(const wchar_t* Fields) { m_OrderFields = Fields; };
+  void SetOrderDirection(e_OrderDirection Direction) { m_OrderDirection = Direction; }
   
 protected:
   e_RepresentationType m_RepresentationType;
@@ -164,6 +171,9 @@ protected:
 public:
   std::wstring m_Pattern;    
   std::wstring m_MimeType;    
+  
+  std::wstring m_OrderFields; // comma separated order fields
+  e_OrderDirection m_OrderDirection; // order direction asc,desc
   
   //bool m_IsMaxBBoxHeight;
   //double m_MaxBBoxHeight;
