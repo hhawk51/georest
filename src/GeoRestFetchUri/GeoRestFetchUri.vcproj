@@ -258,7 +258,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug.Ent2010|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
