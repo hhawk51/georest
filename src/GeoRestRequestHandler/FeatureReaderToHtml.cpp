@@ -36,6 +36,7 @@
 #include "minizip/unzip.h"
 #include "minizip/zip.h"
 #include "minizip/ioapi.h"
+#include "c_GeoRssUtil.h"
 
 extern string g_HtmlTemplatePath;
 
@@ -486,6 +487,10 @@ void FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NameP
           
           Dict->SetValue(dictkey+"_KML_CENTROID",kmlcentroid);
           Dict->SetValue(dictkey+"_KML_MULTI",kml_multi_centroid_polygon);
+          
+          string georsssimple;
+          c_GeoRssUtil::ToGeoRssSimple(fgfgeom,georsssimple);
+          Dict->SetValue(dictkey+"_GEORSS_SIMPLE",georsssimple);
           
           
           char buff[4*64+6];

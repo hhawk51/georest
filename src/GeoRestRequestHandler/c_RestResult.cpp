@@ -222,7 +222,11 @@ void c_RestResult::SetErrorInfo(c_RestRequest* ,
         // Map Mg exception to HTTP result.
 
         httpStatusMessage = mgException->GetClassName();
-        errorMessage = mgException->GetMessage();
+        #ifdef _MG_ENT_2011
+          errorMessage = mgException->GetExceptionMessage();
+        #else
+          errorMessage = mgException->GetMessage();
+        #endif
         detailedMessage = mgException->GetDetails();
 
 #ifdef _DEBUG

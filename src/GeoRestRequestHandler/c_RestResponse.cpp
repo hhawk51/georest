@@ -479,7 +479,12 @@ void c_RestResponse::CreateJsonpCallbackString(const std::string& CallbackFuncNa
 void c_RestResponse::SendError(MgException* e)
 {
   MG_TRY()
-    STRING shortError = e->GetMessage();
+    
+  #ifdef _MG_ENT_2011
+    STRING shortError = mgException->GetExceptionMessage();
+  #else
+    STRING shortError = mgException->GetMessage();
+  #endif
   STRING longError = e->GetDetails();
   STRING statusMessage = e->GetClassName();
 

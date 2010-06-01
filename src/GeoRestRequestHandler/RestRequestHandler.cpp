@@ -60,12 +60,12 @@ BOOL APIENTRY DllMain( HMODULE hModule,
       g_HtmlTemplatePath = dllpath.toString();
       
       
-      
+      ACE::init();
     }
     break;
     case DLL_PROCESS_DETACH:
     {
-      
+      ACE::fini();
     }
     break;
   }

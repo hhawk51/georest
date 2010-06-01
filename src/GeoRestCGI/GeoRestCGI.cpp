@@ -8,6 +8,7 @@
 #include "c_RestRequest.h"
 #include "c_RestConfig.h"
 
+#include "fcgi_stdio.h"
 #include <stdlib.h>
 #include <string>
 #include <iostream>
@@ -34,14 +35,36 @@ int main (int argc, char* argv[])
     MB_OK|MB_SERVICE_NOTIFICATION);
 #endif
 
+#ifdef _WIN32
+  // Set stdin and stdout to binary mode
+  _setmode(0, _O_BINARY);
+  _setmode(1, _O_BINARY);
+#else
+  //TODO: Does this need to be done under Linux?
+#endif
+
   //printf("Content-type: text/html\n\n");
   //printf("GeoREST CGI : Hello");
   //std::cout << "Content-type: text/html\n\n";
   //std::cout << "GeoREST CGI : Hello2";
   //return 0;
+  char* mentor1 = getenv("MENTOR_DICTIONARY_PATH");
+  char* path1 = getenv("PATH");
+  char* x1 = getenv("XALANROOT");
+  
+  FCGX_Request request;
 
+  FCGX_Init();
+  //FCGX_InitRequest(&request, 9001, 0);
   // Construct self Url.  It is embedded into the output stream
   // of some requests (like GetMap).  Use a fully qualified URL.
+  
+  while (FCGI_Accept() >= 0) 
+  {
+    char* mentor = getenv("MENTOR_DICTIONARY_PATH");
+    char* path2 = getenv("PATH");
+    char* x2 = getenv("XALANROOT");
+    
   char* serverName = getenv(MapAgentStrings::ServerName);
   char* serverPort = getenv(MapAgentStrings::ServerPort);
   char* scriptName = getenv(MapAgentStrings::ScriptName);
@@ -79,9 +102,10 @@ int main (int argc, char* argv[])
 
     uri_base = uri_base;
     uri_rest = "";
-    printf("Content-type: text/html\n\n");
-    printf("GeoREST CGI : It is not REST call! /rest/ keyword not found in URI.");
-    return 0;
+    FCGI_fputs("Content-type: text/html\n\n",FCGI_stdout);
+    FCGI_fputs("GeoREST CGI : It is not REST call! /rest/ keyword not found in URI.",FCGI_stdout);
+    
+    continue;
   }
   
   const std::string& httpmethod = getenv(MapAgentStrings::RequestMethod);
@@ -97,7 +121,8 @@ int main (int argc, char* argv[])
       if (nBytes > 0)
       {
         char* chbuf = (char*)malloc(nBytes+1);
-        size_t readBytes = fread(chbuf, 1, nBytes, stdin);
+        size_t readBytes = FCGI_fread(chbuf, 1, nBytes, FCGI_stdin);
+        
         chbuf[readBytes]=0;
         post_data.append(chbuf);
         free(chbuf);
@@ -126,9 +151,15 @@ int main (int argc, char* argv[])
   ostringstream ss;
   headers.write(ss);
   string s1 = ss.str();
-  std::cout << s1;
-  std::cout << "\r\n";
+  //std::cout << s1;
+  //std::cout << "\r\n";
   
+  
+  //FCGI_fwrite(s1.c_str(),sizeof(char),strlen(s1.c_str()),FCGI_stdout );
+  FCGI_fputs(s1.c_str(),FCGI_stdout);
+  FCGI_fputs("\r\n",FCGI_stdout);
+  //FCGI_puts(s1.c_str());
+  //FCGI_puts("\r\n");
   
   //response.write(std::cout);
   if( bytereader.p )
@@ -138,17 +169,17 @@ int main (int argc, char* argv[])
     //std::ostream& outstr = response.send(); 
 
     unsigned char buf[4096];
-    DWORD dwSize;
     int nBytes = bytereader->Read(buf,4096);
     while (nBytes > 0)
     {
-      dwSize = nBytes;
-      //response.sendBuffer(buf,nBytes); 
-      std::cout.write((char*)&buf[0],nBytes);
+      //std::cout.write((char*)&buf[0],nBytes);
+      buf[nBytes]=0;
+      
+      //printf((char*)&buf[0]);
+      //FCGX_PutStr((const char *)&buf[0],nBytes, stdout->fcgx_stream);
+      FCGI_fwrite(&buf[0],1,nBytes,FCGI_stdout);
       nBytes = bytereader->Read(&buf[0],4096);                                
     }
-
-
   }
   else
   {   
@@ -161,8 +192,12 @@ int main (int argc, char* argv[])
     std::cout << "\r\n";
     */
     
-    std::cout << http_data->GetContentString();
+    //std::cout << http_data->GetContentString();
+    //FCGI_puts(http_data->GetContentString().c_str());
+    FCGI_fputs(http_data->GetContentString().c_str(),FCGI_stdout);
         
+  }
+  
   }
   return 0;
 }
