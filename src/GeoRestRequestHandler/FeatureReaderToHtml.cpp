@@ -37,6 +37,7 @@
 #include "minizip/zip.h"
 #include "minizip/ioapi.h"
 #include "c_GeoRssUtil.h"
+#include "c_GmlUtil.h"
 
 extern string g_HtmlTemplatePath;
 
@@ -490,7 +491,11 @@ void FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NameP
           
           string georsssimple;
           c_GeoRssUtil::ToGeoRssSimple(fgfgeom,georsssimple);
-          Dict->SetValue(dictkey+"_GEORSS_SIMPLE",georsssimple);
+          Dict->SetValue(dictkey+"_GEORSS",georsssimple);
+          
+          string gml;
+          c_GmlUtil::ToGML(fgfgeom,gml);
+          Dict->SetValue(dictkey+"_GML",gml);
           
           
           char buff[4*64+6];

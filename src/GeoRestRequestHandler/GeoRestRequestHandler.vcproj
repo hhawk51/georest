@@ -502,6 +502,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\c_GmlUtil.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\c_KmlUtil.cpp"
 				>
 			</File>
@@ -585,6 +589,10 @@
 			>
 			<File
 				RelativePath=".\c_GeoRssUtil.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_GmlUtil.h"
 				>
 			</File>
 			<File

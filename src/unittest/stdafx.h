@@ -80,4 +80,5 @@
 
 #include "RestConfigInclude.h"
 #include "GisServicesDllInclude.h"
+#include "RestRequestHandlerInclude.h"
 
