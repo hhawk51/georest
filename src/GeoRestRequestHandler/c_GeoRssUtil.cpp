@@ -79,10 +79,10 @@ void c_GeoRssUtil::ToGeoRssSimple( MgGeometry* Geometry,std::string& SimpleGeoRs
       char buff[4*64+6];
   
       SimpleGeoRss = "<georss:point>";
-      ::sprintf(buff, "%.7g",x);
+      ::sprintf(buff, "%.7g",y);
       SimpleGeoRss += buff;
       SimpleGeoRss += " ";
-      ::sprintf(buff, "%.7g", y);
+      ::sprintf(buff, "%.7g", x);
       SimpleGeoRss += buff;
       SimpleGeoRss += "</georss:point>";
       
@@ -111,10 +111,10 @@ void c_GeoRssUtil::ToGeoRssSimple( MgGeometry* Geometry,std::string& SimpleGeoRs
         if( coord->GetDimension() & MgCoordinateDimension::XYZ )    z= coord->GetZ();
         else z=0;
         
-        ::sprintf(buff, "%.7g",x);
+        ::sprintf(buff, "%.7g",y);
         SimpleGeoRss += buff;
         SimpleGeoRss += " ";
-        ::sprintf(buff, "%.7g", y);
+        ::sprintf(buff, "%.7g", x);
         SimpleGeoRss += buff;                
       }      
       SimpleGeoRss += "</georss:line>";
@@ -144,11 +144,12 @@ void c_GeoRssUtil::ToGeoRssSimple( MgGeometry* Geometry,std::string& SimpleGeoRs
         if( coord->GetDimension() & MgCoordinateDimension::XYZ )    z= coord->GetZ();
         else z=0;
         
-        ::sprintf(buff, "%.7g",x);
+        ::sprintf(buff, "%.7g",y);
         SimpleGeoRss += buff;
         SimpleGeoRss += " ";
-        ::sprintf(buff, "%.7g", y);
+        ::sprintf(buff, "%.7g", x);
         SimpleGeoRss += buff;    
+        SimpleGeoRss += " ";  
         
       }
 

@@ -80,7 +80,7 @@ void c_GmlUtil::SerializeCoordinate(MgCoordinate* position,std::string& writer)
 {
   static const int SIZE = 256;
   char temp[SIZE];
-  _snprintf(temp, SIZE - 1, "%lf,%lf", position->GetX(), position->GetY());
+  _snprintf(temp, SIZE - 1, "%lf,%lf", position->GetY(), position->GetX());
   writer += temp;
 
   int dimension = position->GetDimension();
@@ -102,9 +102,9 @@ void c_GmlUtil::SerializePoint(MgPoint* point, std::string& writer)
 {	
   Ptr<MgCoordinate> pos = point->GetCoordinate();	
   writer += "<gml:Point>";
-  writer += "<gml:coordinates>";	
+  writer += "<gml:pos>";	
   c_GmlUtil::SerializeCoordinate(pos,writer);
-  writer += "</gml:coordinates>";
+  writer += "</gml:pos>";
   writer += "</gml:Point>";
 }
 
@@ -112,7 +112,7 @@ void c_GmlUtil::SerializeCoordinates(MgCoordinateIterator* coords, std::string& 
 {
   if( !coords ) return;
   
-  writer += "<gml:coordinates>";
+  writer += "<gml:posList>";
 
   // The coordinates are separated by a blank(" ").
   if (coords->MoveNext())
@@ -130,7 +130,7 @@ void c_GmlUtil::SerializeCoordinates(MgCoordinateIterator* coords, std::string& 
     SerializeCoordinate(coord,writer);	
   }
   
-  writer += "</gml:coordinates>";
+  writer += "</gml:posList>";
   
 }
 

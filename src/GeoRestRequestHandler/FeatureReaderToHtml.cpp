@@ -38,6 +38,9 @@
 #include "minizip/ioapi.h"
 #include "c_GeoRssUtil.h"
 #include "c_GmlUtil.h"
+#include "Poco/DateTime.h"
+#include "Poco/DateTimeFormatter.h"
+#include "Poco/DateTimeFormat.h"
 
 extern string g_HtmlTemplatePath;
 
@@ -582,6 +585,13 @@ void FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NameP
           string val;
           MgDateTimeToString(date,val);
           Dict->SetValue(dictkey,val );
+          
+          
+          // set date as Atom string 
+          Poco::DateTime dt(date->GetYear(), date->GetMonth(), date->GetDay(), date->GetHour(), date->GetMinute(), date->GetSecond());
+
+          std::string str = Poco::DateTimeFormatter::format(dt, Poco::DateTimeFormat::ISO8601_FORMAT);
+          Dict->SetValue(dictkey+"_ATOM_DATE",str);
         }
         break;
         case MgPropertyType::String:
