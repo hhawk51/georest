@@ -1,6 +1,7 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by MgWS_ISAPI.rc
+// Used by GeoRest_ISAPI.rc
+//
 
 // Next default values for new objects
 // 

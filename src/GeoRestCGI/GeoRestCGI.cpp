@@ -68,6 +68,8 @@ int main (int argc, char* argv[])
   char* serverName = getenv(MapAgentStrings::ServerName);
   char* serverPort = getenv(MapAgentStrings::ServerPort);
   char* scriptName = getenv(MapAgentStrings::ScriptName);
+  char* querystring = getenv(MapAgentStrings::QueryString);
+  
   char* remoteAddr = getenv(MapAgentStrings::RemoteAddr);
   char* httpClientIp = getenv(MapAgentStrings::HttpClientIp);
   char* httpXFF = getenv(MapAgentStrings::HttpXForwardedFor);
@@ -79,6 +81,8 @@ int main (int argc, char* argv[])
     agenturi += ':';
     agenturi.append(serverPort);
     agenturi.append(scriptName);
+    agenturi.append("?");
+    agenturi.append(querystring);
   }
   
   string uri_base,uri_rest;
