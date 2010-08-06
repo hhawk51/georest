@@ -41,12 +41,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\include;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.4\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(FDO_PATH)\Utilities\ExpressionEngine\Inc&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
@@ -66,7 +66,7 @@
 				AdditionalDependencies="ACEd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib GeoRestServiceConfigd.lib GeoRestCommond.lib lib_jsond.lib libctemplate-debug.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers\lib;&quot;..\..\.D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Lib\Win32\Debug;..\..\lib\debug;&quot;D:\Development\ctemplate\ctemplate-0.95\debug&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;..\..\.$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\debug&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Lib\Win32\Debug&quot;;..\..\lib\debug;&quot;D:\Development\ctemplate\ctemplate-0.95\debug&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -121,10 +121,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\include;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.4\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(FDO_PATH_3_5)\Utilities\ExpressionEngine\Inc&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
@@ -144,7 +144,7 @@
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib GeoRestServiceConfig.lib GeoRestCommon.lib lib_json.lib libctemplate.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers\lib;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib;$(MG_PATH_OS_2_1)\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -201,7 +201,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\Foundation&quot;;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\jsoncpp\include;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.4\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\Foundation&quot;;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\jsoncpp\include;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\MapGuideCommon;$(FDO_PATH)\FDO\Unmanaged\Inc;$(FDO_PATH)\Utilities\ExpressionEngine\Inc;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -226,7 +226,7 @@
 				AdditionalDependencies="ACEd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib GeoRestServiceConfigd.lib GeoRestCommond.lib lib_jsond.lib libctemplate-debug.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers\lib&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\dbxml-2.3.10\lib&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\jsoncpp\lib&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\lib\debug&quot;;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Lib\Win32\Debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\debug&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers\lib&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\dbxml-2.3.10\lib&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\jsoncpp\lib&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\lib\debug&quot;;$(FDO_PATH)\Unmanaged\Lib\Win32\Debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\debug&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -281,7 +281,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\jsoncpp\include;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.4\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Oem\jsoncpp\include;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;$(FDO_PATH)\FDO\Unmanaged\Inc;$(FDO_PATH)\Utilities\ExpressionEngine\Inc;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS;_MG_ENT_2010"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -306,7 +306,7 @@
 				AdditionalDependencies="ACEd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib GeoRestServiceConfigd.lib GeoRestCommond.lib lib_jsond.lib libctemplate-debug.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\ACE\ACE_wrappers\lib;&quot;..\..\.D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\lib\debug;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Lib\Win32\Debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\debug&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\.$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib;$(MG_PATH_ENT_2010)\Common\lib\debug;$(FDO_PATH)\Unmanaged\Lib\Win32\Debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\debug&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -361,7 +361,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\jsoncpp\include;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.5\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.5\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2011)\Oem\jsoncpp\include;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;$(FDO_PATH_3_5)\Inc;$(FDO_PATH_3_5)\Utilities\ExpressionEngine\Inc;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -386,7 +386,7 @@
 				AdditionalDependencies="ACEd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib GeoRestServiceConfigd.lib GeoRestCommond.lib lib_jsond.lib libctemplate-debug.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\ACE\ACE_wrappers\lib;&quot;..\..\.D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\lib\release;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\.$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib;$(MG_PATH_ENT_2010)\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -441,7 +441,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\jsoncpp\include;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.5\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.5\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\include&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH_3_5)\FDO\Unmanaged\Inc&quot;;&quot;$(FDO_PATH_3_5)\Utilities\ExpressionEngine\Inc&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -464,7 +464,7 @@
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib GeoRestServiceConfig.lib GeoRestCommon.lib lib_json.lib libctemplate.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\ACE\ACE_wrappers\lib;&quot;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\lib\release;D:\Development\FDO_SVN\branches\3.5\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\release&quot;;&quot;$(FDO_PATH_3_5)\FDO\Unmanaged\Lib\Win32\Release&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -521,7 +521,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\jsoncpp\include;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.4\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2010)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\jsoncpp\include&quot;;&quot;$(MG_PATH_ENT_2010)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(FDO_PATH)\Utilities\ExpressionEngine\Inc&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS;_MG_ENT_2010"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -544,7 +544,7 @@
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib GeoRestServiceConfig.lib GeoRestCommon.lib lib_json.lib libctemplate.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\ACE\ACE_wrappers\lib;&quot;..\..\.D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\lib\release;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;..\..\.$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_ENT_2010)\Common\lib\release&quot;;&quot;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -601,10 +601,10 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\include;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Inc;D:\Development\FDO_SVN\branches\3.4\Utilities\ExpressionEngine\Inc;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;$(FDO_PATH)\FDO\Unmanaged\Inc;$(FDO_PATH)\Utilities\ExpressionEngine\Inc;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
 				RuntimeLibrary="2"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
@@ -624,7 +624,7 @@
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib GeoRestServiceConfig.lib GeoRestCommon.lib lib_json.lib libctemplate.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers\lib;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;D:\Development\FDO_SVN\branches\3.4\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib;$(MG_PATH_OS_2_1)\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -674,7 +674,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\c_OData_ValueParser.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\c_RestDataReader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\c_RestDataReader_OData.cpp"
 				>
 			</File>
 			<File
@@ -700,6 +708,30 @@
 			<File
 				RelativePath=".\stdafx.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.MgOs2.1|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -716,7 +748,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\c_OData_ValueParser.h"
+				>
+			</File>
+			<File
 				RelativePath=".\c_RestDataReader.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_RestDataReader_OData.h"
 				>
 			</File>
 			<File

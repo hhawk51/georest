@@ -58,8 +58,8 @@ protected:
   ~c_RestFetchSource(void);
   
 public:
-  static MgFeatureReader* FetchSource(const c_CfgDataSource* DataSource);
-  static MgFeatureReader* Fetch(const wchar_t* LibraryFeatureSource,const wchar_t* ClassName);
+  static c_RestDataReader* FetchSource(const c_CfgDataSource* DataSource,MgFeatureQueryOptions* QueryOptions);
+
   
   static void FetchEnvelope(const wchar_t* Uri,double& X1,double& Y1,double& X2,double& Y2);
   
@@ -67,8 +67,12 @@ public:
 
   static void FetchFeaturesToDictionary( const std::string& Uri,ctemplate::TemplateDictionary*ParentDict,const std::string& SectionName,const std::string& SectionDataName,const std::string& NamePrefix );
   
+  static MgClassDefinition* Fetch_MgClassDefinition( const c_CfgDataSource* DataSource );
+  static MgClassDefinition* Fetch_MgClassDefinition_FDO( const c_CfgDataSource_FDO* FdoSource );
+  static MgClassDefinition* Fetch_MgClassDefinition_MG( const c_CfgDataSource_MgFeatureSource* MgFeatureSource );
+  
   static MgByteReader* Fetch_FdoSourceSchema( c_CfgDataSource_FDO* FdoSource );
-  static MgClassDefinition* Fetch_MgClassDefinition( c_CfgDataSource_FDO* FdoSource );
+  
   
 protected:
   enum e_BoolOper { 
@@ -101,7 +105,8 @@ protected:
 protected: 
   static MgEnvelope* XmlFeatureToEnvelope(Poco::XML::Element * XmlFeature);
   static MgGeometry* XmlFeature2Geometry(Poco::XML::Element * XmlFeature);
-  
+  static c_RestDataReader* FetchSource_MG(const c_CfgDataSource_MgFeatureSource* DataSource,MgFeatureQueryOptions* QueryOptions);
+  static c_RestDataReader* FetchSource_FDO(const c_CfgDataSource_FDO* DataSource,MgFeatureQueryOptions* QueryOptions);
 
 
 };

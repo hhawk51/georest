@@ -36,7 +36,7 @@ public:
     c_FdoSelectFeatures();
     ~c_FdoSelectFeatures();
     
-    c_RestDataReader_FdoFeatureReader* SelectFeatures(c_CfgDataSource_FDO* FdoSource, MgFeatureQueryOptions* options);
+    c_RestDataReader_FdoFeatureReader* SelectFeatures(const c_CfgDataSource_FDO* FdoSource, MgFeatureQueryOptions* options);
 private:
     void  ApplyQueryOptions(bool isSelectAggregate);
     void  ApplyClassProperties();
@@ -57,8 +57,8 @@ private:
     void AddCustomComputedProperty(CREFSTRING aliasName, FdoExpression* expression);
     void ValidateConstraintsOnCustomFunctions();
     //void ApplyAggregateOptions(bool isSelectAggregate);
-    void CreateCommand(c_CfgDataSource_FDO* FdoSource, bool isSelectAggregate);
-    void ValidateParam(c_CfgDataSource_FDO* FdoSource, CREFSTRING className);
+    void CreateCommand(const c_CfgDataSource_FDO* FdoSource, bool isSelectAggregate, bool isordering);
+    void ValidateParam(const c_CfgDataSource_FDO* FdoSource, CREFSTRING className);
     //void ApplyFdoGroupingProperties(MgStringCollection* propertyNames);
     bool ContainsCustomFunction(MgFeatureQueryOptions* options);
     MgReader* GetCustomReader(MgReader* reader);
@@ -69,7 +69,8 @@ private:
     Ptr<MgFeatureQueryOptions> m_options;
     STRING                  filterText;
     FdoPtr<FdoIConnection> m_FdoConn;
-    FdoPtr<FdoISelect>    m_command;
+    FdoPtr<FdoISelect>    m_cmd_select;
+    bool m_is_cmd_ext_select;
 
     //Ptr<MgFeatureSourceCacheItem> m_featureSourceCacheItem;
 

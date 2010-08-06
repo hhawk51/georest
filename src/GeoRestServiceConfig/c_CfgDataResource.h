@@ -33,7 +33,6 @@ class REST_CONFIG_API c_CfgDataResource
 {
 public:
   c_CfgDataResource(const wchar_t* UriTag,const char* TemplateFolder);
-public:
   ~c_CfgDataResource(void);
   
 public:
@@ -45,52 +44,29 @@ public:
                               // This is usefull in case of redirections.
                               // default is /rest/data/
                               
-                              
   c_CfgDataSource  * m_DataSource; 
   
-  //std::wstring m_FeatureSource;  // feature source used to retrieve data L"Library://Samples/Sheboygan/Data/Parcels.FeatureSource";
-  //std::wstring m_ClassName;  // full class name of the data, L"SHP_Schema:Parcels";
-  //std::wstring m_ShortClassName;  // short class name of the data, L"Parcels", it is not written in xml but it is extracted from m_ClassName;
-  
-  //std::wstring m_MapDef;  // map to be used for image representation; L"Library://Samples/Sheboygan/Maps/Sheboygan.MapDefinition";
-  //std::wstring m_MapSelectionLayer;  // layer to be used to select highlited features images on when ; L"Library://Samples/Sheboygan/Maps/Parcels.LayerDefinition";
-  //std::wstring m_MapZoomFactor;  // layer to be used to select images on when ; L"Library://Samples/Sheboygan/Maps/Parcels.LayerDefinition";
-  
-  //std::wstring m_MapFeatureSource;  // feature source to be used to zoom to data , this is used when original data doesnt have geomtery r simply want to do zoom to other feature; L"Library://Samples/Sheboygan/Data/Buildings.FeatureSource";
-  //std::wstring m_MapFeatureSourceFilter;  // filter to be used when selected features on m_MapFeatureSource
-  
-  
+   
   t_CfgRepresentationVector m_Representations;
-  
-  //c_CfgRepTemplate m_HtmlTemplateData;
-  //c_CfgRepTemplate m_KmlTemplateData;
-  
-  
   
   
 public:
-  /*
-  bool IsBBoxHeightLimitSet(const wchar_t* Format) const;
-  bool IsBBoxWidthLimitSet(const wchar_t* Format) const;
-  bool IsCountLimitSet(const wchar_t* Format) const;
+  const std::string& GetUriTag() const;  
   
-  bool IsCountInsideLimit(const wchar_t* Format,int Count) const;
-  bool IsWidthInsideLimit(const wchar_t* Format,double Width) const;
-  bool IsHeightInsideLimit(const wchar_t* Format,double Height) const;
+protected:
+  mutable std::string m_UriTagUtf8; // utf 8 copy of m_UriTag string
   
-  e_REST_AccessCodes IsAccess_HTML_GET_Anonymous();
-  e_REST_AccessCodes IsAccess_XML_GET_Anonymous();
-  e_REST_AccessCodes IsAccess_JSON_GET_Anonymous();
+
+public:
   
-  e_REST_AccessCodes IsAccess(const wchar_t* Format,const wchar_t*Method,const wchar_t*UserName,const wchar_t* Password) const;
-  */
   void AddRepresentation(c_CfgRepresentation* Representation)
   {
     m_Representations.push_back(Representation);
   }
   
   const c_CfgRepresentation* FindRepresentation(const wchar_t* Pattern) const;
-  
+  const c_CfgRepresentation* FindRepresentation( c_CfgRepresentation::e_RepresentationType RepType ) const;
+
 public:  
   
 };
@@ -103,7 +79,7 @@ class c_CfgDataResourceVector
 public:
   //c_CfgDataLayerVector(void);
   ~c_CfgDataResourceVector(void);
-  
+  void Clear();
 protected:
   t_CfgDataResourceVector m_CfgDataResourceVector;
   
@@ -111,6 +87,8 @@ public:
   const c_CfgDataResource* FindUriTag(const std::wstring& UriTag) ;   
   bool  Add(c_CfgDataResource* DataLayer);
   
+  int GetCount();
+  const c_CfgDataResource* GetResource(int Index) ;   
   //const c_CfgDataResource* FindClassName(const std::wstring& ClassName) ;   
 };
 

@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2004-2008 by Autodesk, Inc.
+//  Copyright (C) 2010 by Haris Kurtagic
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -14,7 +14,7 @@
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
-
+#include "stdafx.h"
 #include "MapAgentStrings.h"
 
 // DO NOT TRANSLATE.  THESE STRINGS ARE HTTP PROTOCOL SPECIFIC

@@ -32,6 +32,7 @@ EXTERNAL_API:
       e_PrimitiveTypeBool,
       e_PrimitiveTypeInt,
       e_PrimitiveTypeString,
+      e_PrimitiveTypeStringUTF8,
     };
 EXTERNAL_API:
 
@@ -61,6 +62,8 @@ EXTERNAL_API:
     /// with a string value
     /// </summary>
     c_RestPrimitiveValue(CREFSTRING value);
+    
+    c_RestPrimitiveValue(const std::string& value);
 
     //////////////////////////////////////////////////////////////////
     /// <summary>
@@ -85,12 +88,16 @@ EXTERNAL_API:
     /// Get the string primitive value
     /// </summary>
     STRING GetStringValue();
+    
+    const std::string& GetStringUTF8Value() const;
 
     //////////////////////////////////////////////////////////////////
     /// <summary>
     /// Get a string representation of the primitive value
     /// </summary>
     STRING ToString();
+    
+    std::string ToStringUTF8();
 
 protected:
     /// <summary>
@@ -107,6 +114,8 @@ protected:
     /// The integer value
     /// </returns>
     INT32 GetClassId();
+    
+
 
 private:
 
@@ -115,6 +124,7 @@ private:
         bool    b;
         INT32   i;
         STRING* pstr;
+        std::string* pstr_utf8;
     } m_value;
 
     e_PrimitiveType m_PrimitiveType;

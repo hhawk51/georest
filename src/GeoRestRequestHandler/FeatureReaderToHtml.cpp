@@ -537,10 +537,19 @@ void FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NameP
           ::sprintf(buff, "%.7g", (ll->GetY()+ur->GetY())/2.0);
           Dict->SetValue(dictkey+"_BBOX_MID_Y",buff);
           }
-          catch (...) // just ignore in case of invalid geometries
+          catch (MgException *ex) // just ignore in case of invalid geometries
           {
+            ex->Release();
           }
           
+        }
+        break;
+        case MgPropertyType::Int64:
+        {
+          INT64 val = FeatureReader->GetInt64(propname);
+          std::string tmp = "";
+          MgUtil::Int64ToString(val, tmp);
+          Dict->SetValue(dictkey,tmp);        
         }
         break;
         case MgPropertyType::Int32:
@@ -748,7 +757,7 @@ void GetPropertyAsBase64(c_RestDataReader* FeatureReader,CREFSTRING PropName,std
 }
 
 void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_RestRequest* RestRequest
-                            , const string& AgentUri,const string& UriBase
+                            , const string& FullUri,const string& UriBase
                             ,string& HtmlStr,int StartIndex,int MaxCount)
 {
 
@@ -972,7 +981,7 @@ void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_Re
     // now add in dictionary values for next and previous
     if( ismorerecords || StartIndex>0 )
     {    
-      Poco::URI uri_parser(AgentUri);    
+      Poco::URI uri_parser(FullUri);    
       
       std::string query = uri_parser.getQuery();
           
@@ -1120,8 +1129,8 @@ void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_Re
       //scol->Add(wsarg);
       
       std::wstring errmsg = L"Unable to load Template file '";
-      errmsg = errmsg + wsarg;
-      errmsg = errmsg + L"'. Check config file and template file location!";
+      errmsg = errmsg.append(wsarg);
+      errmsg = errmsg.append(L"'. Check config file and template file location!");
       
       throw new MgRuntimeException(L"c_FeatureReaderToHtml::ToTemplate",__LINE__, __WFILE__, NULL, errmsg, NULL);
     }
@@ -1130,7 +1139,7 @@ void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* Reader, c_Re
 
 
 
-}//end of c_FeatureReaderToHtml::ToHtml
+}//end of c_FeatureReaderToHtml::ToTemplate
 
 
 

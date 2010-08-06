@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug;..\..\lib\debug;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Common\lib\debug;..\..\lib\debug;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -123,7 +123,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -145,7 +145,7 @@
 				AdditionalDependencies="mgfoundation.lib GeoRestCommon.lib GeoRestServiceConfig.lib GeoRestRequestHandler.lib PocoFoundation.lib PocoXML.lib PocoNet.lib PocoUtil.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -203,7 +203,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -227,7 +227,7 @@
 				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Common\lib\debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -285,7 +285,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\PlatformBase;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -309,7 +309,7 @@
 				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\lib\debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Common\lib\debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -367,7 +367,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\PlatformBase;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS;_MG_ENT_2011"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -391,7 +391,7 @@
 				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\lib\debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\Common\lib\debug;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -449,7 +449,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\PlatformBase;D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -471,7 +471,7 @@
 				AdditionalDependencies="mgfoundation.lib GeoRestCommon.lib GeoRestServiceConfig.lib GeoRestRequestHandler.lib PocoFoundation.lib PocoXML.lib PocoNet.lib PocoUtil.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.2gp\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -529,7 +529,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Foundation;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\Geometry;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\PlatformBase;D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS;_MG_ENT_2010"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -551,7 +551,7 @@
 				AdditionalDependencies="mgfoundation.lib GeoRestCommon.lib GeoRestServiceConfig.lib GeoRestRequestHandler.lib PocoFoundation.lib PocoXML.lib PocoNet.lib PocoUtil.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\sandbox\adsk\2.1\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -609,7 +609,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;D:\Development\POCO\poco-1.3.5\Foundation\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Util\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\XML\include&quot;;&quot;D:\Development\POCO\poco-1.3.5\Net\include&quot;"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;MGWS_ISAPI_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -631,7 +631,7 @@
 				AdditionalDependencies="mgfoundation.lib GeoRestCommon.lib GeoRestServiceConfig.lib GeoRestRequestHandler.lib PocoFoundation.lib PocoXML.lib PocoNet.lib PocoUtil.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\POCO\poco-1.3.5\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				ModuleDefinitionFile="src\GeoRest_ISAPI.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"

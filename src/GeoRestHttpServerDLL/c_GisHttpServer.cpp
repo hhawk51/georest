@@ -67,6 +67,9 @@ using Poco::Util::HelpFormatter;
 using namespace std;
 
 extern Poco::Path g_AppFolder;
+extern Poco::Path g_WWWFolder;
+
+static unsigned long g_UriCount=0;
 
 class RestRequestHandler: public HTTPRequestHandler
 {
@@ -78,8 +81,7 @@ public:
   void handleFileRequest(HTTPServerRequest& request,HTTPServerResponse& response)
   {
     
-    Poco::Path fpath = g_AppFolder;
-    fpath.pushDirectory("www");
+    Poco::Path fpath = g_WWWFolder;
     const std::string& agenturi = request.getURI();
     fpath.setFileName(agenturi);
     
@@ -137,31 +139,64 @@ public:
       content_type = "application/vnd.google-earth.kmz";
     }
    
+    try
+    {
+      response.sendFile(fpath.toString(),content_type);
+    }
+    catch (Poco::FileNotFoundException& ex)
+    {
+      response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_NOT_FOUND);
+      response.setContentType("text/html");
+      response.setChunkedTransferEncoding(false);
+
+
+      stringstream resp_body;
+      resp_body << "<html><head><title>404 Not Found</title>";
+      resp_body << "</head>";
+      resp_body << "<body><p style=\"font-size: 24;\">GeoREST Web Service</p>";
+      resp_body << "<p style=\"font-size: 24;\"><H1>Not Found</H1></p><p style=\"font-size: 24;\">";
+      resp_body << "The requested URL " << request.getURI() << " was not found.";
+      resp_body << "</p></body></html>";
+
+      response.setContentLength(resp_body.str().length());
+
+      std::ostream& ostr = response.send();
+      
+      ostr << resp_body.str();
+    }
+    catch (Poco::OpenFileException& ex)
+    {
+      
+    }
+    catch (Poco::Exception& ex)
+    {
+      
+    }
+    catch (...)
+    {
+      
+    }
     
-    response.sendFile(fpath.toString(),content_type);
   
   }
+  
+  
   void handleRequest(HTTPServerRequest& request,
     HTTPServerResponse& response)
   {
-    /*
-    Application& app = Application::instance();
-    app.logger().information("Request from "
-      + request.clientAddress().toString());
-    */
+     
     
-    /*
-    response.setStatus(Poco::Net::HTTPResponse::HTTP_OK);
-    response.setContentType("text/plain");
-    std::ostream& outstr2 = response.send(); 
-    outstr2 << "Hello back from REST";
-    return;
-    */
+    std::string host = request.getHost();
+     
     
     
-   
+    std::string agenturi = "http://" + host + request.getURI();
+    g_UriCount++;
     
-    const std::string& agenturi = request.getURI();
+    #ifdef _DEBUG
+      std::cout << "\nURI(" << g_UriCount << "): " << agenturi;
+    #endif
+    
     const std::string& httpmethod = request.getMethod();
     
     bool isrest_uri=false;
@@ -206,6 +241,26 @@ public:
       }
     }
     Ptr<c_RestRequest> restrequest = new c_RestRequest(agenturi,uri_base,uri_rest,httpmethod,post_data);
+    
+    
+    try
+    {
+      restrequest->SetHeaderValue("Accept",request.get("Accept").c_str());
+    }
+    catch(...){}
+    try
+    {
+      restrequest->SetHeaderValue("DataServiceVersion",request.get("DataServiceVersion").c_str());
+    }
+    catch(...){}
+    try
+    {
+      restrequest->SetHeaderValue("MaxDataServiceVersion",request.get("MaxDataServiceVersion").c_str());
+    }
+    catch(...){}
+    
+
+        
     
     Ptr<c_RestResponse> restresponse = restrequest->Execute();
     //c_RestResponse_HttpData* http_data = restresponse->PrepareHttpData(restrequest);

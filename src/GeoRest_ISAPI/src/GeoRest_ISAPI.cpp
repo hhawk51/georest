@@ -255,7 +255,7 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
   
   //ECB->GetServerVariable(ECB->ConnID, (LPSTR)MapAgentStrings::ScriptName, scriptnamebuff2, &size);
 
-  std::string http_fulluri = httpuri_buff;
+  std::string httpfulluri = httpuri_buff;
 
   string url = MapAgentStrings::Http;
   if (NULL != serverName && NULL != serverPort && NULL != httpuri_buff)
@@ -263,7 +263,7 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
     url.append(serverName);
     url += ':';
     url.append(serverPort);
-    url.append(http_fulluri);
+    url.append(httpfulluri);
   }
   agent_uri = url;
   STRING wUrl = MgUtil::MultiByteToWideChar(url);
@@ -286,21 +286,21 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
   c_RestConfig * restcfg = c_RestConfig::GetInstance();
   const char *resturi_separator = restcfg->GetRestUriSeparator();
   
-  basic_string <char>::size_type rpos = http_fulluri.find("/REST/");
+  basic_string <char>::size_type rpos = agent_uri.find("/REST/");
   if( rpos == string::npos )
   {
-    rpos = http_fulluri.find("/rest/");
+    rpos = agent_uri.find("/rest/");
     
   }
   if( rpos != string::npos )
   {
-    uri_base = http_fulluri.substr(0,rpos);
-    uri_rest = http_fulluri.substr(rpos,http_fulluri.length()-rpos);
+    uri_base = agent_uri.substr(0,rpos);
+    uri_rest = agent_uri.substr(rpos,agent_uri.length()-rpos);
     isrest_uri=true;
   }
   else
   {
-    uri_base = http_fulluri;
+    uri_base = agent_uri;
     uri_rest = "";
   }
   // create uribase with full server name
@@ -375,6 +375,25 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
     }
   }
   */
+  size = 1024;
+  char buff[1204+1];
+  buff[0]=0;
+  if( ECB->GetServerVariable(ECB->ConnID, "HTTP_Accept", buff, &size) )
+  {
+    request->SetHeaderValue("Accept",buff);
+  }
+  buff[0]=0;
+  
+  if( ECB->GetServerVariable(ECB->ConnID, "HTTP_DataServiceVersion", buff, &size) )
+  {
+    request->SetHeaderValue("DataServiceVersion",buff);
+  }
+  buff[0]=0;
+  if( ECB->GetServerVariable(ECB->ConnID, "HTTP_MaxDataServiceVersion", buff, &size) )
+  {
+    request->SetHeaderValue("MaxDataServiceVersion",buff);
+  }
+  
   IsapiResponseHandler responseHandler(request,agent_uri,uri_base,ECB);
   Ptr<c_RestResponse> response = request->Execute();
 

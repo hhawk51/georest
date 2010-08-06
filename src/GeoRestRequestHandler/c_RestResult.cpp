@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2004-2008 by Autodesk, Inc.
+//  Copyright (C) 2010 by Haris Kurtagic
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -17,6 +17,7 @@
 
 #include "stdafx.h"
 #include "c_RestResult.h"
+#include "Poco\UnicodeConverter.h"
 
 #ifdef _WIN32
     #undef GetMessage
@@ -28,7 +29,7 @@
 /// </summary>
 c_RestResult::c_RestResult()
 {
-    m_StatusCode = HTTP_STATUS_OK;
+  m_StatusCode = Poco::Net::HTTPResponse::HTTP_OK; // HTTP_STATUS_OK;
     m_pResultObject = NULL;
     
     m_FeatureReader_StartIndex = -1;
@@ -41,7 +42,7 @@ c_RestResult::c_RestResult()
 
 c_RestResult::c_RestResult(MgDisposable* resultObject)
 {
-    m_StatusCode = HTTP_STATUS_OK;
+    m_StatusCode = Poco::Net::HTTPResponse::HTTP_OK;
     m_pResultObject = resultObject;
     
     m_FeatureReader_StartIndex = -1;
@@ -66,7 +67,7 @@ c_RestResult::~c_RestResult()
 /// Success/Error code.
 /// </returns>
 /// </summary>
-STATUS c_RestResult::GetStatusCode()
+Poco::Net::HTTPResponse::HTTPStatus c_RestResult::GetStatusCode()
 {
     return m_StatusCode;
 }
@@ -78,7 +79,7 @@ STATUS c_RestResult::GetStatusCode()
 /// Nothing.
 /// </returns>
 /// </summary>
-void c_RestResult::SetStatusCode(STATUS status)
+void c_RestResult::SetStatusCode(Poco::Net::HTTPResponse::HTTPStatus status)
 {
     m_StatusCode = status;
 }
@@ -205,14 +206,13 @@ INT32 c_RestResult::GetClassId()
 /// </summary>
 ///----------------------------------------------------------------------------
 
-void c_RestResult::SetErrorInfo(c_RestRequest* ,
-    MgException* mgException)
+void c_RestResult::SetErrorInfo(c_RestRequest* ,  MgException* mgException)
 {
 #ifdef _DEBUG
     assert(0 != mgException);
 #endif
 
-    STATUS httpStatusCode = HTTP_STATUS_INTERNAL_SERVER_ERROR;
+    Poco::Net::HTTPResponse::HTTPStatus httpStatusCode = Poco::Net::HTTPResponse::HTTP_INTERNAL_SERVER_ERROR; // HTTP_STATUS_INTERNAL_SERVER_ERROR;
     STRING httpStatusMessage;
     STRING errorMessage;
     STRING detailedMessage;
@@ -234,7 +234,7 @@ void c_RestResult::SetErrorInfo(c_RestRequest* ,
         detailedMessage += mgException->GetStackTrace();
 #endif
 
-        httpStatusCode = HTTP_STATUS_MG_ERROR;
+        //httpStatusCode = HTTP_STATUS_MG_ERROR;
     }
     catch (MgException* e)
     {
@@ -248,15 +248,10 @@ void c_RestResult::SetErrorInfo(c_RestRequest* ,
 
     try
     {
-        if (HTTP_STATUS_INTERNAL_SERVER_ERROR == httpStatusCode)
-        {
-            // If we are here it is because we failed to get the exception information above
-            httpStatusMessage = L"Invalid exception"; // TODO: Localize.
-            errorMessage = L"Unable to process exception";          // TODO: Localize.
-        }
+       
 
         SetStatusCode(httpStatusCode);
-        SetHttpStatusMessage(httpStatusMessage);
+        //SetHttpStatusMessage(httpStatusMessage);
         SetErrorMessage(errorMessage);
         SetDetailedErrorMessage(detailedMessage);
     }
@@ -267,4 +262,30 @@ void c_RestResult::SetErrorInfo(c_RestRequest* ,
     catch (...)
     {
     }
+}
+
+void c_RestResult::SetErrorInfo( c_RestRequest* awRequest, c_ExceptionHTTPStatus& Exception )
+{
+  SetStatusCode(Exception.httpStatus());
+  std::wstring tmpstr;
+  Poco::UnicodeConverter::toUTF16(Exception.displayText(),tmpstr);
+  SetErrorMessage(tmpstr);
+}
+
+
+
+void c_RestResult::SetErrorInfo( c_RestRequest* awRequest, Poco::Exception& Exception )
+{
+  SetStatusCode(Poco::Net::HTTPResponse::HTTP_INTERNAL_SERVER_ERROR);
+  std::wstring tmpstr;
+  Poco::UnicodeConverter::toUTF16(Exception.displayText(),tmpstr);
+  SetErrorMessage(tmpstr);
+}
+void c_RestResult::SetErrorInfo( c_RestRequest* awRequest, FdoException*  Exception )
+{
+  SetStatusCode(Poco::Net::HTTPResponse::HTTP_INTERNAL_SERVER_ERROR);
+  std::wstring tmpstr;
+  if( Exception->GetExceptionMessage() )
+    tmpstr = Exception->GetExceptionMessage();
+  SetErrorMessage(tmpstr);
 }

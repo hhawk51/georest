@@ -18,6 +18,7 @@
 #ifndef _c_RestDataReader_h
 #define _c_RestDataReader_h
 
+
 //
 // c_RestDataReader is returned after completion of RestFetchUri execution.
 //
@@ -486,5 +487,8 @@ protected:
   FdoPtr<FdoIFeatureReader> m_FdoReader;
 };
 
+/*
+
+*/
 
 #endif

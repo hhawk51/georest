@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2004-2007 by Autodesk, Inc.
+//  Copyright (C) 2010 by Haris Kurtagic
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -54,7 +54,7 @@ void IsapiResponseHandler::SendResponse(c_RestResponse* response)
   headers.write(ostr2);
   std::string s2 = ostr2.str();
   
-  Poco::Net::HTTPResponse httpresponse(Poco::Net::HTTPMessage::HTTP_1_1, Poco::Net::HTTPResponse::HTTP_OK);
+  //Poco::Net::HTTPResponse httpresponse(Poco::Net::HTTPMessage::HTTP_1_1, Poco::Net::HTTPResponse::HTTP_OK);
   //httpresponse.set("Location", "http://www.appinf.com/index.html");
   //response.set("Server", "Poco/1.0");
   char statusline[512];

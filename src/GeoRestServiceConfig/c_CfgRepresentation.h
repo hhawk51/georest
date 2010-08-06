@@ -67,6 +67,10 @@ public:
     m_IsMaxBBoxHeight=false;
     m_IsMaxBBoxWidth=false;;
     m_IsMaxCount=false;  
+    
+    m_MaxCount = 1;
+    m_MaxBBoxHeight = 1;
+    m_MaxBBoxWidth = 1;
   }
   ~c_CfgAccessMethod()
   {
@@ -135,6 +139,7 @@ public:
     e_PNG_MapGuide,
     e_FDO_Schema,
     e_Sitemap,
+    e_OData,
   };
   
   enum e_OrderDirection {
@@ -153,6 +158,8 @@ public:
   
   void AddMethod(c_CfgAccessMethod* Method);
   e_REST_AccessCodes IsAccess( const wchar_t*Method,const wchar_t*UserName,const wchar_t* Password ) const;
+
+  long GetMaxCount() const; // return number of features allowed to be retruned
 
   bool IsBBoxHeightLimitSet() const;
   bool IsBBoxWidthLimitSet() const;
@@ -226,6 +233,74 @@ public:
   const c_CfgRepTemplateExtraData* GetHtmlExtraData(int ind) const { return m_RepTemplateExtraDataVector.at(ind); }
 
   t_CfgRepTemplateExtraDataVector m_RepTemplateExtraDataVector; // additional data to be fetched when generating html template 
+};
+
+
+
+
+class REST_CONFIG_API c_AtomElementOverride 
+{
+public:
+  c_AtomElementOverride ();
+  
+public:
+  enum e_OverrideType  
+  {
+    e_Static,
+    e_Property,
+    e_Template
+  };
+  
+public:  
+  const std::string& GetValueUTF8() const;
+  const std::wstring& GetValue() const { return m_Value; }  
+  void SetValue( const std::wstring& Value,const std::wstring& OverType );
+
+  e_OverrideType GetOverrideType() const { return m_OverridType; }
+  void SetOverrideType(e_OverrideType Type) { m_OverridType=Type; }
+  void SetOverrideType(const std::wstring& OverType);
+  
+  bool IsValuePropertyName() const { return m_OverridType==e_Property; }
+  bool IsValueEmpty() const { return m_Value.empty(); }
+  
+protected:  
+  e_OverrideType m_OverridType; // if true it means that m_Value holds name of property to be used to set
+                              // if false it means that m_Value holds fixed text to be set for element
+  std::wstring m_Value; // if non-empty it will be used as values for some atom element     
+
+  mutable bool m_IsValueUTF8; // true==means that m_ValueUTF8 is valid copy of m_FeedTitle
+  mutable std::string m_ValueUTF8; // UTF8 copy of m_ValueUTF8    
+};
+
+typedef struct t_AtomAuthorElements
+{
+  c_AtomElementOverride m_AuthorName; // if non-empty it will be used as author/name of atom:feed 
+  c_AtomElementOverride m_AuthorUri; // if non-empty it will be used as author/uRI of atom:feed 
+  c_AtomElementOverride m_AuthorEmail; // if non-empty it will be used as author/email of atom:feed 
+} t_AtomAuthorElements;
+
+class c_CfgRepOdata : public c_CfgRepresentation
+{
+public:
+  c_CfgRepOdata() : c_CfgRepresentation(c_CfgRepresentation::e_OData,L"OData.svc",L"application/xml")
+  {
+    
+  }
+  ~c_CfgRepOdata()
+  {
+    
+  }
+  
+  
+  
+public:
+  
+  c_AtomElementOverride m_FeedTitle; // if non-empty it will be used as title of atom:feed   
+  t_AtomAuthorElements m_FeedAuthor;
+  
+  c_AtomElementOverride m_EntryTitle;
+  t_AtomAuthorElements m_EntryAuthor;          
+  
 };
 
 class REST_CONFIG_API c_CfgRepresentation_Png8_MapGuide : public c_CfgRepresentation

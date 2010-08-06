@@ -28,7 +28,7 @@
 /// and request meta data for use in Common MapAgent API (CMA).
 /// </summary>
 	
-class IsapiPostParser;
+//class IsapiPostParser;
 class c_CfgDataResource;
 class c_CfgRepresentation;
 	
@@ -44,16 +44,10 @@ class REST_REQUEST_HANDLER_API c_RestRequest : public MgDisposable
         /// <returns>Pointer to c_RestResponse object</returns>
         c_RestResponse* Execute();  
         
-        void SetPostData(IsapiPostParser* PostData);
-        IsapiPostParser* GetPostData();
+        //void SetPostData(IsapiPostParser* PostData);
+        //IsapiPostParser* GetPostData();
         
-         /// <summary>
-        /// Makes available the pointer to header class.
-        /// User will use header class instance to add
-        /// header information for a request.
-        /// </summary>
-        /// <returns>Pointer to MgHttpHeader class</returns>
-        c_RestHeader* GetHeader();
+         
 
         /// <summary>
         /// Makes available the pointer to RequestParam class.
@@ -90,10 +84,20 @@ public:
         
         c_RestUri::e_HttpMethod GetHttpMethod();
         
+        const c_RestUri& GetRestUri() const { return m_RestUri; }
+        
         const std::string& GetBaseUri() const { return m_RestUri.GetBaseUri(); }
-        const std::string& GetAgentUri() const { return m_RestUri.GetAgentUri(); }
+        
+        const std::string& GetOriginalFullUri() const { return m_RestUri.GetOriginalFullUri(); } // full uri; includes query parameters 
         //void SetBaseUri(const std::string& BaseUri) { m_BaseUri = BaseUri; }
 
+        void SetServiceURI(const std::string& ServiceURI ) { m_ServiceURI = ServiceURI; }
+        const std::string&  GetServiceURI() const { return m_ServiceURI; }
+        
+        void SetHeaderValue(const char* Name,const char* Value);
+        //void SetHeaderValue(const wchar_t* Name,const wchar_t* Value);
+        
+        bool GetHeaderValue(const char* Name,std::string& Val);
         
     protected:
         /// <summary>
@@ -115,15 +119,14 @@ public:
         void REST_Request_Hello(c_RestRequest *HttpRequest,c_RestResponse& HttpResponse);
     protected:
            
-      Ptr<c_RestHeader> m_RestHttpHeader;
+      Poco::Net::MessageHeader m_HttpRequestHeader;
       //Ptr<c_RestUriRequestParam> m_RestRequestParam;
       Ptr<c_RestUriRequestParam> m_RestRequestMetadata;
                  
       c_RestUri m_RestUri;                  
-      //std::string m_RestUri;
-      //std::string m_BaseUri;
-      //std::string m_HttpMethod;
-      //Ptr<c_RestUriPathParam> m_UriPathParameters;
+      std::string m_ServiceURI; // this is URI which defines start of rest service
+                                    // e.g. http://localhost:99/rest/data/
+                                    // e.g. http://localhost:99/rest/OData.svc/
       
      
     public: 

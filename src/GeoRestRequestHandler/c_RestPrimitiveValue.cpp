@@ -18,6 +18,7 @@
 #include "stdafx.h"
 #include "c_RestPrimitiveValue.h"
 
+
 //////////////////////////////////////////////////////////////////
 /// <summary>
 /// Constructor. Create a new c_RestPrimitiveValue object initialized
@@ -52,6 +53,13 @@ c_RestPrimitiveValue::c_RestPrimitiveValue(CREFSTRING value)
     m_PrimitiveType = e_PrimitiveTypeString;
 }
 
+
+c_RestPrimitiveValue::c_RestPrimitiveValue(const std::string& value)
+{
+  if(!(m_value.pstr_utf8 = new std::string(value)))
+    throw new MgOutOfMemoryException(L"c_RestPrimitiveValue", __LINE__, __WFILE__, NULL, L"", NULL);
+  m_PrimitiveType = e_PrimitiveTypeStringUTF8;
+}
 //////////////////////////////////////////////////////////////////
 /// <summary>
 /// Destructor. This will clean up the value.
@@ -60,6 +68,9 @@ c_RestPrimitiveValue::~c_RestPrimitiveValue()
 {
     if(m_PrimitiveType == e_PrimitiveTypeString)
         delete m_value.pstr;
+        
+    if(m_PrimitiveType == e_PrimitiveTypeStringUTF8)
+      delete m_value.pstr_utf8;        
 }
 
 //////////////////////////////////////////////////////////////////
@@ -98,6 +109,11 @@ STRING c_RestPrimitiveValue::GetStringValue()
     return *m_value.pstr;
 }
 
+const std::string& c_RestPrimitiveValue::GetStringUTF8Value() const
+{
+  return *m_value.pstr_utf8;
+}
+
 //////////////////////////////////////////////////////////////////
 /// <summary>
 /// Get a string representation of the primitive value
@@ -118,10 +134,46 @@ STRING c_RestPrimitiveValue::ToString()
         }
         case e_PrimitiveTypeString:
             return *m_value.pstr;
+        case e_PrimitiveTypeStringUTF8:
+        {
+          return MgUtil::MultiByteToWideChar(*m_value.pstr_utf8);
+          
+        }
     }
 
     assert(false);
     return L"";
+}
+
+//////////////////////////////////////////////////////////////////
+/// <summary>
+/// Get a string representation of the primitive value
+/// </summary>
+std::string c_RestPrimitiveValue::ToStringUTF8()
+{
+
+  switch(m_PrimitiveType)
+  {
+  case e_PrimitiveTypeBool:
+    return m_value.b? "True": "False";
+
+  case e_PrimitiveTypeInt:
+    {
+      char buf[30];
+      sprintf(buf, "%d", m_value.i);
+      return buf;
+    }
+    case e_PrimitiveTypeString:
+    {
+      return MG_WCHAR_TO_CHAR(*m_value.pstr);
+      
+    }
+  case e_PrimitiveTypeStringUTF8:
+    return *m_value.pstr_utf8;
+  }
+
+  assert(false);
+  return "";
 }
 
 void c_RestPrimitiveValue::Dispose()

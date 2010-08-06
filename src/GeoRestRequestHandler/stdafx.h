@@ -32,8 +32,8 @@
 
 // TODO: reference additional headers your program requires here
 #include <stdlib.h>
-#include "PlatformBase.h"
-#include "MapGuideCommon.h"
+//#include "PlatformBase.h"
+//#include "MapGuideCommon.h"
 #include "Fdo.h"
 
 #include "RestCommonInclude.h"

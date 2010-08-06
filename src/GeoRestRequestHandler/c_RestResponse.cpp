@@ -17,7 +17,7 @@
 
 #include "stdafx.h"
 #include "c_RestRequest.h"
-#include "c_RestHeader.h"
+
 #include "c_RestResult.h"
 #include "c_RestResponse.h"
 #include "c_RestPrimitiveValue.h"
@@ -42,20 +42,9 @@
 /// </summary>
 c_RestResponse::c_RestResponse()
 {
-    m_header = new c_RestHeader();
     m_result = new c_RestResult();
 }
 
-/// <summary>
-/// Makes available the pointer to header.
-/// User will use header class instance to retrieve
-/// header information for a response.
-/// </summary>
-/// <returns>Pointer to c_RestHeader class</returns>
-c_RestHeader* c_RestResponse::GetHeader()
-{
-    return SAFE_ADDREF((c_RestHeader*)m_header);
-}
 
 /// <summary>
 /// Makes available the pointer to c_RestResult.
@@ -157,11 +146,7 @@ try
       
       
       m_HttpData.SetContent(content);
-      
-
-
-
-
+  
     }
   }
   else
@@ -212,7 +197,7 @@ try
     if( proxyfreader )
     {
       restreader = new c_RestDataReader_MgFeatureReader(proxyfreader);
-      //c_FeatureReaderToHtml::ToHtml((MgFeatureReader*)pResultObj,RestRequest,RestRequest->GetAgentUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);            
+      //c_FeatureReaderToHtml::ToHtml((MgFeatureReader*)pResultObj,RestRequest,RestRequest->GetFullUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);            
     }
     else
     {
@@ -224,24 +209,24 @@ try
     {
       if( response_contentType == RestMimeType::Html  )
       {      
-        c_FeatureReaderToHtml::ToHtml(restreader,RestRequest,RestRequest->GetAgentUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);            
+        c_FeatureReaderToHtml::ToHtml(restreader,RestRequest,RestRequest->GetOriginalFullUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);            
         
       }
       else
       {
         if( response_contentType == RestMimeType::Kml  )
         {
-            c_FeatureReaderToHtml::ToKml(restreader.p,RestRequest,RestRequest->GetAgentUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);            
+            c_FeatureReaderToHtml::ToKml(restreader.p,RestRequest,RestRequest->GetOriginalFullUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);            
         }
         else
         {
           if( response_contentType == RestMimeType::Kmz  )
           {
-              outputReader = c_FeatureReaderToHtml::ToKmz(restreader.p,RestRequest,RestRequest->GetAgentUri(),RestRequest->GetBaseUri(),result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);
+              outputReader = c_FeatureReaderToHtml::ToKmz(restreader.p,RestRequest,RestRequest->GetOriginalFullUri(),RestRequest->GetBaseUri(),result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);
           }
           else
           {
-            c_FeatureReaderToHtml::ToTemplate(false,restreader,RestRequest,RestRequest->GetAgentUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);              
+            c_FeatureReaderToHtml::ToTemplate(false,restreader,RestRequest,RestRequest->GetOriginalFullUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);              
             
           }
         }
@@ -274,9 +259,12 @@ try
       restreader->Close();
     }
     
+    if (NULL != dynamic_cast<c_RestPrimitiveValue*>(pResultObj))
+    { 
+      stringval_utf8 = ((c_RestPrimitiveValue*)pResultObj)->ToStringUTF8();;
 
-
-    if (NULL != dynamic_cast<MgByteReader*>(pResultObj))
+    }
+    else if (NULL != dynamic_cast<MgByteReader*>(pResultObj))
     {
       outputReader = (MgByteReader*) SAFE_ADDREF(pResultObj);
 
@@ -285,57 +273,18 @@ try
     {
       outputReader = ((MgStringCollection*)pResultObj)->ToXml();
 
-      /*
-      outputReader = contentType == RestMimeType::Json ? 
-      ((MgStringCollection*)pResultObj)->ToJson() :
-      ((MgStringCollection*)pResultObj)->ToXml();
-      */
     }
     else if (NULL != dynamic_cast<MgSqlDataReader*>(pResultObj))
     {
       outputReader = ((MgSqlDataReader*)pResultObj)->ToXml();
 
-      /*
-      outputReader = contentType == RestMimeType::Json ? 
-      ((MgSqlDataReader*)pResultObj)->ToJson() :
-      ((MgSqlDataReader*)pResultObj)->ToXml();
-      */
     }
     else if (NULL != dynamic_cast<MgDataReader*>(pResultObj))
     {
       outputReader = ((MgDataReader*)pResultObj)->ToXml();
 
-      /*
-      outputReader = contentType == RestMimeType::Json ? 
-      ((MgDataReader*)pResultObj)->ToJson() :
-      ((MgDataReader*)pResultObj)->ToXml();
-      */
-    }
-    else if (NULL != dynamic_cast<MgSpatialContextReader*>(pResultObj))
-    {
-      outputReader = ((MgSpatialContextReader*)pResultObj)->ToXml();
-
-      /*
-      outputReader = contentType == RestMimeType::Json ? 
-      ((MgSpatialContextReader*)pResultObj)->ToJson() :
-      ((MgSpatialContextReader*)pResultObj)->ToXml();
-      */
-    }
-    else if (NULL != dynamic_cast<MgLongTransactionReader*>(pResultObj))
-    {
-      outputReader = ((MgSpatialContextReader*)pResultObj)->ToXml();
-
-      /*
-      outputReader = contentType == RestMimeType::Json ? 
-      ((MgLongTransactionReader*)pResultObj)->ToJson() :
-      ((MgLongTransactionReader*)pResultObj)->ToXml();
-      */
-    }
-    else if (NULL != dynamic_cast<c_RestPrimitiveValue*>(pResultObj))
-    { 
-      STRING temp = ((c_RestPrimitiveValue*)pResultObj)->ToString();
-      stringval_utf8 = MG_WCHAR_TO_CHAR(temp);
-    }
+    }    
+    
 
     if (stringval_utf8.length() > 0)
     {

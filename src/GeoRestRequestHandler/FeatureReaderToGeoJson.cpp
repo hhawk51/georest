@@ -40,42 +40,42 @@ STRING ReplaceEscapeCharInJSON(CREFSTRING str)
   {
     switch(str[i])
     {
-    case '"' :
+      case '"' :
       {
         newStr += L"\\\"";
         break;
       }          
-    case '\\' :
+      case '\\' :
       {
         newStr += L"\\\\";
         break;
       }
-    case '\b' :
+      case '\b' :
       {
         newStr += L"\\b";
         break;
       }
-    case '\f' :
+      case '\f' :
       {
         newStr += L"\\f";
         break;
       }
-    case '\n' :
+      case '\n' :
       {
         newStr += L"\\n";
         break;
       }
-    case '\r' :
+      case '\r' :
       {
         newStr += L"\\r";
         break;
       }
-    case '\t' :
+      case '\t' :
       {
         newStr += L"\\t";
         break;
       }
-    default :
+      default :
       {
         if( str[i] <= 0x1F )
         {
@@ -125,8 +125,8 @@ void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string
     
     // TODO: define a schema for this XML
     // TODO: rename FeatureSet element to avoid conflict with FeatureSet-1.0.0.xsd?
-    GJsonStr += "{ \"type\": \"FeatureCollection\" ";
-    GJsonStr += ",\"features\" : [";
+    GJsonStr.append("{ \"type\": \"FeatureCollection\" ");
+    GJsonStr.append(",\"features\" : [");
     
     //classDef->ToXml(str);
     //str += "<Features>";
@@ -163,11 +163,11 @@ void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string
         
             
         if( !isfirstfeature ) GJsonStr += ",";
-        GJsonStr += "{";
+        GJsonStr.append("{");
         
         std::string identprop_value="";
         
-        GJsonStr += "\"type\":\"Feature\"";
+        GJsonStr.append("\"type\":\"Feature\"");
         
         bool isfirst_prop = true;
         std::string props_str; // properties like string: "porp1" :  "string1" , "prop2" : 34
@@ -219,8 +219,8 @@ void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string
                 {         
                   prop_val = "\"";
                   STRING escstr = ReplaceEscapeCharInJSON(FeatureReader->GetString(propname));
-                  prop_val += MgUtil::WideCharToMultiByte(escstr);              
-                  prop_val += "\"";
+                  prop_val.append(MgUtil::WideCharToMultiByte(escstr));              
+                  prop_val.append("\"");
                 }
                 break;
                 case MgPropertyType::DateTime:
@@ -310,31 +310,38 @@ void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string
         
         if( geom_val.length() > 0 )
         {
-          GJsonStr += ",\"geometry\": " + geom_val;
+          GJsonStr.append(",\"geometry\": ");
+          GJsonStr.append(geom_val);
 
         }
         
         if( (identprop_name.length()>0) && (identprop_value.length() > 0) )
         {
-          GJsonStr += ",\"id\": { \"" + MgUtil::WideCharToMultiByte(identprop_name) + "\":" + identprop_value + "}";
+          GJsonStr.append(",\"id\": { \"");
+          GJsonStr.append(MgUtil::WideCharToMultiByte(identprop_name));
+          GJsonStr.append("\":");
+          GJsonStr.append(identprop_value);
+          GJsonStr.append("}");
         }
         
         
         if( props_str.length() > 0 )
         {
-          GJsonStr += ",\"properties\": {" + props_str + "}";
+          GJsonStr.append(",\"properties\": {");
+          GJsonStr.append(props_str);
+          GJsonStr.append("}");
 
         }
         
-        GJsonStr += "}";
+        GJsonStr.append("}");
         
         isfirstfeature = false;
         
         featurecount++;
         
       };//end of while
-      GJsonStr += "]";
-      GJsonStr += "}";
+      GJsonStr.append("]");
+      GJsonStr.append("}");
     }
   }
 }
@@ -345,15 +352,15 @@ void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string
 void c_FeatureReaderToGeoJson::ToGeoJson(MgGeometryProperty* Geom,string &str,bool includeType)
 {
   //str += "<" + rootElmName + ">";
-  str += "{";
+  str.append("{");
   
-  str += MgUtil::WideCharToMultiByte(Geom->GetName());
+  str.append(MgUtil::WideCharToMultiByte(Geom->GetName()));
 
   //str += "<Name>";
   //str += MgUtil::WideCharToMultiByte(MgUtil::ReplaceEscapeCharInXml(GetName())) + "</Name>";
   if (includeType)
   {
-    str += "<Type>geometry</Type>";
+    str.append("<Type>geometry</Type>");
   }
   //str += "<Value>";
 
@@ -367,7 +374,7 @@ void c_FeatureReaderToGeoJson::ToGeoJson(MgGeometryProperty* Geom,string &str,bo
    
   }
 
-  str += "}";
+  str.append("}");
   //str += "</Value>";
   //str += "</" + rootElmName + ">";
 }

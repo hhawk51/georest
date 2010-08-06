@@ -20,7 +20,7 @@
 
 #include "Poco/Net/MessageHeader.h"
 #include "c_RestResult.h"
-#include "c_RestHeader.h"
+
 
 
 
@@ -105,13 +105,6 @@ class REST_REQUEST_HANDLER_API c_RestResponse : public MgDisposable
     EXTERNAL_API:
         c_RestResponse();
 
-        /// <summary>
-        /// Makes available the pointer to header.
-        /// User will use header class instance to retrieve
-        /// header information for a response.
-        /// </summary>
-        /// <returns>Pointer to c_RestHeader class</returns>
-        c_RestHeader* GetHeader();
 
         /// <summary>
         /// Makes available the pointer to c_RestResult.
@@ -169,7 +162,7 @@ class REST_REQUEST_HANDLER_API c_RestResponse : public MgDisposable
 
 
     private:
-        Ptr<c_RestHeader> m_header;
+      Poco::Net::MessageHeader m_HttpHeader;
         Ptr<c_RestResult> m_result;
 		    std::string m_JsonpCallbackName;
         std::wstring m_ContentType; // requested format of response ( XMl, JSON, JSONP )

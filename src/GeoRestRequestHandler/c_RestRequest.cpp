@@ -22,11 +22,13 @@
 #include "c_RestUriRequestParam.h"
 #include "c_RestHandler.h"
 #include "c_RestHandler_Data.h"
-
+#include "c_RestHandler_OData.h"
 
 //#include "RestDefs.h"
 
 #include <algorithm>
+#include "Poco\UnicodeConverter.h"
+
 using namespace std;
 
 
@@ -45,7 +47,7 @@ c_RestRequest::c_RestRequest(const std::string& AgentUri,const std::string& Base
    //m_HttpMethod = HttpMethod;
    //m_UriPathParameters = new c_RestUriPathParam();
    
-   
+  
    
 }
 
@@ -58,6 +60,8 @@ c_RestRequest::c_RestRequest()
   m_CfgDataResource = NULL;
   m_CfgRepresentation = NULL;
   //m_UriPathParameters = new c_RestUriPathParam();
+  
+ 
 }
 
 
@@ -134,13 +138,16 @@ if (mgException != NULL)
 /// <returns>Pointer to c_RestResponse object</returns>
 c_RestResponse* c_RestRequest::Execute()
 {
-    Ptr<c_RestResponse> response;
-    Ptr<c_RestResult> result;
+  Ptr<c_RestResponse> response;
+  Ptr<c_RestResult> result;
 
-    response = new c_RestResponse();
-    result = response->GetResult();
+  response = new c_RestResponse();
+  result = response->GetResult();
     
-    MG_TRY()
+  Ptr<MgException> mgException;
+  STRING mgStackParams;
+  try
+  {
 
     Ptr<c_RestUriRequestParam> query_params = GetRequestParam();
     STRING callbackname = query_params->GetParameterValue(D_REST_JSONP_CALLBACK_STR);
@@ -184,8 +191,42 @@ c_RestResponse* c_RestRequest::Execute()
         isrest = true;
         if( path_params->NextParameter() )
         {
-          if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_HELLO)==0 )
+          if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_DATA)==0 )
+          {       
+            m_ServiceURI = m_RestUri.GetBaseUri();
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_REST_UTF8);
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_DATA_UTF8);
+            m_ServiceURI.append("/");
+
+            Ptr<c_RestHandler> exechandler = c_RestHandler_Data::CreateObject(this);               
+            // Execute request
+            if(exechandler != NULL)
+              exechandler->Execute(*response);
+          }
+          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_ODATA)==0 )
+          {       
+            m_ServiceURI = m_RestUri.GetBaseUri();
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_REST_UTF8);
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_ODATA_UTF8);
+            m_ServiceURI.append("/");
+
+            Ptr<c_RestHandler> exechandler = c_RestHandler_OData::CreateObject(this);               
+            // Execute request
+            if(exechandler != NULL)
+              exechandler->Execute(*response);
+          }
+          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_HELLO)==0 )
           {
+            m_ServiceURI = m_RestUri.GetBaseUri();
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_REST_UTF8);
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_HELLO_UTF8);
+            m_ServiceURI.append("/");
             
             REST_Request_Hello(this,*response);
           }
@@ -217,36 +258,6 @@ c_RestResponse* c_RestRequest::Execute()
             //if(exechandler != NULL)
             //  exechandler->Execute(*response);
           } 
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_DATA)==0 )
-          {
-          /*
-            STRING  datafilter;
-            STRING  formatdesc;
-            STRING  datatagname;
-            if( path_params->NextParameter() )
-            {
-              datatagname = path_params->GetCurrentParameterName();
-              if( path_params->NextParameter() )
-              {
-                datafilter = path_params->GetCurrentParameterName();
-                if( path_params->NextParameter() )
-                { 
-                  formatdesc = path_params->GetCurrentParameterName();
-                }
-              
-                
-              }
-              Ptr<c_RestHandler> exechandler = MgRestData::CreateObject(this,datatagname.c_str(),datafilter.c_str(),formatdesc.c_str());               
-             // Execute request
-              if(exechandler != NULL)
-                exechandler->Execute(*response);
-            }
-          */
-             Ptr<c_RestHandler> exechandler = c_RestHandler_Data::CreateObject(this);               
-             // Execute request
-              if(exechandler != NULL)
-                exechandler->Execute(*response);
-          }
           else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_FDO)==0 )
           {
             if( path_params->NextParameter() )
@@ -293,7 +304,7 @@ c_RestResponse* c_RestRequest::Execute()
                     
             MgStringCollection arguments;
             arguments.Add(L"0");
-            STRING wstr = MgUtil::MultiByteToWideChar(m_RestUri.GetRestUri());
+            STRING wstr = MgUtil::MultiByteToWideChar(m_RestUri.GetOriginalFullUri());
             arguments.Add(wstr);
             throw new MgRuntimeException(L"MgHttpRestRequest.Execute",__LINE__, __WFILE__, &arguments, L"Unknow REST Request", NULL);
           }
@@ -314,19 +325,46 @@ c_RestResponse* c_RestRequest::Execute()
       
     response->PrepareHttpData(this);
     
-    MG_CATCH(L"MgHttpRestRequest.Execute")
-    if (mgException != NULL)                                                  
-    {                                                                         
-      if (result != NULL)                                                  
-      {                                                                     
-        result->SetErrorInfo(this, mgException);    
-        response->PrepareHttpData(this);               
-      }                                                                     
-      //(*mgException).AddRef();                                              
-      //mgException->Raise();                                                 
-    } 
-      
-    return SAFE_ADDREF((c_RestResponse*)response);
+  }                                                                         \
+  catch (c_ExceptionHTTPStatus& ex)                                                    \
+  {  
+    if (result != NULL)                                                  
+    {                                                                       \
+      result->SetErrorInfo(this, ex);
+    }
+  }
+  catch (Poco::Exception& ex)                                                    \
+  {                                                                         \
+    result->SetErrorInfo(this, ex);
+  }
+  catch (FdoException* ex)                                                    \
+  {
+    result->SetErrorInfo(this, ex);
+    ex->Release();
+  }
+  catch (MgException* e)                                                    \
+  {                                                                         \
+    mgException = e;                                                      \
+    mgException->AddStackTraceInfo(L"c_RestRequest.Execute", mgStackParams, __LINE__, __WFILE__);      \
+  }                                                                         \
+  catch (exception& e)                                                      \
+  {                                                                         \
+    mgException = MgSystemException::Create(e, L"c_RestRequest.Execute", __LINE__, __WFILE__); \
+  }                                                                         \
+  catch (...)                                                               \
+  {                                                                         \
+    mgException = new MgUnclassifiedException(L"c_RestRequest.Execute", __LINE__, __WFILE__, NULL, L"", NULL); \
+  }
+  if (mgException != NULL)                                                  
+  {                                                                         
+    if (result != NULL)                                                  
+    {                                                                     
+      result->SetErrorInfo(this, mgException);     
+      response->PrepareHttpData(this);     
+    }                                                                           
+  } 
+                     
+  return SAFE_ADDREF((c_RestResponse*)response);
 }
 
 
@@ -353,3 +391,36 @@ c_RestUri::e_HttpMethod c_RestRequest::GetHttpMethod()
   return m_RestUri.GetHttpMethod();   
 }
 
+void c_RestRequest::SetHeaderValue( const char* Name,const char* Value )
+{
+  m_HttpRequestHeader.set(Name,Value);
+  
+}
+
+/*
+void c_RestRequest::SetHeaderValue( const wchar_t* Name,const wchar_t* Value )
+{
+  std::wstring u16_name(Name),u16_value(Value);
+  std::string u8_name,u8_value;
+
+  Poco::UnicodeConverter::toUTF8(u16_name,u8_name);
+  Poco::UnicodeConverter::toUTF8(u16_value,u8_value);
+
+  m_HttpRequestHeader.set(u8_name,u8_value);
+}
+*/
+
+bool c_RestRequest::GetHeaderValue( const char* Name,std::string& Val )
+{
+  try
+  {
+  
+  Val = m_HttpRequestHeader.get(Name);
+  }
+  catch(Poco::NotFoundException& ex)
+  {
+    return false;
+  }
+  
+  return true;
+}

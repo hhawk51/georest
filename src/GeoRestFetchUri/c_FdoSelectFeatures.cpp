@@ -37,6 +37,8 @@
 //#include "GwsQuery.h"
 #include "FdoExpressionEngineCopyFilter.h"
 //#include "CacheManager.h"
+#include "Poco\UnicodeConverter.h"
+#include "c_ExceptionGeoREST.h"
 
 #define EQUAL_CATEGORY      0
 #define STDEV_CATEGORY      1
@@ -201,7 +203,8 @@ void ValidateCustomConstraints(FdoFunction* customFunction)
 
 c_FdoSelectFeatures::c_FdoSelectFeatures()
 {
-    m_command = NULL;
+    m_cmd_select = NULL;
+    m_is_cmd_ext_select = false;
     m_options = NULL;
     m_customPropertyFound = false;
     m_customFunction = NULL;
@@ -216,7 +219,7 @@ c_FdoSelectFeatures::~c_FdoSelectFeatures()
 }
 
 // Executes the select features command and serializes the reader
-c_RestDataReader_FdoFeatureReader* c_FdoSelectFeatures::SelectFeatures(c_CfgDataSource_FDO* FdoSource,
+c_RestDataReader_FdoFeatureReader* c_FdoSelectFeatures::SelectFeatures(const c_CfgDataSource_FDO* FdoSource,
                                                  MgFeatureQueryOptions* options)
 {
     
@@ -257,13 +260,15 @@ try
             useClassName = false;
         }
 
-        
+        bool isordering=false;
+        Ptr<MgStringCollection> ordr_coll = options->GetOrderingProperties();
+        if( ordr_coll.p && ordr_coll->GetCount() > 0) isordering=true;
 
         // Create Command
-        CreateCommand(FdoSource, isSelectAggregate);
+        CreateCommand(FdoSource, isSelectAggregate,isordering);
 
         
-        m_command->SetFeatureClassName(FdoSource->GetFeatureClass().c_str());
+        m_cmd_select->SetFeatureClassName(FdoSource->GetFeatureClass().c_str());
         
         // Set options (NULL is a valid value)
         m_options = SAFE_ADDREF(options);
@@ -272,13 +277,21 @@ try
         ApplyQueryOptions(isSelectAggregate);
 
         
-        m_command->SetFeatureClassName(FdoSource->GetFeatureClass().c_str());
+        m_cmd_select->SetFeatureClassName(FdoSource->GetFeatureClass().c_str());
 
         // If custom function is found, then validate that no more than one function/property is specified
         ValidateConstraintsOnCustomFunctions();
 
         // Execute the command
-         FdoPtr<FdoIFeatureReader> fdoreader = m_command->Execute();
+        FdoPtr<FdoIFeatureReader> fdoreader;
+        if( m_is_cmd_ext_select )
+        {
+          
+          fdoreader = (FdoIFeatureReader*)(((FdoIExtendedSelect*)(m_cmd_select.p))->ExecuteScrollable());
+        }
+        else
+          fdoreader = m_cmd_select->Execute();
+         
         //reader = m_command->Execute();
         
         //FdoPtr<MgFdoFeatureReader> featureReader = new MgFdoFeatureReader(frc);
@@ -301,7 +314,7 @@ catch (FdoException* e)                                                   \
 
 void c_FdoSelectFeatures::ApplyQueryOptions(bool isSelectAggregate)
 {
-    CHECKNULL(m_command, L"c_FdoSelectFeatures.ApplyQueryOptions");
+    CHECKNULL(m_cmd_select, L"c_FdoSelectFeatures.ApplyQueryOptions");
 
     if (m_options != NULL)
     {
@@ -318,7 +331,7 @@ void c_FdoSelectFeatures::ApplyQueryOptions(bool isSelectAggregate)
 void c_FdoSelectFeatures::ApplyClassProperties()
 {
     CHECKNULL(m_options, L"c_FdoSelectFeatures.ApplyClassProperties");
-    CHECKNULL(m_command, L"c_FdoSelectFeatures.ApplyClassProperties");
+    CHECKNULL(m_cmd_select, L"c_FdoSelectFeatures.ApplyClassProperties");
 
     Ptr<MgStringCollection> properties = m_options->GetClassProperties();
 
@@ -329,7 +342,7 @@ void c_FdoSelectFeatures::ApplyClassProperties()
     if (cnt <= 0)
         return; // Nothing to do
 
-    FdoPtr<FdoIdentifierCollection> fic = m_command->GetPropertyNames();
+    FdoPtr<FdoIdentifierCollection> fic = m_cmd_select->GetPropertyNames();
     CHECKNULL((FdoIdentifierCollection*)fic, L"c_FdoSelectFeatures.ApplyClassProperties");
 
     for (INT32 i=0; i < cnt; i++)
@@ -348,7 +361,7 @@ void c_FdoSelectFeatures::ApplyClassProperties()
 void c_FdoSelectFeatures::ApplyComputedProperties()
 {
     CHECKNULL(m_options, L"c_FdoSelectFeatures.ApplyComputedProperties");
-    CHECKNULL(m_command, L"c_FdoSelectFeatures.ApplyComputedProperties");
+    CHECKNULL(m_cmd_select, L"c_FdoSelectFeatures.ApplyComputedProperties");
 
     Ptr<MgStringPropertyCollection> properties = m_options->GetComputedProperties();
 
@@ -401,7 +414,7 @@ void c_FdoSelectFeatures::ApplyComputedProperties()
 void c_FdoSelectFeatures::ApplyFilter()
 {
     CHECKNULL(m_options, L"c_FdoSelectFeatures.ApplyFilter");
-    CHECKNULL(m_command, L"c_FdoSelectFeatures.ApplyFilter");
+    CHECKNULL(m_cmd_select, L"c_FdoSelectFeatures.ApplyFilter");
 
     FdoPtr<FdoFilter> regularFilter;
     FdoPtr<FdoSpatialCondition> spatialFilter;
@@ -486,7 +499,7 @@ void c_FdoSelectFeatures::ApplyFilter()
     // Apply the filter
     if (combineFilter != NULL)
     {
-        m_command->SetFilter(combineFilter);
+        m_cmd_select->SetFilter(combineFilter);
     }
 }
 
@@ -494,7 +507,7 @@ void c_FdoSelectFeatures::ApplyFilter()
 void c_FdoSelectFeatures::ApplyOrderingOptions()
 {
     CHECKNULL(m_options, L"c_FdoSelectFeatures.ApplyOrderingOptions");
-    CHECKNULL(m_command, L"c_FdoSelectFeatures.ApplyOrderingOptions");
+    CHECKNULL(m_cmd_select, L"c_FdoSelectFeatures.ApplyOrderingOptions");
 
     Ptr<MgStringCollection> properties = m_options->GetOrderingProperties();
 
@@ -509,33 +522,53 @@ void c_FdoSelectFeatures::ApplyOrderingOptions()
     
     FdoPtr<FdoICommandCapabilities> fcc = m_FdoConn->GetCommandCapabilities();
       
-    if ( !fcc || !fcc->SupportsSelectOrdering())
+    if ( !fcc || (!fcc->SupportsSelectOrdering() && !m_is_cmd_ext_select) )
     {
-        STRING message = L"Ordering options are supplied but provider does not support it";
-
-        MgStringCollection arguments;
-        arguments.Add(message);
-        throw new MgFeatureServiceException(L"c_FdoSelectFeatures.ApplyOrderingOptions", __LINE__, __WFILE__, &arguments, L"", NULL);
+      std::string errstr = "Ordering options are supplied but provider does not support it or doesn't support extended select!";
+      throw c_ExceptionGeoREST(errstr);
     }
 
-    FdoPtr<FdoIdentifierCollection> fic = m_command->GetOrdering();
-    CHECKNULL((FdoIdentifierCollection*)fic, L"c_FdoSelectFeatures.ApplyOrderingOptions");
-
-    // Order option Asc or Desc (default is Asc)
-    FdoOrderingOption option = GetFdoOrderingOption(m_options->GetOrderOption());
-    m_command->SetOrderingOption(option);
-
-    for (INT32 i=0; i < cnt; i++)
+    if( !m_is_cmd_ext_select )
     {
+    
+      FdoPtr<FdoIdentifierCollection> fic = m_cmd_select->GetOrdering();
+      CHECKNULL((FdoIdentifierCollection*)fic, L"c_FdoSelectFeatures.ApplyOrderingOptions");
+
+      // Order option Asc or Desc (default is Asc)
+      FdoOrderingOption option = GetFdoOrderingOption(m_options->GetOrderOption());
+      m_cmd_select->SetOrderingOption(option);
+
+      for (INT32 i=0; i < cnt; i++)
+      {
+          STRING propertyName = properties->GetItem(i);
+
+          if (!propertyName.empty())
+          {
+              FdoPtr<FdoIdentifier> fdoIden = FdoIdentifier::Create((FdoString*)propertyName.c_str());
+              
+              fic->Add(fdoIden);
+          }
+      }
+    }
+    else
+    {
+      FdoIExtendedSelect* extselect = (FdoIExtendedSelect*)m_cmd_select.p;
+      
+      FdoOrderingOption option = GetFdoOrderingOption(m_options->GetOrderOption());
+      Ptr<MgStringCollection> properties = m_options->GetOrderingProperties();
+      
+      FdoPtr<FdoIdentifierCollection> fic = m_cmd_select->GetOrdering();
+      
+      INT32 cnt = properties->GetCount();
+      for (INT32 i=0; i < cnt; i++)
+      {
         STRING propertyName = properties->GetItem(i);
-
-        if (!propertyName.empty())
-        {
-            FdoPtr<FdoIdentifier> fdoIden = FdoIdentifier::Create((FdoString*)propertyName.c_str());
-            CHECKNULL((FdoIdentifier*)fdoIden, L"c_FdoSelectFeatures.ApplyOrderingOptions");
-
-            fic->Add(fdoIden);
-        }
+        FdoPtr<FdoIdentifier> fdoIden = FdoIdentifier::Create((FdoString*)propertyName.c_str());
+        fic->Add(fdoIden);
+        
+        extselect->SetOrderingOption(propertyName.c_str(),option);
+          
+      }
     }
 }
 
@@ -588,7 +621,7 @@ bool c_FdoSelectFeatures::ContainsUdf(FdoExpression* expression)
     // an expression. We do not do anything with this. We just pass it to FDO
     if (function != NULL)
     {
-        if (m_command != NULL)
+        if (m_cmd_select != NULL)
         {
             // Check if FDO supports this function, if so, let FDO handle it
             fdoSupported = IsFdoSupportedFunction(function);
@@ -621,7 +654,7 @@ bool c_FdoSelectFeatures::IsCustomFunction(FdoFunction* fdoFunc)
 
 void c_FdoSelectFeatures::AddFdoComputedProperty(CREFSTRING aliasName, FdoExpression* expression)
 {
-    FdoPtr<FdoIdentifierCollection> fic = m_command->GetPropertyNames();
+    FdoPtr<FdoIdentifierCollection> fic = m_cmd_select->GetPropertyNames();
     CHECKNULL((FdoIdentifierCollection*)fic, L"c_FdoSelectFeatures.AddFdoComputedProperty");
 
     FdoString* expName = aliasName.c_str();
@@ -638,7 +671,7 @@ void c_FdoSelectFeatures::AddCustomComputedProperty(CREFSTRING aliasName, FdoExp
 {
     CHECKNULL((FdoExpression*)expression, L"c_FdoSelectFeatures.AddCustomComputedProperty");
 
-    FdoPtr<FdoIdentifierCollection> fic = m_command->GetPropertyNames();
+    FdoPtr<FdoIdentifierCollection> fic = m_cmd_select->GetPropertyNames();
     CHECKNULL((FdoIdentifierCollection*)fic, L"c_FdoSelectFeatures.AddCustomComputedProperty");
 
     // If property is already found, two custom properties are not supported and therefore throw exception
@@ -715,47 +748,74 @@ void c_FdoSelectFeatures::ValidateConstraintsOnCustomFunctions()
 }
 
 
-void c_FdoSelectFeatures::CreateCommand(c_CfgDataSource_FDO* FdoSource, bool isSelectAggregate)
+void c_FdoSelectFeatures::CreateCommand(const c_CfgDataSource_FDO* FdoSource, bool isSelectAggregate, bool isordering)
 {
-  try
+  FdoPtr<IConnectionManager> manager = FdoFeatureAccessManager::GetConnectionManager ();
+
+  m_FdoConn = manager->CreateConnection (FdoSource->GetProvider().c_str());
+
+  if( !m_FdoConn.p )
   {
-    FdoPtr<IConnectionManager> manager = FdoFeatureAccessManager::GetConnectionManager ();
+    std::string errmsg,u8;
+    errmsg = "Unable to Create FDO Connection! Provider='";
+    Poco::UnicodeConverter::toUTF8(FdoSource->GetProvider(),u8);
+    errmsg = errmsg + u8 + "'.";
+    throw c_ExceptionGeoREST(errmsg);   
+  }
 
-    m_FdoConn = manager->CreateConnection (FdoSource->GetProvider().c_str());
+  m_FdoConn->SetConnectionString(FdoSource->GetConnString().c_str());
+  if( m_FdoConn->Open() != FdoConnectionState_Open )
+  {
+    std::string errmsg,u8;
+    errmsg = "Unable to Open FDO Connection! Provider='";
+    Poco::UnicodeConverter::toUTF8(FdoSource->GetProvider(),u8);
+    errmsg.append(u8);
+    errmsg.append("' ConnectionString='");
+    Poco::UnicodeConverter::toUTF8(FdoSource->GetConnString(),u8);
+    errmsg.append(u8);
+    errmsg.append("'.");
+     
+    throw c_ExceptionGeoREST(errmsg);   
+  }
 
-    if( !m_FdoConn.p )
+  FdoPtr<FdoICommandCapabilities> comm_cpb = m_FdoConn->GetCommandCapabilities();
+  bool is_fdosqlite=false;;
+  if( FdoSource->GetProvider().substr(0,12).compare(L"OSGeo.SQLite") == 0 )
+  {
+    is_fdosqlite = true;
+  }
+  if( !isordering || (comm_cpb->SupportsSelectOrdering() && !is_fdosqlite) )
+  {
+    m_cmd_select = (FdoISelect*)m_FdoConn->CreateCommand(FdoCommandType_Select);
+  }
+  else
+  {
+    try
     {
-      std::wstring errmsg;
-      errmsg = L"Unable to Create FDO Connection! Provider='";
-      errmsg = errmsg + FdoSource->GetProvider() + L"'.";
-      throw new MgRuntimeException(L"c_FdoSelectFeatures::CreateCommand",__LINE__, __WFILE__, NULL, errmsg, NULL);   
+      m_cmd_select = (FdoISelect*)m_FdoConn->CreateCommand(FdoCommandType_ExtendedSelect);
+      if( m_cmd_select ) m_is_cmd_ext_select = true;
     }
-
-    m_FdoConn->SetConnectionString(FdoSource->GetConnString().c_str());
-    if( m_FdoConn->Open() != FdoConnectionState_Open )
+    catch (...)
     {
-      std::wstring errmsg;
-      errmsg = L"Unable to Open FDO Connection! Provider='";
-      errmsg = errmsg + FdoSource->GetProvider() + L"' ConnectionString='" + FdoSource->GetConnString()+ L"'.";
-      throw new MgRuntimeException(L"c_RestFetchSource::Fetch_FdoSourceSchema",__LINE__, __WFILE__, NULL, errmsg, NULL);   
+    	
     }
-
-    m_command = (FdoISelect*)m_FdoConn->CreateCommand(FdoCommandType_Select);
+    
+  }
 
   
 
-  }
-  catch ( FdoException* ex ) 
-  {  
-    MgRuntimeException * mgexc = new MgRuntimeException(L"c_RestFetchSource::Fetch_FdoSourceSchema",__LINE__, __WFILE__, NULL, ex->GetExceptionMessage(), NULL); 
-    ex->Release();
-    throw mgexc;  
+  if( !m_cmd_select ) 
+  { 
+    std::string errmsg,u8;
+    errmsg = "Unable to Create FDO Select command! Provider='";
+    Poco::UnicodeConverter::toUTF8(FdoSource->GetProvider(),u8);
+    errmsg = errmsg + u8 + "'.";
+    throw c_ExceptionGeoREST(errmsg);
   }
       
-  CHECKNULL(m_command, L"c_FdoSelectFeatures.CreateCommand");
 }
 
-void c_FdoSelectFeatures::ValidateParam(c_CfgDataSource_FDO* FdoSource, CREFSTRING className)
+void c_FdoSelectFeatures::ValidateParam(const c_CfgDataSource_FDO* FdoSource, CREFSTRING className)
 {
     // className and resource identifier can not be NULL
     if (FdoSource == NULL)

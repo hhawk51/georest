@@ -18,9 +18,11 @@
 #include "stdafx.h"
 #include "Poco\UnicodeConverter.h"
 #include "Poco\Path.h"
+#include "Poco\File.h"
 
 wchar_t g_AppFileName[MAX_PATH+2];
 Poco::Path g_AppFolder;
+Poco::Path g_WWWFolder;
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -47,6 +49,16 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     
     g_AppFolder = buff_utf8;
     g_AppFolder.setFileName("");
+    
+    g_WWWFolder = g_AppFolder;
+    g_WWWFolder.popDirectory();
+    g_WWWFolder.pushDirectory("www");
+    Poco::File f(g_WWWFolder);
+    if( !f.exists() || !f.isDirectory() )
+    {
+      g_WWWFolder = g_AppFolder;
+      g_WWWFolder.pushDirectory("www");
+    }
   }
 	break;
 	case DLL_THREAD_ATTACH:

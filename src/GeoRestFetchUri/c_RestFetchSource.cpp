@@ -49,6 +49,8 @@
 #include "Poco/SAX/InputSource.h"
 #include "Poco/Exception.h"
 #include <fstream>
+#include "c_RestMgSiteConnection.h"
+#include "c_FdoSelectFeatures.h"
 
 using Poco::TemporaryFile;
 
@@ -118,12 +120,16 @@ MgService* c_RestFetchSource::CreateMapguideService(const std::wstring& UserName
     return NULL;
 }
 
-MgFeatureReader* c_RestFetchSource::FetchSource(const c_CfgDataSource* DataSource)
+c_RestDataReader* c_RestFetchSource::FetchSource(const c_CfgDataSource* DataSource,MgFeatureQueryOptions* QueryOptions)
 {
   switch(DataSource->GetSourceType())
   {
     case c_CfgDataSource::e_MgFeatureSource:
+      return FetchSource_MG((const c_CfgDataSource_MgFeatureSource*)DataSource,QueryOptions);
     break;
+    case c_CfgDataSource::e_FDO:
+      return FetchSource_FDO((const c_CfgDataSource_FDO*)DataSource,QueryOptions);
+      break;
     case c_CfgDataSource::e_Http:
     break;
     
@@ -134,33 +140,27 @@ MgFeatureReader* c_RestFetchSource::FetchSource(const c_CfgDataSource* DataSourc
 };
 
 
-MgFeatureReader* c_RestFetchSource::FetchMgFeatureSource(const c_CfgDataSource_MgFeatureSource* DataSource)
+c_RestDataReader* c_RestFetchSource::FetchSource_MG(const c_CfgDataSource_MgFeatureSource* DataSource,MgFeatureQueryOptions* QueryOptions)
 {
-  Ptr<MgFeatureService> service = (MgFeatureService*)(CreateMapguideService(DataSource->GetUsername(),DataSource->GetPassword(),MgServiceType::FeatureService));
-  MgResourceIdentifier resId(DataSource->GetMgFeatureSource());
-  Ptr<MgFeatureQueryOptions> qryOptions = new MgFeatureQueryOptions();
+  MgResourceIdentifier resId(DataSource->m_MgFeatureSource);
   
-  /*
-  STRING schema;
-  STRING classname;
-  STRING::size_type iColon = HttpRequest->m_DataClassName.find(':');
-  if(iColon != STRING::npos) {
-    schema = HttpRequest->m_DataClassName.substr(0,iColon);
-    classname   = HttpRequest->m_DataClassName.substr(iColon+1);
-    
-  }
-  else
-  {
-    schema = L"";
-    classname =HttpRequest->m_DataClassName;
-  }  
-  Ptr<MgClassDefinition> classdef = service->GetClassDefinition(&resId, schema, classname);
-  */
+  Ptr<c_RestMgSiteConnection> mgsiteconn = c_RestMgSiteConnection::Open(L"Anonymous",L"",DataSource->GetServerIP(),DataSource->GetServerPort());    
+  // Create Proxy Feature Service instance
+  Ptr<MgFeatureService> service = (MgFeatureService*)mgsiteconn->CreateService(MgServiceType::FeatureService);
   
-  Ptr<MgFeatureReader> featureReader = service->SelectFeatures(&resId, DataSource->GetMgFeatureSourceClassName(), qryOptions);
-    
-  return SAFE_ADDREF(featureReader.p);
-  //return  new c_RestDataReader(featureReader);    
+  Ptr<MgFeatureReader> featureReader = service->SelectFeatures(&resId, DataSource->m_MgFeatureSourceClassName, QueryOptions); 
+  
+  MgProxyFeatureReader* proxy_reader = dynamic_cast<MgProxyFeatureReader*>(featureReader.p);
+  
+  return new c_RestDataReader_MgFeatureReader(proxy_reader);
+  
+}//end of  c_RestFetchSource::FetchMgFeatureSource
+
+c_RestDataReader* c_RestFetchSource::FetchSource_FDO(const c_CfgDataSource_FDO* DataSource,MgFeatureQueryOptions* QueryOptions)
+{
+  c_FdoSelectFeatures selfeatures;
+  return selfeatures.SelectFeatures(DataSource,  QueryOptions);
+  
 }//end of  c_RestFetchSource::FetchMgFeatureSource
 
 bool c_RestFetchSource::ParseFilterQueryParam(const wstring& Param,int& Level,e_BoolOper& BoolOper,e_CompOper& CompOper,wstring& PropertyName)
@@ -532,8 +532,8 @@ void c_RestFetchSource::CreateFilterString(MgClassDefinition* ClassDef,c_RestUri
 
 MgEnvelope* c_RestFetchSource::XmlFeatureToEnvelope(Element * XmlFeature)
 {
-      XMLString str_name;
-      XMLString str_val;
+      Poco::XML::XMLString str_name;
+      Poco::XML::XMLString str_val;
   
   //FdoPtr<FdoPropertyDefinitionCollection> coll_propdef =  ClassDef->GetProperties();
   
@@ -547,8 +547,8 @@ MgEnvelope* c_RestFetchSource::XmlFeatureToEnvelope(Element * XmlFeature)
     
     if( !el_name || !el_val ) return NULL;
     
-    XMLString str_name = el_name->innerText();
-    XMLString str_val = el_val->innerText();
+    Poco::XML::XMLString str_name = el_name->innerText();
+    Poco::XML::XMLString str_val = el_val->innerText();
     
     STRING wstr_val;
     MgUtil::MultiByteToWideChar(str_val,wstr_val);
@@ -578,8 +578,8 @@ MgEnvelope* c_RestFetchSource::XmlFeatureToEnvelope(Element * XmlFeature)
 
 MgGeometry* c_RestFetchSource::XmlFeature2Geometry(Poco::XML::Element * XmlFeature)
 {
-  XMLString str_name;
-  XMLString str_val;
+  Poco::XML::XMLString str_name;
+  Poco::XML::XMLString str_val;
 
   //FdoPtr<FdoPropertyDefinitionCollection> coll_propdef =  ClassDef->GetProperties();
 
@@ -593,8 +593,8 @@ MgGeometry* c_RestFetchSource::XmlFeature2Geometry(Poco::XML::Element * XmlFeatu
 
     if( !el_name || !el_val ) return NULL;
 
-    XMLString str_name = el_name->innerText();
-    XMLString str_val = el_val->innerText();
+    Poco::XML::XMLString str_name = el_name->innerText();
+    Poco::XML::XMLString str_val = el_val->innerText();
 
     STRING wstr_val;
     MgUtil::MultiByteToWideChar(str_val,wstr_val);
@@ -642,10 +642,10 @@ void c_RestFetchSource::FetchEnvelope( const wchar_t* Uri,double& X1,double& Y1,
 	//StreamCopier::copyToString(rs, str);
 	int count=0;
 	
-	InputSource src(rs);
+	Poco::XML::InputSource src(rs);
 	try
 	{
-		DOMParser parser;
+		Poco::XML::DOMParser parser;
 		AutoPtr<Document> pdoc = parser.parse(&src);
 		
 		
@@ -731,7 +731,7 @@ MgGeometry* c_RestFetchSource::FetchBuffer( const wchar_t* Uri,double Distance)
   //StreamCopier::copyToString(rs, str);
   int count=0;
 
-  InputSource src(rs);
+  Poco::XML::InputSource src(rs);
   try
   {
     DOMParser parser;
@@ -789,8 +789,8 @@ MgGeometry* c_RestFetchSource::FetchBuffer( const wchar_t* Uri,double Distance)
 
 void XmlFeatureToDictionary(Element * XmlFeature,ctemplate::TemplateDictionary*Dict,const std::string& Prefix)
 {
-      XMLString str_name;
-      XMLString str_val;
+      Poco::XML::XMLString str_name;
+      Poco::XML::XMLString str_val;
   
   //FdoPtr<FdoPropertyDefinitionCollection> coll_propdef =  ClassDef->GetProperties();
   
@@ -804,9 +804,9 @@ void XmlFeatureToDictionary(Element * XmlFeature,ctemplate::TemplateDictionary*D
     
     if( el_name && el_val ) 
     {
-      XMLString str_name = Prefix;
+      Poco::XML::XMLString str_name = Prefix;
       str_name += el_name->innerText();
-      XMLString str_val = el_val->innerText();
+      Poco::XML::XMLString str_val = el_val->innerText();
       
       Dict->SetValue(str_name,str_val);
     }
@@ -857,7 +857,7 @@ void c_RestFetchSource::HttpFetchFeaturesToDictionary( const std::string& Uri,ct
 	//StreamCopier::copyToString(rs, str);
 	int count=0;
 	
-	InputSource src(rs);
+	Poco::XML::InputSource src(rs);
 	try
 	{
 		DOMParser parser;
@@ -1033,7 +1033,22 @@ MgByteReader* c_RestFetchSource::Fetch_FdoSourceSchema( c_CfgDataSource_FDO* Fdo
   return NULL;
 }
 
-MgClassDefinition* c_RestFetchSource::Fetch_MgClassDefinition( c_CfgDataSource_FDO* FdoSource )
+MgClassDefinition* c_RestFetchSource::Fetch_MgClassDefinition( const c_CfgDataSource* DataSource )
+{
+  switch(DataSource->GetSourceType())
+  {
+    case c_CfgDataSource::e_MgFeatureSource:
+      return Fetch_MgClassDefinition_MG( (c_CfgDataSource_MgFeatureSource*)DataSource );
+    break;
+    case c_CfgDataSource::e_FDO:
+      return Fetch_MgClassDefinition_FDO( (c_CfgDataSource_FDO*)DataSource );
+    break;
+  }
+  
+  throw new MgRuntimeException(L"c_RestFetchSource::Fetch_MgClassDefinition",__LINE__, __WFILE__, NULL, L"DataSource is not of correct type. It has to be FDO or MapGuide Feature Source", NULL);         
+}
+
+MgClassDefinition* c_RestFetchSource::Fetch_MgClassDefinition_FDO( const c_CfgDataSource_FDO* FdoSource )
 {
   try
   {
@@ -1086,4 +1101,32 @@ MgClassDefinition* c_RestFetchSource::Fetch_MgClassDefinition( c_CfgDataSource_F
   }
 
   return NULL;
+}
+
+MgClassDefinition* c_RestFetchSource::Fetch_MgClassDefinition_MG( const c_CfgDataSource_MgFeatureSource* MgFeatureSource )
+{
+  STRING schema;
+  STRING classname;
+  STRING::size_type iColon = MgFeatureSource->m_MgFeatureSourceClassName.find(':');
+  if(iColon != STRING::npos) {
+    schema = MgFeatureSource->m_MgFeatureSourceClassName.substr(0,iColon);
+    classname   = MgFeatureSource->m_MgFeatureSourceClassName.substr(iColon+1);
+
+  }
+  else
+  {
+    schema = L"";
+    classname =MgFeatureSource->m_MgFeatureSourceClassName;
+  }
+  
+  MgResourceIdentifier resId(MgFeatureSource->m_MgFeatureSource);
+  
+  Ptr<c_RestMgSiteConnection> mgsiteconn = c_RestMgSiteConnection::Open(MgFeatureSource->GetUsername(),MgFeatureSource->GetPassword(),MgFeatureSource->GetServerIP(),MgFeatureSource->GetServerPort());    
+  // Create Proxy Feature Service instance
+  Ptr<MgFeatureService> service = (MgFeatureService*)mgsiteconn->CreateService(MgServiceType::FeatureService);
+  
+  MgClassDefinition* classdef = service->GetClassDefinition(&resId, schema, classname);
+  
+  
+  return classdef;
 }

@@ -17,12 +17,15 @@
 
 #include "StdAfx.h"
 #include "c_CfgDataResource.h"
+#include "Poco\UnicodeConverter.h"
 
 c_CfgDataResource::c_CfgDataResource(const wchar_t* UriTag,const char* TemplateFolder)
 {
   m_TemplateFolder = TemplateFolder;
   m_UriTag = UriTag;
   m_DataSource = NULL;
+  
+  
 }
 
 c_CfgDataResource::~c_CfgDataResource(void)
@@ -39,6 +42,9 @@ c_CfgDataResource::~c_CfgDataResource(void)
   }
 }
 
+
+
+
 const c_CfgRepresentation* c_CfgDataResource::FindRepresentation( const wchar_t* Pattern ) const
 {
   t_CfgRepresentationVector::const_iterator iter;
@@ -50,9 +56,36 @@ const c_CfgRepresentation* c_CfgDataResource::FindRepresentation( const wchar_t*
   return NULL;
 }
 
+const c_CfgRepresentation* c_CfgDataResource::FindRepresentation( c_CfgRepresentation::e_RepresentationType RepType ) const
+{
+  t_CfgRepresentationVector::const_iterator iter;
+  for ( iter = m_Representations.begin( ) ; iter != m_Representations.end( ) ; iter++ )
+  {
+    const c_CfgRepresentation * rep = *iter;
+    if( rep->GetType() == RepType ) return rep;
+  }
+  return NULL;
+}
+
+const std::string& c_CfgDataResource::GetUriTag() const
+{
+  if( m_UriTagUtf8.length()== 0 )
+  {
+  
+    Poco::UnicodeConverter::toUTF8(m_UriTag,m_UriTagUtf8);
+  }
+  
+  return m_UriTagUtf8;
+}
+
 
 
 c_CfgDataResourceVector::~c_CfgDataResourceVector( void )
+{
+  Clear();
+}
+
+void c_CfgDataResourceVector::Clear()
 {
   t_CfgDataResourceVector::iterator iter;
   for ( iter = m_CfgDataResourceVector.begin( ) ; iter != m_CfgDataResourceVector.end( ) ; iter++ )
@@ -60,6 +93,7 @@ c_CfgDataResourceVector::~c_CfgDataResourceVector( void )
     c_CfgDataResource * datalayer = *iter;
     delete datalayer;
   }
+  m_CfgDataResourceVector.clear();
 }
 
 const c_CfgDataResource* c_CfgDataResourceVector::FindUriTag( const std::wstring& UriTag ) 
@@ -112,4 +146,13 @@ bool c_CfgDataResourceVector::Add( c_CfgDataResource* DataLayer )
   return true;
 }
 
+int c_CfgDataResourceVector::GetCount()
+{
+  return m_CfgDataResourceVector.size();
+}
+
+const c_CfgDataResource* c_CfgDataResourceVector::GetResource( int Index )
+{
+  return m_CfgDataResourceVector.at(Index);
+}
 

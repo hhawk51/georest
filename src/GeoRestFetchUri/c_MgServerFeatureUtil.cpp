@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2004-2009 by Autodesk, Inc.
+//  Copyright (C) 2010 by Haris Kurtagic
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -15,7 +15,7 @@
 //  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
-//#include "ServerFeatureServiceDefs.h"
+#include "stdafx.h"
 #include "c_MgServerFeatureUtil.h"
 //#include "ServerDataReaderPool.h"
 //#include "ServerFeatureReaderPool.h"

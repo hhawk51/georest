@@ -65,6 +65,7 @@ bool c_RestUriPathParam::IsEndOfParameters()
   return true;  
 }
 
+/*
 bool c_RestUriPathParam::IsLastParameter()
 {
   if( !GetParametersCount() ) return false;
@@ -73,6 +74,7 @@ bool c_RestUriPathParam::IsLastParameter()
 
   return false;  
 }
+*/
 
 void c_RestUriPathParam::ResetParameterCurrentIndex()
 {

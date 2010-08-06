@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2004-2008 by Autodesk, Inc.
+//  Copyright (C) 2010 by Haris Kurtagic
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -91,18 +91,26 @@ bool c_RestUriRequestParam::RemoveParameter(CREFSTRING name)
 /// </returns>
 STRING c_RestUriRequestParam::GetParameterValue(CREFSTRING parameterName)
 {
-    if (m_reqParamCollection->Contains(parameterName))
+    try
     {
         return m_reqParamCollection->GetValue(parameterName);
+    }
+    catch(...)
+    {
+    
     }
     return L"";
 }
 
 STRING c_RestUriRequestParam::GetParameterType(CREFSTRING parameterName)
 {
-    if (m_paramTypeCollection.Contains(parameterName))
+    try
     {
         return m_paramTypeCollection.GetValue(parameterName);
+    }
+    catch(...)
+    {
+    
     }
     return L"";
 }
@@ -178,22 +186,72 @@ MgStringCollection* c_RestUriRequestParam::GetParameterNames()
 /// <returns>
 /// A string collection containing names of all parameters.
 /// </returns>
-void c_RestUriRequestParam::GetAsUriQuery(REFSTRING Query)
+void c_RestUriRequestParam::GetAsUriQuery(REFSTRING Query,MgStringCollection* RemoveParams,MgStringPropertyCollection* AddParams)
 {
-    
-    for (int i = 0; i < m_reqParamCollection->GetCount(); i++)
+  Query.reserve(512);
+   
+  Ptr<MgStringPropertyCollection> params;
+  if( RemoveParams || AddParams)    
+  {
+    params = new MgStringPropertyCollection();
+    int count = m_reqParamCollection->GetCount();
+    for(int ind=0;ind<count;ind++)
     {
-      
-      if( i>=1 )
+      STRING param_name = m_reqParamCollection->GetName(ind);
+      STRING param_value = m_reqParamCollection->GetValue(ind);
+      if( RemoveParams && RemoveParams->Contains(param_name))
       {
-        Query = Query + L"&";
-      }
-        Query = Query + m_reqParamCollection->GetName(i);
-        Query = Query + L"=";
-        Query = Query + m_reqParamCollection->GetValue(i);
+        // it is to be removed just skip it  - do nothing
+      } 
+      else
+      {
+        params->Add(param_name,param_value);
+      } 
     }
-
     
+    if( AddParams )
+    {
+      int count = AddParams->GetCount();
+      for(int ind=0;ind<count;ind++)
+      {
+        STRING param_name = AddParams->GetName(ind);
+        STRING param_value = AddParams->GetValue(ind);
+        
+        if( params->Contains(param_name) )
+        {
+        // parameter name which is supposed to be added allready exists
+        // do nothing; if user wanted to replace parameter then he needs to add parameter into remove list to
+        // in this way we are adding posibility to add only if not already exists
+        }
+        else
+        {
+          params->Add(param_name,param_value);
+        }
+      }
+    }    
+  }
+  else
+  {
+    params = m_reqParamCollection;
+  }
+    
+  for (int i = 0; i < params->GetCount(); i++)
+  {
+    
+    STRING param_name = params->GetName(i);
+    STRING param_value = params->GetValue(i);
+    
+    if( i>=1 )
+    {
+      Query = Query.append(L"&");
+    }
+    Query = Query.append(param_name);
+    Query = Query.append(L"=");
+    Query = Query.append(param_value);
+    
+  }    
+  
+  
 }
 
 /// <summary>

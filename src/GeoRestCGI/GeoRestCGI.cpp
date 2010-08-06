@@ -18,6 +18,7 @@ using namespace std;
 
 #include "MapAgentStrings.h"
 #include "Poco\Net\HTTPResponse.h"
+#include "Poco\UnicodeConverter.h"
 
 /*
 int _tmain(int argc, _TCHAR* argv[])
@@ -132,11 +133,29 @@ int main (int argc, char* argv[])
         free(chbuf);
       }
     }
-    
-    
   }
-  Ptr<c_RestRequest> restrequest = new c_RestRequest(agenturi,uri_base,uri_rest,httpmethod,post_data);
+  
  
+  
+  Ptr<c_RestRequest> restrequest = new c_RestRequest(agenturi,uri_base,uri_rest,httpmethod,post_data);
+  
+  // add headers to it
+  char* header_accept = getenv("HTTP_Accept");
+  if( header_accept )
+  {
+    restrequest->SetHeaderValue("Accept",header_accept);
+  }
+  char* header_dsv = getenv("HTTP_DataServiceVersion");
+  if( header_accept )
+  {
+    restrequest->SetHeaderValue("DataServiceVersion",header_accept);
+  }
+  char* header_max_dsvt = getenv("HTTP_MaxDataServiceVersion");
+  if( header_accept )
+  {
+    restrequest->SetHeaderValue("MaxDataServiceVersion",header_accept);
+  }
+  
   Ptr<c_RestResponse> restresponse = restrequest->Execute();
   //c_RestResponse_HttpData* http_data = restresponse->PrepareHttpData(restrequest);
   c_RestResponse_HttpData* http_data = restresponse->GetHttpData();

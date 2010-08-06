@@ -31,6 +31,7 @@
 //#include "RestDefs.h"
 
 #include <algorithm>
+#include "Poco\UnicodeConverter.h"
 using namespace std;
 
 
@@ -39,24 +40,39 @@ using namespace std;
 /// <summary>
 /// Constructor. Initialize member variables.
 /// </summary>
-c_RestUri::c_RestUri(const std::string& AgentUri,const std::string& BaseUri,const std::string& RestUri,const std::string& HttpMethod,const std::string& XmlPostData)
+c_RestUri::c_RestUri(const std::string& FullUri,const std::string& BaseUri,const std::string& RestUri,const std::string& HttpMethod,const std::string& XmlPostData)
   
 {
-  m_AgentUri = AgentUri;
-  m_BaseUri = BaseUri;
-  m_RestUri = RestUri;
   m_UriPathParameters = new c_RestUriPathParam();
   m_RestRequestParam = new c_RestUriRequestParam();
+  
+  m_OriginalFullUri = FullUri;
+  
+  basic_string <char>::size_type rpos = m_OriginalFullUri.find('?');
+  if( rpos != string::npos )
+  {
+    m_OriginalFullUri_WithoutQuery = m_OriginalFullUri.substr(0,rpos);
+    m_OriginalFullUri_Query = m_OriginalFullUri.substr(rpos+1,m_OriginalFullUri.length()-rpos);
+    
+  }
+  else
+  {
+    m_OriginalFullUri_WithoutQuery = m_OriginalFullUri;
+    m_OriginalFullUri_Query = "";
+  }
+  
+  
+  
+  if( m_OriginalFullUri_Query.length() )
+    ParseQuery(m_OriginalFullUri_Query.c_str(),m_RestRequestParam);
+  
+  m_BaseUri = BaseUri;
+  m_RestUri = RestUri;
+  
   m_RestRequestParam->SetXmlPostData(XmlPostData.c_str());
   m_HttpMethod = HttpMethod;
   
-  basic_string <char>::size_type rpos = m_RestUri.find('?');
-  if( rpos != string::npos )
-  {
-    string query = m_RestUri.substr(rpos+1,m_RestUri.length()-rpos);
-    ParseQuery(query.c_str(),m_RestRequestParam);
-  }
-  
+    
   ParsePath(RestUri,m_UriPathParameters);
    
 }
@@ -70,6 +86,25 @@ c_RestUri::c_RestUri()
   m_RestRequestParam = new c_RestUriRequestParam();
 }
 
+
+
+void c_RestUri::GetFullUri( std::string& Uri,MgStringCollection* RemoveParams,MgStringPropertyCollection* AddParams ) const
+{
+  Uri.reserve(m_OriginalFullUri.length()+128);
+  
+  STRING newquery;newquery.reserve(128);
+  m_RestRequestParam->GetAsUriQuery(newquery,RemoveParams,AddParams);
+  
+  std::string query_utf8;
+  Poco::UnicodeConverter::toUTF8(newquery,query_utf8);
+  
+  Uri = m_OriginalFullUri_WithoutQuery;
+  if( newquery.length() > 0 )
+  {
+    Uri.append("?");
+    Uri.append(query_utf8);
+  }
+}
 
 
 c_RestUriPathParam* c_RestUri::GetUriPathParameters()
@@ -293,9 +328,9 @@ void c_RestUri::ParsePath(const std::string& Uri, c_RestUriPathParam* Params)
       if( ch != 0 )
       {      
         if( inside_brackets )
-          seg_val += ch; 
+          seg_val.append(&ch,1); 
         else
-          seg_name += ch; 
+          seg_name.append(&ch,1); 
       }
 
     }
@@ -313,3 +348,4 @@ void c_RestUri::ParsePath(const std::string& Uri, c_RestUriPathParam* Params)
 
   MG_CATCH_AND_THROW(L"RestUriParser.Parse");
 }
+

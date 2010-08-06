@@ -20,7 +20,7 @@
 
 
 #include "c_RestUriPathParam.h"
-#include "c_RestUriHeader.h"
+
 #include "c_RestUriRequestMetadata.h"
 
 /// <summary>
@@ -36,20 +36,14 @@ class IsapiPostParser;
 class REST_COMMON_API c_RestUri : public MgDisposable
 {
     EXTERNAL_API:
-  c_RestUri(const std::string& AgentUri,const std::string& BaseUri,const std::string& RestUri,const std::string& HttpMethod,const std::string& XmlPostData);
+  c_RestUri(const std::string& FullUri,const std::string& BaseUri,const std::string& RestUri,const std::string& HttpMethod,const std::string& XmlPostData);
 
         
         
-        void SetPostData(IsapiPostParser* PostData);
-        IsapiPostParser* GetPostData();
+        //void SetPostData(IsapiPostParser* PostData);
+        //IsapiPostParser* GetPostData();
         
-         /// <summary>
-        /// Makes available the pointer to header class.
-        /// User will use header class instance to add
-        /// header information for a request.
-        /// </summary>
-        /// <returns>Pointer to MgHttpHeader class</returns>
-        c_RestUriHeader* GetHeader();
+       
 
         /// <summary>
         /// Makes available the pointer to RequestParam class.
@@ -95,13 +89,22 @@ public:
         
         e_HttpMethod GetHttpMethod();
         
+        
+        
         const std::string& GetBaseUri() const { return m_BaseUri; }
-        void SetBaseUri(const std::string& BaseUri) { m_BaseUri = BaseUri; }
+        //void SetBaseUri(const std::string& BaseUri) { m_BaseUri = BaseUri; }
         
-        const std::string& GetAgentUri() const { return m_AgentUri; }
-        void SetAgentUri(const std::string& AgentUri) { m_AgentUri = AgentUri; }
+        // GetFullUri.. creates new full uri by changing original one
+        // RemoveParams- parameters to be removed from original parameters
+        // AddParams- parameters to be be added to original parameters
+        // If parameter already exists and needs to be replaced then it has to be added to remove and also to add list
+        // if only in add list then it will be added if already not defined
+        void GetFullUri(std::string& Uri,MgStringCollection* RemoveParams,MgStringPropertyCollection* AddParams) const;
         
-        const std::string& GetRestUri() const { return m_RestUri; }
+        const std::string& GetOriginalFullUri() const { return m_OriginalFullUri; }
+        //void SetFullUri(const std::string& FullUri) { m_FullUri = FullUri; }
+        
+        //const std::string& GetRestUri() const { return m_RestUri; }
         
         static void ParseUri(const std::string& Uri, std::vector < std::string > & UriSegments);
         static void ParseQuery(const char* pszQuery, c_RestUriRequestParam* params);
@@ -128,13 +131,17 @@ public:
         
 protected:
            
-      Ptr<c_RestUriHeader> m_RestHttpHeader;
       Ptr<c_RestUriRequestParam> m_RestRequestParam;
       Ptr<c_RestUriRequestMetadata> m_RestRequestMetadata;
                  
       std::string m_RestUri;
       std::string m_BaseUri;
-      std::string m_AgentUri;
+      
+      std::string m_OriginalFullUri;
+      std::string m_OriginalFullUri_WithoutQuery; // WithoutQuery is original full uri wuthout query
+      std::string m_OriginalFullUri_Query;   // query part of full uri
+      
+      
       std::string m_HttpMethod;
       Ptr<c_RestUriPathParam> m_UriPathParameters;
       

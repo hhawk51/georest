@@ -43,7 +43,7 @@ public:
     void ResetParameterCurrentIndex();
     bool NextParameter();
     bool IsEndOfParameters();
-    bool IsLastParameter();
+    //bool IsLastParameter();
 
     protected:
         /// <summary>

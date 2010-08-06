@@ -21,6 +21,7 @@
 
 #include "c_CfgDataResource.h"
 #include "c_CfgDataSource.h"
+#include "Poco\Logger.h"
 namespace Poco
 {
   class Logger;
@@ -50,10 +51,16 @@ public:
   const c_CfgDataResource* FindUriTag(const std::wstring& UriTag);
   const c_CfgDataResource* FindClassName(const std::wstring& ClassName);
   
+  int GetResourceCount();
+  const c_CfgDataResource* GetResource(int Index);
+  
+  
   const char* GetRestUriSeparator() { return m_RestUriSeparator.c_str(); }
-  
-  
   void ReadFromString( const std::string& XmlCfg, const char* TemplateFolder );
+  
+  void Clear();
+  
+  Poco::Logger& GetLogger();
 
 protected:
   c_RestConfig(Poco::Logger* Log=NULL);
@@ -64,6 +71,7 @@ protected:
   void ReadFromXML( const char* FileName, const char* TemplateFolder );
 
 protected:  
+  void CreateLogger( );
   void CreateLogger( const char* FileName );
   
   
@@ -73,6 +81,8 @@ protected:
   c_CfgAccessMethod* ParseMethod( Poco::XML::Element* XmlMethod);
   c_CfgDataSource* ParseSource( Poco::XML::Element* XmlSource);
   void Read( Poco::XML::Document* PocoDoc, const char* TemplateFolder );
+  void GetOData(Poco::XML::Element* XmlRepresentation,c_CfgRepOdata* Rep);
+  void GetOData_ElemOverride(Poco::XML::Element* XmlElemOverride,c_AtomElementOverride* ElemOverride);
   Poco::Logger* m_Logger;
   std::string m_LogFileName; // if logger is not set in constructor than in constructor name for log file is created and logger itself
   

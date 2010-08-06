@@ -31,7 +31,7 @@
 
 
 #include "c_RestHandler_Data.h"
-#include "c_FdoSelectFeatures.h"
+
 
 
 
@@ -936,8 +936,8 @@ void c_RestHandler_Data::Execute_Get_Feature_FDO(c_RestResponse& HttpResponse)
     hResult->m_FeatureReader_StartIndex = sindex-1;
   }
   
-  c_FdoSelectFeatures selfeatures;
-  Ptr<c_RestDataReader> featureReader = selfeatures.SelectFeatures(fdo_source,  qryOptions);
+  
+  Ptr<c_RestDataReader> featureReader = c_RestFetchSource::FetchSource(fdo_source,  qryOptions);
   
   
   //if( wcsicmp(L"png",m_FormatType.c_str())==0 )
@@ -1019,9 +1019,9 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
   // Create Proxy Feature Service instance
   //Ptr<MgFeatureService> service = (MgFeatureService*)(CreateService(MgServiceType::FeatureService));
   //Ptr<c_RestMgSiteConnection> mgsiteconn = c_RestMgSiteConnection::Open(L"Anonymous",L"");    
-  Ptr<c_RestMgSiteConnection> mgsiteconn = c_RestMgSiteConnection::Open(mg_fsource->GetUsername(),mg_fsource->GetPassword(),mg_fsource->GetServerIP(),mg_fsource->GetServerPort());    
+  //Ptr<c_RestMgSiteConnection> mgsiteconn = c_RestMgSiteConnection::Open(mg_fsource->GetUsername(),mg_fsource->GetPassword(),mg_fsource->GetServerIP(),mg_fsource->GetServerPort());    
   // Create Proxy Feature Service instance
-  Ptr<MgFeatureService> service = (MgFeatureService*)mgsiteconn->CreateService(MgServiceType::FeatureService);
+  //Ptr<MgFeatureService> service = (MgFeatureService*)mgsiteconn->CreateService(MgServiceType::FeatureService);
 
   MgResourceIdentifier resId(mg_fsource->m_MgFeatureSource);
   Ptr<MgFeatureQueryOptions> qryOptions = new MgFeatureQueryOptions();
@@ -1042,7 +1042,7 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
 
   MG_TRY()
 
-    STRING schema;
+  STRING schema;
   STRING classname;
   STRING::size_type iColon = mg_fsource->m_MgFeatureSourceClassName.find(':');
   if(iColon != STRING::npos) {
@@ -1056,7 +1056,7 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
     classname =mg_fsource->m_MgFeatureSourceClassName;
   }
 
-  m_RestRequest->m_DataClassDef = service->GetClassDefinition(&resId, schema, classname);
+  m_RestRequest->m_DataClassDef = c_RestFetchSource::Fetch_MgClassDefinition(mg_fsource); // service->GetClassDefinition(&resId, schema, classname);
 
   if( m_RestRequest->m_CfgRepresentation->IsBBoxHeightLimitSet() 
     || m_RestRequest->m_CfgRepresentation->IsBBoxWidthLimitSet() 
@@ -1127,7 +1127,8 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
     hResult->m_FeatureReader_StartIndex = sindex-1;
   }
 
-  Ptr<MgFeatureReader> featureReader = service->SelectFeatures(&resId, mg_fsource->m_MgFeatureSourceClassName, qryOptions);
+  //Ptr<MgFeatureReader> featureReader = service->SelectFeatures(&resId, mg_fsource->m_MgFeatureSourceClassName, qryOptions);
+  Ptr<c_RestDataReader> featureReader = c_RestFetchSource::FetchSource(mg_fsource,qryOptions); 
 
 
   //if( wcsicmp(L"png",m_FormatType.c_str())==0 )
@@ -1670,7 +1671,7 @@ void c_RestHandler_Data::Execute_Put_Class_Feature(c_RestResponse& HttpResponse)
   
   Ptr<MgPropertyCollection> propcoll = c_RestDataTransform::XmlToFeature(m_RestRequest->m_DataClassDef,postxml);
 
-  
+ 
 
 /*  
   //get addtional params, determine which overload to call and make the call

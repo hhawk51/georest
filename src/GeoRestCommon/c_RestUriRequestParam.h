@@ -150,9 +150,14 @@ class REST_COMMON_API c_RestUriRequestParam : public MgDisposable
         /// </returns>
         bool ContainsParameter(CREFSTRING name);
         
-        void GetAsUriQuery(REFSTRING Query);
         
-        void GetCount(REFSTRING Query);
+        // RemoveParams- parameters to be removed from original parameters
+        // AddParams- parameters to be be added to original parameters
+        // If parameter allready exists and needs to be replaced then it has to be added to remove and also to add list
+        // if only in add list then it will be added if allready not defined
+        void GetAsUriQuery(REFSTRING Query,MgStringCollection* RemoveParams=NULL,MgStringPropertyCollection* AddParams=NULL);
+
+        //void GetCount(REFSTRING Query);
 
     INTERNAL_API:
         /// <summary>

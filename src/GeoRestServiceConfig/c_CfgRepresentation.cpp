@@ -17,6 +17,10 @@
 
 #include "StdAfx.h"
 #include "c_CfgRepresentation.h"
+#include "Poco\UnicodeConverter.h"
+#include "Poco\String.h"
+
+
 
 c_CfgRepresentation::c_CfgRepresentation(e_RepresentationType RepresentationType,const wchar_t* Pattern,const wchar_t* MimeType)
 {
@@ -167,3 +171,42 @@ bool c_CfgRepresentation::IsCountLimitSet() const
   return m_Cached_GET ? m_Cached_GET->m_IsMaxCount : false;
 }
 
+long c_CfgRepresentation::GetMaxCount() const
+{
+  if( m_Cached_GET && m_Cached_GET->m_IsMaxCount ) return m_Cached_GET->m_MaxCount;
+  
+  return -1;
+}
+
+
+
+c_AtomElementOverride::c_AtomElementOverride()
+{
+  m_OverridType = e_Static;
+  m_IsValueUTF8 = false;
+}
+
+const std::string& c_AtomElementOverride::GetValueUTF8() const
+{
+  if( !m_IsValueUTF8 )
+  {
+    Poco::UnicodeConverter::toUTF8(m_Value,m_ValueUTF8);
+    m_IsValueUTF8=true;
+  }
+
+  return m_ValueUTF8;
+}
+
+void c_AtomElementOverride::SetValue( const std::wstring& Value,const std::wstring& OverType )
+{
+  SetOverrideType(OverType);
+  m_Value = Value;
+  m_IsValueUTF8 = false;
+}
+
+void c_AtomElementOverride::SetOverrideType( const std::wstring& OverType )
+{
+  if( Poco::icompare(OverType,L"Property") == 0 ) m_OverridType = e_Property;
+  if( Poco::icompare(OverType,L"Template") == 0 ) m_OverridType = e_Template;
+  if( Poco::icompare(OverType,L"Static") == 0 ) m_OverridType = e_Static;
+}

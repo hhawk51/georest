@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2009 by Autodesk, Inc.
+//  Copyright (C) 2010 by Haris Kurtagic
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -37,4 +37,5 @@ const STRING RestMimeType::Json            = L"application/json";
 const STRING RestMimeType::JsonP            = L"application/jsonp";
 const STRING RestMimeType::Kml             = L"application/vnd.google-earth.kml+xml";
 const STRING RestMimeType::Kmz             = L"application/vnd.google-earth.kmz";
+const STRING RestMimeType::Atom             = L"application/xml+atom";
 

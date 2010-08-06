@@ -24,12 +24,13 @@
 
 #define D_DEFAULT_CFG_FILENAME "restcfg.xml"
 
-
+#include "Poco/Foundation.h"
 #include "Poco/Exception.h"
 #include "Poco/UnicodeConverter.h"
 #include "Poco/Logger.h"
 #include "Poco/PatternFormatter.h"
 #include "Poco/FileChannel.h"
+#include "Poco/AsyncChannel.h"
 #include "Poco/FormattingChannel.h"
 #include "Poco/Path.h"
 #include "Poco/DirectoryIterator.h"
@@ -43,6 +44,8 @@
 #include "Poco/DOM/Document.h"
 #include "Poco/SAX/InputSource.h"
 #include "Poco/DOM/AutoPtr.h"
+#include <sstream>
+#include "Poco/String.h"
 
 
 using Poco::XML::Text;
@@ -85,34 +88,72 @@ c_RestConfig::c_RestConfig(Poco::Logger* Log)
 {
   if( !Log )
   {
-    std::string s1;
-    Poco::UnicodeConverter::toUTF8(g_AppFileName,s1);
-    Poco::Path cfgpath(s1);  
-    cfgpath.setFileName("rest.log");
-    m_LogFileName = cfgpath.toString();
-    
-    CreateLogger( m_LogFileName.c_str() );
+    CreateLogger();
   }
   
   m_RestUriSeparator = "rest";
 }
 
+void c_RestConfig::CreateLogger()
+{
+  std::string s1;
+  Poco::UnicodeConverter::toUTF8(g_AppFileName,s1);
+  Poco::Path cfgpath(s1);  
+
+  // check if "log" folder exists
+  Poco::Path logdir = cfgpath;
+  logdir.popDirectory();
+  logdir.pushDirectory("log");
+  logdir.setFileName("");
+  Poco::File tf(logdir);
+  if( tf.exists() && tf.isDirectory() )
+  {
+    cfgpath = logdir;
+  }
+
+  cfgpath.setFileName("rest.log");
+  m_LogFileName = cfgpath.toString();
+
+  CreateLogger( m_LogFileName.c_str() );
+}
+
+Poco::Logger& c_RestConfig::GetLogger()
+{
+  if( !m_Logger )
+  {
+    c_RestConfig::CreateLogger();
+  }
+  
+  return *m_Logger;
+}
+
+
 c_RestConfig::~c_RestConfig(void)
 {
 }
 
+
+void c_RestConfig::Clear()
+{
+  m_DataResourceVector.Clear();
+}
+
 void c_RestConfig::CreateLogger( const char* FileName )
 {
-  m_Logger = Poco::Logger::has("RestConfig");
+  m_Logger = Poco::Logger::has("GeoRestLogger");
 
   if( !m_Logger )
   {   
     Poco::AutoPtr<Poco::PatternFormatter> formatter = new Poco::PatternFormatter("%Y-%m-%d %H:%M:%S.%c %N[%P]:%s:%q:  %t");
-    Poco::AutoPtr<Poco::FormattingChannel> pFCFile = new Poco::FormattingChannel(formatter);  
+    Poco::AutoPtr<Poco::FormattingChannel> format_channel = new Poco::FormattingChannel(formatter);  
     Poco::AutoPtr<Poco::FileChannel> filechannel = new Poco::FileChannel(FileName);
-    pFCFile->setChannel(filechannel);
-    pFCFile->open();
-    m_Logger = &Poco::Logger::create("RestConfig", pFCFile, Poco::Message::PRIO_NOTICE);
+    Poco::AutoPtr<Poco::AsyncChannel> asyncchannel = new Poco::AsyncChannel();
+    format_channel->setChannel(filechannel);
+    asyncchannel->setChannel(format_channel);
+    //pFCFile->open();
+    
+    Poco::Logger::root().setChannel(asyncchannel);
+    m_Logger = &Poco::Logger::get("GeoRestLogger"); 
   }
   
 }
@@ -152,13 +193,18 @@ void c_RestConfig::Read( Poco::XML::Document* PocoDoc, const char* TemplateFolde
         c_CfgDataResource* datalayer = ParseResource_v2(node_layer,TemplateFolder);
         if( datalayer && !m_DataResourceVector.Add(datalayer) )
         {
-          m_Logger->warning("c_RestConfig::ReadFromXML : Duplicated 'UriTag'. Resource will not be added.");
+          
+          std::string errmsg;errmsg.reserve(512);
+          errmsg = "c_RestConfig::ReadFromXML : Duplicated UriTag '";
+          errmsg.append(datalayer->GetUriTag());
+          errmsg.append("'. Resource will not be added.");
+          m_Logger->warning();
           delete datalayer;
         }
       }
     }
 
-    // Read old version of confg "Data"
+    // Read old version of config "Data"
     {
       Poco::Path tempfolders(TemplateFolder);
       tempfolders.pushDirectory("HtmlTemplates");
@@ -189,15 +235,24 @@ void c_RestConfig::ReadFromXML( const char* FileName, const char* TemplateFolder
 {
   // Parse an XML document from standard input
 	// and use a NodeIterator to print out all nodes.
-	m_Logger->notice("c_RestConfig::ReadFromXML : started");
+  Poco::File xmlfile(FileName);
+  if( !xmlfile.exists() || !xmlfile.isFile() ) return;
+  
+  std::string noticemsg;
+  noticemsg.reserve(512);
+  noticemsg = "c_RestConfig::ReadFromXML : Reading File:'";
+  noticemsg.append(FileName);
+  noticemsg.append("'");
+	m_Logger->notice(noticemsg);
 	std::ifstream file;
+	
 	file.open(FileName);
 	if( !file.is_open() )
 	{
 	  std::string errmsg = "c_RestConfig::ReadFromXML : unable to open file '";
 	  errmsg = errmsg + FileName;
 	  errmsg = errmsg + "'";
-	  m_Logger->error();
+	  m_Logger->error(errmsg);
 	  throw c_ExceptionRestConfig(L"Unable to open config file!");
 	}
 	Poco::XML::InputSource src(file);
@@ -523,6 +578,75 @@ c_CfgAccessMethod* c_RestConfig::ParseMethod( Poco::XML::Element* XmlMethod)
   return method;
 }
 
+void c_RestConfig::GetOData_ElemOverride(Poco::XML::Element* XmlElemOverride,c_AtomElementOverride* ElemOverride)
+{
+  if( !XmlElemOverride ) return;
+  
+  bool is_type_property;
+  std::wstring typestr;
+  GetElementAttribute(XmlElemOverride,"type",typestr);
+  
+  /*if( Poco::icompare(typestr,L"Property") == 0 )
+    is_type_property = true;
+  else
+    is_type_property = false;
+  */
+  
+  std::string instr = XmlElemOverride->innerText();
+  std::wstring overr_value;
+  Poco::UnicodeConverter::toUTF16(instr,overr_value);
+  
+  ElemOverride->SetValue(overr_value,typestr);
+}
+
+void c_RestConfig::GetOData(Poco::XML::Element* XmlRepresentation,c_CfgRepOdata* Rep)
+{
+  {
+  
+  Poco::XML::Element* feedoverride = XmlRepresentation->getChildElement("FeedOverride");
+  if( feedoverride )
+  {
+    Poco::XML::Element* authoroverride = feedoverride->getChildElement("Author");
+    if( authoroverride )
+    {
+      Poco::XML::Element* overval = authoroverride->getChildElement("Name");
+      GetOData_ElemOverride(overval,&Rep->m_FeedAuthor.m_AuthorName);
+      
+      overval = authoroverride->getChildElement("Uri");
+      GetOData_ElemOverride(overval,&Rep->m_FeedAuthor.m_AuthorUri);
+      
+      overval = authoroverride->getChildElement("Email");
+      GetOData_ElemOverride(overval,&Rep->m_FeedAuthor.m_AuthorEmail);
+    }
+    
+    Poco::XML::Element* titleoverride = feedoverride->getChildElement("Title");
+    GetOData_ElemOverride(titleoverride,&Rep->m_FeedTitle);
+  }
+  }
+  {
+  
+  Poco::XML::Element* entryoverride = XmlRepresentation->getChildElement("EntryOverride");
+  if( entryoverride )
+  {
+    Poco::XML::Element* authoroverride = entryoverride->getChildElement("Author");
+    if( authoroverride )
+    {
+      Poco::XML::Element* overval = authoroverride->getChildElement("Name");
+      GetOData_ElemOverride(overval,&Rep->m_EntryAuthor.m_AuthorName);
+
+      overval = authoroverride->getChildElement("Uri");
+      GetOData_ElemOverride(overval,&Rep->m_EntryAuthor.m_AuthorUri);
+
+      overval = authoroverride->getChildElement("Email");
+      GetOData_ElemOverride(overval,&Rep->m_EntryAuthor.m_AuthorEmail);
+    }
+    
+    Poco::XML::Element* titleoverride = entryoverride->getChildElement("Title");
+    GetOData_ElemOverride(titleoverride,&Rep->m_EntryTitle);
+  }
+  }
+}
+
 /*
 <Representation pattern=".html$" mimetype="text/html" >
 <Templates>
@@ -543,7 +667,8 @@ c_CfgRepresentation* c_RestConfig::ParseRepresentation_v2( Poco::XML::Element* X
   std::wstring mimetype;
   GetElementAttribute(XmlRepresentation,"mimetype",mimetype);
   
-  if( pattern.length()==0 ) return NULL;
+  // if rendere is not odata then pattern has to be set
+  if( ( pattern.length()==0) &&  wcsicmp( renderer.c_str(),L"OData") ) return NULL;
   
   
   c_CfgRepresentation* representaion = NULL;
@@ -590,6 +715,13 @@ c_CfgRepresentation* c_RestConfig::ParseRepresentation_v2( Poco::XML::Element* X
   if( wcsicmp( renderer.c_str(),L"Sitemap")==0 ) // built-in JSON representation of data
   {
     representaion = new c_CfgRepresentation_Sitemap();
+  }
+  
+  if( wcsicmp( renderer.c_str(),L"OData")==0 ) // built-in JSON representation of data
+  {
+    representaion = new c_CfgRepOdata();
+    
+    GetOData(XmlRepresentation,(c_CfgRepOdata*)representaion);
   }
   
  
@@ -854,6 +986,8 @@ c_CfgDataResource* c_RestConfig::ParseResource_v2( Poco::XML::Element* XmlResour
     return NULL;
   }
   
+  
+  
   // Read Data Source
   c_CfgDataSource *res_source=NULL;
   {
@@ -874,6 +1008,7 @@ c_CfgDataResource* c_RestConfig::ParseResource_v2( Poco::XML::Element* XmlResour
   c_CfgDataResource* resource = new c_CfgDataResource(uripart.c_str(),TemplateFolder);
   resource->m_UriTag = uripart;
   resource->m_DataSource = res_source;
+   
   
   
   // Read Representations
@@ -914,7 +1049,8 @@ void c_RestConfig::ReadFromString( const std::string& XmlCfg, const char* Templa
   
   try
   {
-    Poco::XML::InputSource src(XmlCfg);
+    std::stringstream xmlstream(XmlCfg);
+    Poco::XML::InputSource src(xmlstream);
     Poco::XML::DOMParser parser;
     AutoPtr<Poco::XML::Document> pdoc = parser.parse(&src);
     Read(pdoc,TemplateFolder);
@@ -927,6 +1063,19 @@ void c_RestConfig::ReadFromString( const std::string& XmlCfg, const char* Templa
 
   }
 }
+
+int c_RestConfig::GetResourceCount()
+{
+  return m_DataResourceVector.GetCount();
+}
+
+const c_CfgDataResource* c_RestConfig::GetResource( int Index )
+{
+  return m_DataResourceVector.GetResource(Index);
+}
+
+
+
 /*
 const c_CfgDataResource* c_RestConfig::FindClassName( const std::wstring& ClassName )
 {

@@ -19,9 +19,13 @@
 #define _c_RestResult_h
 
 #include "RestStatusCodes.h"
+#include "c_ExceptionGeoREST.h"
+#include "Poco\Exception.h"
+#include "Poco\Net\HTTPResponse.h"
 class c_RestRequest;
 class c_RestResult;
 class MgException;
+class FdoException;
 
 template class REST_REQUEST_HANDLER_API Ptr<c_RestResult>;
 
@@ -30,7 +34,7 @@ template class REST_REQUEST_HANDLER_API Ptr<c_RestResult>;
 /// Represents a result returned by a call to a Mg Service.
 /// A c_RestResult contains a status code plus data.
 /// </summary>
-class REST_REQUEST_HANDLER_API c_RestResult : public MgDisposable
+class REST_REQUEST_HANDLER_API  c_RestResult : public MgDisposable
 {
 EXTERNAL_API:
     //////////////////////////////////////////////////////////////////
@@ -46,7 +50,7 @@ EXTERNAL_API:
     /// Success/Error code.
     /// </returns>
     /// </summary>
-    STATUS GetStatusCode();
+    Poco::Net::HTTPResponse::HTTPStatus GetStatusCode();
 
     //////////////////////////////////////////////////////////////////
     /// <summary>
@@ -55,7 +59,7 @@ EXTERNAL_API:
     /// Nothing.
     /// </returns>
     /// </summary>
-    void SetStatusCode(STATUS status);
+    void SetStatusCode(Poco::Net::HTTPResponse::HTTPStatus status);
 
     //////////////////////////////////////////////////////////////////
     /// <summary>
@@ -159,6 +163,10 @@ INTERNAL_API:
     /// </summary>
     ///
     void SetErrorInfo(c_RestRequest* awRequest, MgException* mgException);
+    
+    void SetErrorInfo(c_RestRequest* awRequest, c_ExceptionHTTPStatus& Exception);
+    void SetErrorInfo(c_RestRequest* awRequest, Poco::Exception& Exception);
+    void SetErrorInfo( c_RestRequest* awRequest, FdoException* Exception );
 
 protected:
     /// <summary>
@@ -186,7 +194,7 @@ public:
     bool m_IsSitemapXML;
     
 private:    
-    STATUS    m_StatusCode;
+    Poco::Net::HTTPResponse::HTTPStatus    m_StatusCode;
     STRING    m_ErrorMessage;
     STRING    m_DetailedMessage;
     STRING    m_HttpStatusMessage;
