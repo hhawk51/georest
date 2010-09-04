@@ -270,7 +270,8 @@ void c_ODataTest::TestNotFound()
   
   HTTPResponse response;
   std::istream& rs = s.receiveResponse(response);
-  if( response.getStatus() != HTTPResponse::HTTP_NOT_FOUND )
+  Poco::Net::HTTPResponse::HTTPStatus status = response.getStatus();
+  if( status != HTTPResponse::HTTP_NOT_FOUND )
   {
     CPPUNIT_FAIL("Response HTTP Status code is not HTTP_NOT_FOUND!");
   }

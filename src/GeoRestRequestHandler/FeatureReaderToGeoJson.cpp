@@ -283,6 +283,24 @@ void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string
                     //ToGeoJson(geom,prop_val,includeType);           
                   }
                   break;
+                case MgPropertyType::Byte:
+                  {
+                    
+                      BYTE val = FeatureReader->GetByte(propname);
+                      MgUtil::Int32ToString((INT32)val,prop_val);
+                    
+                  }
+                  break;
+                case MgPropertyType::Boolean:
+                  {
+                      bool val = FeatureReader->GetBoolean(propname);
+                      if( val )
+                        prop_val = "true";
+                      else
+                        prop_val = "false";
+
+                  }
+                  break;
                 
               
             }

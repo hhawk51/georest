@@ -12,13 +12,16 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -64,11 +67,88 @@
 				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;..\..\lib\debug;$(MG_PATH_OS_2_1)\common\lib\debug"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;..\..\lib\Win32\$(ConfigurationName);$(MG_PATH_OS_2_1)\common\lib\debug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib\x64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(MG_PATH_OS_2_1)\common\lib\debug64&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -94,7 +174,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -140,13 +220,92 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\release"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\release"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\release"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -172,7 +331,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug.2.1-3891|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -218,11 +377,88 @@
 				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\debug"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\debug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug.2.1-3891|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\debug"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -248,7 +484,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug.Ent2010|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -294,11 +530,88 @@
 				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\common\lib\debug"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\common\lib\debug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug.Ent2010|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\common\lib\debug"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -324,7 +637,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug.Ent2011|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -370,10 +683,10 @@
 				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\common\lib\debug;&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\common\lib\debug;&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -399,8 +712,85 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug.Ent2011|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandlerd.lib GeoRestServiceConfigd.lib mgfoundationd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\common\lib\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release.Ent2011|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -446,12 +836,12 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2011)\common\lib\release"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2011)\common\lib\release"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -477,8 +867,87 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Release.Ent2011|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib\x64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(MG_PATH_ENT_2011)\common\lib\release64&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release.Ent2010|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -524,12 +993,12 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\common\lib\release"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\common\lib\release"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -555,8 +1024,87 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Release.Ent2010|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\common\lib\release"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release.MgOs2.1|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -602,13 +1150,92 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\release"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\release"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release.MgOs2.1|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;..\GeoRestRequestHandler;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;GISSERVICESDLL_EXPORTS"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="GeoRestRequestHandler.lib GeoRestServiceConfig.lib mgfoundation.lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_OS_2_1)\common\lib\release"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -658,7 +1285,25 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -676,7 +1321,25 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug.2.1-3891|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Debug.Ent2010|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug.Ent2010|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -694,7 +1357,25 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug.Ent2011|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release.Ent2011|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.Ent2011|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -712,7 +1393,25 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Release.Ent2010|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release.MgOs2.1|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						CompileAsManaged="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.MgOs2.1|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -737,7 +1436,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -753,7 +1468,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug.2.1-3891|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Debug.Ent2010|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug.Ent2010|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -769,7 +1500,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug.Ent2011|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release.Ent2011|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.Ent2011|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -785,7 +1532,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Release.Ent2010|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release.MgOs2.1|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.MgOs2.1|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"

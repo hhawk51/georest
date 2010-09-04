@@ -63,13 +63,7 @@ public:
     m_ContentLength = m_Content_OutputReader.p ? m_Content_OutputReader->GetLength() : 0;
     m_Content_String = "";
   };
-  /*
-  void SetStatus(int Status,const char* Reason)
-  {
-    m_Status = Status;
-    m_StatusReason = Reason;
-  };
-  */
+  
   void SetStatusAndReason(int Status,const char* Reason)
   {
     m_Status = Status;
@@ -128,8 +122,8 @@ class REST_REQUEST_HANDLER_API c_RestResponse : public MgDisposable
         
         // PrepareHttpResponse will check what MIME type of response is requested
         // and convert (template in some cases-e.g. convert feature reader to html) result to requested type
-        c_RestResponse_HttpData* PrepareHttpData(c_RestRequest* Request);
-        c_RestResponse_HttpData* GetHttpData() { return &m_HttpData; }
+        
+        c_RestResponse_HttpData* GetHttpData(c_RestRequest* RestRequest);
 
     INTERNAL_API:
         /// <summary>
@@ -169,6 +163,8 @@ class REST_REQUEST_HANDLER_API c_RestResponse : public MgDisposable
         
   protected:
     c_RestResponse_HttpData m_HttpData; // here will set data to be returned via Http to client        
+    
+    c_RestResponse_HttpData* PrepareHttpData(c_RestRequest* Request);
 
 };
 

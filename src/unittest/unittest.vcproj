@@ -12,13 +12,16 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="obj\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="obj\$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
@@ -64,9 +67,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib cppunitd.lib testrunnerud.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib GeoRestServiceConfigd.lib GeoRestHttpServerDlld.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\lib\debug;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Win32\$(ConfigurationName);D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -96,8 +99,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			UseOfMFC="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib cppunit64.lib testrunnerud64.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib GeoRestServiceConfigd.lib GeoRestHttpServerDlld.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug64;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="obj\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="obj\$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
@@ -141,7 +224,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
@@ -151,6 +234,86 @@
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			UseOfMFC="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -176,7 +339,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release.Ent2010|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
@@ -220,7 +383,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
@@ -254,8 +417,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Release.Ent2010|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			UseOfMFC="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release.MgOs2.1|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfMFC="2"
@@ -299,7 +542,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
@@ -309,6 +552,86 @@
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release.MgOs2.1|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			UseOfMFC="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"

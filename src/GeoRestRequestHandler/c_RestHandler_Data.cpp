@@ -886,7 +886,7 @@ void c_RestHandler_Data::Execute_Get_Feature_FDO(c_RestResponse& HttpResponse)
     }  
   }
   
-  if( m_RestRequest->m_CfgRepresentation->IsCountLimitSet() )
+  if( m_RestRequest->m_CfgRepresentation->IsMaxCountSet() )
   {
     if( query_params->ContainsParameter(L"count") )
     {
@@ -928,6 +928,11 @@ void c_RestHandler_Data::Execute_Get_Feature_FDO(c_RestResponse& HttpResponse)
     
     hResult->m_FeatureReader_Count = rowcount;
   }
+  else
+  {
+    hResult->m_FeatureReader_Count = m_RestRequest->m_CfgRepresentation->GetDefaultCount();
+  }
+  
   if( query_params->ContainsParameter(L"start") )
   {
     STRING val = query_params->GetParameterValue(L"start");
@@ -1086,7 +1091,7 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
     }  
   }
 
-  if( m_RestRequest->m_CfgRepresentation->IsCountLimitSet() )
+  if( m_RestRequest->m_CfgRepresentation->IsMaxCountSet() )
   {
     if( query_params->ContainsParameter(L"count") )
     {
@@ -1118,6 +1123,10 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
     int rowcount = _wtoi(val.c_str());
 
     hResult->m_FeatureReader_Count = rowcount;
+  }
+  else
+  {
+    hResult->m_FeatureReader_Count = m_RestRequest->m_CfgRepresentation->GetDefaultCount();
   }
   if( query_params->ContainsParameter(L"start") )
   {

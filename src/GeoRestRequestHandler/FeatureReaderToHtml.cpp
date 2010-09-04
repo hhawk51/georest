@@ -282,6 +282,19 @@ void GetPropertyAsString(c_RestDataReader* FeatureReader,CREFSTRING PropName,REF
       //prop_coll->Add(prop);
     }
     break;
+    case MgPropertyType::Int64:
+    {
+      if( FeatureReader->IsNull(PropName) )
+      {
+        StringValue = L"";
+      }
+      else
+      {
+        INT64 val = FeatureReader->GetInt64(PropName);
+        MgUtil::Int64ToString(val,StringValue);      
+      }
+    }
+    break;
     case MgPropertyType::Int32:
     {
       if( FeatureReader->IsNull(PropName) )
@@ -335,6 +348,38 @@ void GetPropertyAsString(c_RestDataReader* FeatureReader,CREFSTRING PropName,REF
         MgUtil::DoubleToString(val,StringValue);
       }
       
+    }
+    break;
+    case MgPropertyType::Byte:
+    {
+      if( FeatureReader->IsNull(PropName) )
+      {
+        StringValue = L"";
+      }
+      else
+      {
+        BYTE val = FeatureReader->GetByte(PropName);
+        MgUtil::Int32ToString((INT32)val,StringValue);
+      }
+
+    }
+    break;
+    case MgPropertyType::Boolean:
+    {
+      if( FeatureReader->IsNull(PropName) )
+      {
+        StringValue = L"";
+      }
+      else
+      {
+        bool val = FeatureReader->GetBoolean(PropName);
+        if( val )
+          StringValue = L"true";
+        else
+          StringValue = L"false";
+        
+      }
+
     }
     break;
     case MgPropertyType::DateTime:
@@ -660,6 +705,19 @@ void GetPropertyAsBase64(c_RestDataReader* FeatureReader,CREFSTRING PropName,std
         //prop_coll->Add(prop);
       }
       break;
+    case MgPropertyType::Int64:
+      {
+        if( FeatureReader->IsNull(PropName) )
+        {
+          StringValue = "";
+        }
+        else
+        {
+          stream.WriteINT64(FeatureReader->GetInt64(PropName));
+
+        }
+      }
+      break;  
     case MgPropertyType::Int32:
       {
         if( FeatureReader->IsNull(PropName) )

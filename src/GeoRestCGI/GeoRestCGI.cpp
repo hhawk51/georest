@@ -157,8 +157,8 @@ int main (int argc, char* argv[])
   }
   
   Ptr<c_RestResponse> restresponse = restrequest->Execute();
-  //c_RestResponse_HttpData* http_data = restresponse->PrepareHttpData(restrequest);
-  c_RestResponse_HttpData* http_data = restresponse->GetHttpData();
+  
+  c_RestResponse_HttpData* http_data = restresponse->GetHttpData(restrequest);
 
   //std::istream istr(http_data->GetHeader());
 

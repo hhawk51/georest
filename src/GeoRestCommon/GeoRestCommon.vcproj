@@ -12,13 +12,16 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -63,14 +66,14 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib PocoNetd.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;..\..\lib\debug;$(MG_PATH_OS_2_1)\Common\lib\debug;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;..\..\lib\Win32\$(ConfigurationName);$(MG_PATH_OS_2_1)\Common\lib\debug;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -96,8 +99,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib PocoNetd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -140,16 +223,16 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\common\lib\release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -175,8 +258,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Release|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\common\lib\release64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Debug.2.1-3891|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -221,14 +384,14 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers\lib&quot;;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\lib\debug&quot;"
+				AdditionalLibraryDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\lib\debug&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -254,8 +417,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug.2.1-3891|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\Foundation&quot;;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\jsoncpp\include;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\MapGuideCommon;$(FDO_PATH)\FDO\Unmanaged\Inc;$(FDO_PATH)\Utilities\ExpressionEngine\Inc;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Oem\ACE\ACE_wrappers\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;D:\Development\MapGuideSVN\branches\2.1-3891\MgDev\Common\lib\debug&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Debug.Ent2010|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -300,14 +543,14 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\Common\lib\debug"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\Common\lib\debug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -333,8 +576,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug.Ent2010|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\Common\lib\debug"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Debug.Ent2011|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -379,14 +702,14 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName)d.dll"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_ENT_2011)\Common\lib\debug;&quot;..\..\lib\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_ENT_2011)\Common\lib\debug;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -412,8 +735,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug.Ent2011|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
+				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACEd.lib mgfoundationd.lib MgPlatformBased.lib PocoFoundationd.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.dll"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\debug64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release.Ent2011|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -456,16 +859,16 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_ENT_2011)\common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_ENT_2011)\common\lib\release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -491,8 +894,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Release.Ent2011|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\common\lib\release64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release.Ent2010|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -535,16 +1018,16 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\lib\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\Common\lib\release;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\Common\lib\release;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -570,8 +1053,88 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Release.Ent2010|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;$(MG_PATH_ENT_2010)\Common\lib\release;&quot;$(POCO_PATH)\lib&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release.MgOs2.1|Win32"
-			OutputDirectory="..\..\bin\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="1"
@@ -614,17 +1177,97 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
-				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\common\lib\release;&quot;..\..\lib\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\common\lib\release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
-				ImportLibrary="..\..\lib\$(ConfigurationName)\$(TargetName).lib"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release.MgOs2.1|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="ACE.lib mgfoundation.lib MgPlatformBase.lib PocoFoundation.lib PocoNet.lib"
+				OutputFile="$(OutDir)\$(ProjectName).dll"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\common\lib\release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				ImportLibrary="..\..\lib\Win64\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -697,7 +1340,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Release|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release.MgOs2.1|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.MgOs2.1|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"

@@ -193,6 +193,12 @@ void c_FeatureReaderToXML::GetPropertyAsString(c_RestDataReader* FeatureReader,C
       StringValue = wktReader.Write(fgfgeom);      
     }
     break;
+    case MgPropertyType::Int64:
+      {
+        INT64 val = FeatureReader->GetInt64(PropName);
+        MgUtil::Int64ToString(val,StringValue);      
+      }
+      break;
     case MgPropertyType::Int32:
     {
         long val = FeatureReader->GetInt32(PropName);
@@ -260,6 +266,12 @@ void c_FeatureReaderToXML::GetPropertyAsString(c_RestDataReader* FeatureReader,C
       StringValue = MgUtil::WideCharToMultiByte(wktstring);                  
     }
     break;
+    case MgPropertyType::Int64:
+    {
+      INT64 val = FeatureReader->GetInt64(PropName);
+      MgUtil::Int64ToString(val,StringValue);      
+    }
+    break;
     case MgPropertyType::Int32:
     {
         long val = FeatureReader->GetInt32(PropName);
@@ -270,6 +282,38 @@ void c_FeatureReaderToXML::GetPropertyAsString(c_RestDataReader* FeatureReader,C
     {
         long val = FeatureReader->GetInt16(PropName);
         MgUtil::Int32ToString(val,StringValue);
+    }
+    break;
+    case MgPropertyType::Byte:
+    {
+      if( FeatureReader->IsNull(PropName) )
+      {
+        StringValue = "";
+      }
+      else
+      {
+        BYTE val = FeatureReader->GetByte(PropName);
+        MgUtil::Int32ToString((INT32)val,StringValue);
+      }
+
+    }
+    break;
+    case MgPropertyType::Boolean:
+    {
+      if( FeatureReader->IsNull(PropName) )
+      {
+        StringValue = "";
+      }
+      else
+      {
+        bool val = FeatureReader->GetBoolean(PropName);
+        if( val )
+          StringValue = "true";
+        else
+          StringValue = "false";
+
+      }
+
     }
     break;
     case MgPropertyType::Single:

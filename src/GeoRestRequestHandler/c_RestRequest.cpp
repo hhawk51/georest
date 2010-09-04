@@ -323,7 +323,7 @@ c_RestResponse* c_RestRequest::Execute()
     }
       
       
-    response->PrepareHttpData(this);
+    //response->PrepareHttpData(this);
     
   }                                                                         \
   catch (c_ExceptionHTTPStatus& ex)                                                    \
@@ -360,7 +360,7 @@ c_RestResponse* c_RestRequest::Execute()
     if (result != NULL)                                                  
     {                                                                     
       result->SetErrorInfo(this, mgException);     
-      response->PrepareHttpData(this);     
+      
     }                                                                           
   } 
                      

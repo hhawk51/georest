@@ -68,6 +68,9 @@ public:
     m_IsMaxBBoxWidth=false;;
     m_IsMaxCount=false;  
     
+    m_IsDefaultCount = false;
+    
+    m_DefaultCount = 1;
     m_MaxCount = 1;
     m_MaxBBoxHeight = 1;
     m_MaxBBoxWidth = 1;
@@ -93,6 +96,11 @@ public:
 
   bool m_IsMaxCount;
   unsigned int m_MaxCount;
+  
+  bool m_IsDefaultCount;
+  unsigned int m_DefaultCount;
+  
+  
   
   t_CfgAccessFormatMethodUserVector m_Users;
 };
@@ -159,11 +167,12 @@ public:
   void AddMethod(c_CfgAccessMethod* Method);
   e_REST_AccessCodes IsAccess( const wchar_t*Method,const wchar_t*UserName,const wchar_t* Password ) const;
 
-  long GetMaxCount() const; // return number of features allowed to be retruned
+  long GetDefaultCount( ) const; // return deafult number of features to be returned 
+  long GetMaxCount() const; // return maximum number of features allowed to be retruned
 
   bool IsBBoxHeightLimitSet() const;
   bool IsBBoxWidthLimitSet() const;
-  bool IsCountLimitSet() const;
+  bool IsMaxCountSet() const;
 
   bool IsCountInsideLimit(int Count) const;
   bool IsWidthInsideLimit(double Width) const;
@@ -172,6 +181,7 @@ public:
   void SetOrderFields(const wchar_t* Fields) { m_OrderFields = Fields; };
   void SetOrderDirection(e_OrderDirection Direction) { m_OrderDirection = Direction; }
   
+
 protected:
   e_RepresentationType m_RepresentationType;
   

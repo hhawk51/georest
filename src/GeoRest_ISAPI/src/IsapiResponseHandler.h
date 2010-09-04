@@ -30,7 +30,7 @@ class IsapiResponseHandler
 public:
     IsapiResponseHandler(c_RestRequest* RestRequest,const string& AgentUri,const string& UriBase,EXTENSION_CONTROL_BLOCK *pECB);
     ~IsapiResponseHandler(void);
-    void SendResponse(c_RestResponse* response);
+    void SendResponse(c_RestResponse* response,c_RestRequest* RestRequest);
     void SendError(MgException* e);
     void RequestAuth();
 

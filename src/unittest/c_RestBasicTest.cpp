@@ -81,27 +81,7 @@ void c_RestBasicTest::tearDown()
   delete m_GisHttpServer;
 }
 
-void c_RestBasicTest::TestEcho()
-{
-  HTTPClientSession s("localhost", 99);
-  HTTPRequest request(HTTPRequest::HTTP_GET, "/");
-  Poco::Timespan timeout(2,0);
-  s.setTimeout(timeout);
-  s.sendRequest(request);
-  
-  HTTPResponse response;
-  std::istream& rs = s.receiveResponse(response);
-  if( response.getStatus() != HTTPResponse::HTTP_OK )
-  {
-    CPPUNIT_FAIL("Returned Http Status is not HTTP_OK!");
-  }
-  
-  //assert (response.getContentLength() == HTTPTestServer::SMALL_BODY.length());
-  //assert (response.getContentType() == "text/html");
-  //std::ostringstream ostr;
-  //StreamCopier::copyStream(rs, ostr);
-  //assert (ostr.str() == HTTPTestServer::SMALL_BODY);
-}
+
 
 void c_RestBasicTest::TestRestHello()
 {

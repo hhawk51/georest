@@ -44,9 +44,9 @@ IsapiResponseHandler::~IsapiResponseHandler(void)
 {
 }
 
-void IsapiResponseHandler::SendResponse(c_RestResponse* response)
+void IsapiResponseHandler::SendResponse(c_RestResponse* response,c_RestRequest* RestRequest)
 {
-  c_RestResponse_HttpData* http_data = response->GetHttpData();
+  c_RestResponse_HttpData* http_data = response->GetHttpData(RestRequest);
   
   Poco::Net::MessageHeader& headers = http_data->GetMsgHeaders();
   

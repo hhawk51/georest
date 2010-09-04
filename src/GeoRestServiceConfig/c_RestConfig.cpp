@@ -534,6 +534,14 @@ c_CfgAccessMethod* c_RestConfig::ParseMethod( Poco::XML::Element* XmlMethod)
     }
     
     
+    GetElementAttribute(XmlMethod,"defaultcount",attrval);    
+    if( attrval.length() > 0 )
+    {    
+      method->m_DefaultCount= wcstod(attrval.c_str(),&errpt);
+      if( !*errpt && method->m_MaxCount>0 ) method->m_IsDefaultCount= true;
+    }
+
+    
     GetElementAttribute(XmlMethod,"maxbboxwidth",attrval);    
     if( attrval.length() > 0 )
     {

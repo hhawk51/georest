@@ -28,7 +28,6 @@
 class c_RestBasicTest : public CppUnit::TestFixture
 {
   CPPUNIT_TEST_SUITE( c_RestBasicTest );
-    CPPUNIT_TEST( TestEcho );    
     CPPUNIT_TEST( TestRestHello );    
   CPPUNIT_TEST_SUITE_END();
   
@@ -42,7 +41,6 @@ public:
   //! Clean up after the test run.
   virtual void tearDown() ;
   
-  void TestEcho();   
   void TestRestHello();
 
 protected:

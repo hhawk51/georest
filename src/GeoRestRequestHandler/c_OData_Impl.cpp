@@ -631,26 +631,35 @@ void c_OData_Impl::Reader2AtomCollection_Atom(c_RestRequest* RestRequest,const c
   }
   
   long maxcount = 200;
-  if( ODataRepresentation->IsCountLimitSet() )
+  if( ODataRepresentation->IsMaxCountSet() )
   {
     maxcount = ODataRepresentation->GetMaxCount();    
+  }
+  
+  if( param_top < 0 ) // if not defined in URI
+  {
+    param_top = ODataRepresentation->GetDefaultCount();
   }
   
   std::wstring one_prop;
   // write entries from reader
   int count=0;
-  bool isnext = false; // need to remember last one, because sdf provider has a bug and will "roll-over"
-  while((isnext=Reader->ReadNext())==true)
-  {
-    WriteEntry_Atom(writer,RestRequest,ODataRepresentation,Reader,one_prop,atom_updated);
-    count++;
-    if( (count >= maxcount) )
-    {            
-      break;
-    }
-    if( (param_top >= 0 ) && (count >= param_top) )
+  bool isnext = true; // need to remember last one, because sdf provider has a bug and will "roll-over"
+  
+  if( param_top > 0 )
+  {  
+    while((isnext=Reader->ReadNext())==true)
     {
-      break;
+      WriteEntry_Atom(writer,RestRequest,ODataRepresentation,Reader,one_prop,atom_updated);
+      count++;
+      if( (count >= maxcount) )
+      {            
+        break;
+      }
+      if( (param_top >= 0 ) && (count >= param_top) )
+      {
+        break;
+      }
     }
   }
   if(isnext)
@@ -721,30 +730,37 @@ void c_OData_Impl::Reader2AtomCollection_Json(c_RestRequest* RestRequest,const c
   }
 
   long maxcount = 200;
-  if( ODataRepresentation->IsCountLimitSet() )
+  if( ODataRepresentation->IsMaxCountSet() )
   {
     maxcount = ODataRepresentation->GetMaxCount();    
   }
 
-
+  if( param_top < 0 ) // if not defined in URI
+  {
+    param_top = ODataRepresentation->GetDefaultCount();
+  }
+  
   std::wstring one_prop;
 
   // write entries from reader
   int count=0;
-  bool isnext=false; // need to remember last one, because sdf provider has a bug and will "roll-over"
-  while((isnext=Reader->ReadNext())==true )
+  bool isnext=true; // need to remember last one, because sdf provider has a bug and will "roll-over"
+  if( param_top > 0 )
   {
-    if( count > 0) OutStream << ",";
-    
-    WriteEntry_Json(OutStream,RestRequest,ODataRepresentation,Reader,one_prop);
-    count++;
-    if( (count >= maxcount)  )
-    {            
-      break;
-    }
-    if( (param_top >= 0 ) && (count >= param_top) )
+    while((isnext=Reader->ReadNext())==true )
     {
-      break;
+      if( count > 0) OutStream << ",";
+      
+      WriteEntry_Json(OutStream,RestRequest,ODataRepresentation,Reader,one_prop);
+      count++;
+      if( (count >= maxcount)  )
+      {            
+        break;
+      }
+      if( (param_top >= 0 ) && (count >= param_top) )
+      {
+        break;
+      }
     }
   }
   OutStream << "]"; // end array of objects

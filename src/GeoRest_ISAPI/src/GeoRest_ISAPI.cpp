@@ -397,7 +397,7 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
   IsapiResponseHandler responseHandler(request,agent_uri,uri_base,ECB);
   Ptr<c_RestResponse> response = request->Execute();
 
-  responseHandler.SendResponse(response);
+  responseHandler.SendResponse(response,request);
   
   
   /*

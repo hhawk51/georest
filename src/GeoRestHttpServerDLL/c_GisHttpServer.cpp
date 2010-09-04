@@ -263,8 +263,8 @@ public:
         
     
     Ptr<c_RestResponse> restresponse = restrequest->Execute();
-    //c_RestResponse_HttpData* http_data = restresponse->PrepareHttpData(restrequest);
-    c_RestResponse_HttpData* http_data = restresponse->GetHttpData();
+    
+    c_RestResponse_HttpData* http_data = restresponse->GetHttpData(restrequest);
     
     //std::istream istr(http_data->GetHeader());
     
@@ -279,16 +279,11 @@ public:
     //headers.operator []
     sprintf(temphead,"%d OK",http_data->GetStatus());
     response.set("Status",temphead);
-    
-    //std::istringstream istr(http_data->GetHeader());
-    //response.read(istr);
-    
+        
     Ptr<MgByteReader> bytereader = http_data->GetContentByteReader();
     
     if( bytereader.p )
     {
-      //MgByteSource* bytes = bytereader->GetByteSource();
-      //ByteSourceImpl* bsrcimpl = bytes->GetSourceImpl();
       std::ostream& outstr = response.send(); 
       
       unsigned char buf[4096];

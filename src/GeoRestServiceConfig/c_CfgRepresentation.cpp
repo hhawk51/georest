@@ -57,9 +57,11 @@ void c_CfgRepresentation::AddMethod( c_CfgAccessMethod* Method )
   }
 }
 
+
+
 bool c_CfgRepresentation::IsCountInsideLimit( int Count ) const
 {
-  if( IsCountLimitSet() && m_Cached_GET)
+  if( IsMaxCountSet() && m_Cached_GET)
   {
     if( Count>=0 && Count<=m_Cached_GET->m_MaxCount ) return true;
 
@@ -166,9 +168,16 @@ bool c_CfgRepresentation::IsBBoxWidthLimitSet() const
   return m_Cached_GET ? m_Cached_GET->m_IsMaxBBoxWidth : false;
 }
 
-bool c_CfgRepresentation::IsCountLimitSet() const
+bool c_CfgRepresentation::IsMaxCountSet() const
 {
   return m_Cached_GET ? m_Cached_GET->m_IsMaxCount : false;
+}
+
+long c_CfgRepresentation::GetDefaultCount( ) const
+{
+  if( m_Cached_GET && m_Cached_GET->m_IsDefaultCount ) return m_Cached_GET->m_DefaultCount;
+  
+  return 32;
 }
 
 long c_CfgRepresentation::GetMaxCount() const

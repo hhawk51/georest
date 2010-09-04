@@ -197,7 +197,7 @@ try
     if( proxyfreader )
     {
       restreader = new c_RestDataReader_MgFeatureReader(proxyfreader);
-      //c_FeatureReaderToHtml::ToHtml((MgFeatureReader*)pResultObj,RestRequest,RestRequest->GetFullUri(),RestRequest->GetBaseUri(),stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);            
+      
     }
     else
     {
@@ -335,17 +335,7 @@ try
       
       m_HttpData.AddHeader(MapAgentStrings::ContentLengthKey,tempHeader);
       
-      /*
-      unsigned char buf[4096];
-      DWORD dwSize;
-      int nBytes = outputReader->Read(buf,4096);
-      while (nBytes > 0)
-      {
-        dwSize = nBytes;
-        m_pECB->WriteClient(m_pECB->ConnID, buf, &dwSize, 0);
-        nBytes = outputReader->Read(buf,4096);                                
-      }
-      */
+     
       m_HttpData.SetContent(outputReader);
 
       // Tell IIS to keep the connection open 
@@ -403,13 +393,7 @@ void c_RestResponse::CreateJsonpCallbackString(const std::string& CallbackFuncNa
     // replace ' with \' so it will again be evaluated to ' when apperas in html as parameter to fucntion call
     if( *iter == '\'' )
     {
-      /*
-      char ch = *iter;
-      JsonP += '%';
-      JsonP += g_Hex[(int)(ch>>4)];
-      JsonP += g_Hex[(int)(ch&0x0F)];
-      */
-
+     
       JsonP += '\\'; 
       JsonP += '\'';  
 
@@ -441,13 +425,7 @@ void c_RestResponse::SendError(MgException* e)
   string sResponseHeader;
   char tempHeader[4096]; 
 
-  /*
-  sprintf(tempHeader, MapAgentStrings::StatusHeader, 559, MG_WCHAR_TO_CHAR(statusMessage));
-  sResponseHeader.append(tempHeader);
-  sprintf(tempHeader, MapAgentStrings::ContentTypeHeader, MapAgentStrings::TextHtml, MapAgentStrings::Utf8Text);
-  sResponseHeader.append(tempHeader);
-  sResponseHeader.append(MapAgentStrings::CrLf);
-  */
+ 
   
   m_HttpData.SetStatusAndReason(559,MG_WCHAR_TO_CHAR(statusMessage));
   sprintf(tempHeader, "%s%s", MapAgentStrings::TextHtml, MapAgentStrings::Utf8Text);
@@ -540,4 +518,9 @@ void c_RestResponse::WriteContent(const char *pszFormat, ...)
   
 }
 
+c_RestResponse_HttpData* c_RestResponse::GetHttpData(c_RestRequest* RestRequest)
+{
+  PrepareHttpData(RestRequest);
+  return &m_HttpData;
+}
 
