@@ -42,6 +42,7 @@
 #include "Poco/StringTokenizer.h"
 #include "c_FdoFilter.h"
 #include "c_Odata_FilterParser.h"
+#include "c_RestHandler_Data.h"
 
 
 c_RestHandler* c_RestHandler_OData::CreateObject( c_RestRequest* Request )
@@ -375,6 +376,14 @@ void c_RestHandler_OData::CreateQueryOptions(c_RestRequest* RestRequest,const st
     STRING fdo_filter;fdo_filter.reserve(param_odata_filter.length()+32);
     c_Odata_FilterParser::ODataFilter2FdoFilter(param_odata_filter,fdo_filter);;
     QueryOptions->SetFilter(fdo_filter);   
+  }
+  
+  if( query_params ->ContainsParameter(L"bbox") )
+  {
+    STRING paramval = query_params->GetParameterValue(L"BBOX");
+    STRING bbox_filterstr;
+    c_RestHandler_Data::CreateFilter_BBOX(paramval,RestRequest->m_DataClassDef,QueryOptions,bbox_filterstr);    
+
   }
   
   

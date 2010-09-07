@@ -102,6 +102,7 @@ public:
     bool ParseFilterQueryParam(const wstring& Param,int& Level,e_BoolOper& BoolOper,e_CompOper& CompOper,wstring& PropertyName);
     void Execute_Get_Feature_FDO(c_RestResponse& HttpResponse);
     void Execute_Get_Feature_MapGuide(c_RestResponse& HttpResponse);
+    static bool CreateFilter_BBOX(CREFSTRING BBoxParamValue,MgClassDefinition* ClassDef,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr);
 protected:
   //STRING m_MapDefId;
   //STRING m_FeatureSourceId;

@@ -331,6 +331,100 @@ bool c_RestHandler_Data::ParseFilterQueryParam(const wstring& Param,int& Level,e
   
 }
 
+
+bool c_RestHandler_Data::CreateFilter_BBOX(CREFSTRING BBoxParamValue,MgClassDefinition* ClassDef,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr)
+{
+  bool isbbox=false;
+  STRING bbox_paramval = BBoxParamValue;
+  {
+    
+    Ptr<MgGeometry> buffergeom;
+    double x1,y1,x2,y2;
+    if( swscanf(bbox_paramval.c_str(),L"%lf,%lf,%lf,%lf",&x1,&y1,&x2,&y2) == 4 )
+    {
+      isbbox=true;
+
+    }
+    else
+    {
+      // check if it is http url , then fetch that data and take those envelope as bbox
+
+      if( wcsicmp(bbox_paramval.substr(0,7).c_str(),L"buffer(") == 0 )
+      {
+        bbox_paramval = bbox_paramval.substr(7,bbox_paramval.length()-8); // minus last ')'
+
+        STRING::size_type iColon = bbox_paramval.find(',');
+        if(iColon != STRING::npos) 
+        {
+          STRING::size_type len = bbox_paramval.length();
+          STRING diststr = bbox_paramval.substr(0,iColon);
+          double dist;
+          if( swscanf(diststr.c_str(),L"%lf",&dist) == 1 )
+          {
+
+
+            STRING httpparamval = bbox_paramval.substr(iColon+1,len-iColon);
+
+            if( wcsicmp(httpparamval.substr(0,5).c_str(),L"http:") == 0 )
+            {
+              buffergeom = c_RestFetchSource::FetchBuffer(httpparamval.c_str(),dist);
+              isbbox=true;
+            }
+          }
+        }
+      }
+      else
+      { 
+        if( wcsicmp(bbox_paramval.substr(0,5).c_str(),L"http:") == 0 )
+        {
+          c_RestFetchSource::FetchEnvelope(bbox_paramval.c_str(),x1,y1,x2,y2);
+          isbbox=true;
+        }
+      }
+    }
+    if( isbbox )
+    {
+      // create geometry spatial filter
+      Ptr<MgGeometry> filterGeometry;
+      if( buffergeom.p )
+      {
+        filterGeometry = buffergeom;
+      }
+      else
+      {
+        // geomstr = POLYGON(x1 y1, x2 y1, x2 y2, x1 y2, x1 y1)
+        wchar_t geomstr[1024];
+        swprintf(geomstr,L"POLYGON((%.5lf %.5lf, %.5lf %.5lf, %.5lf %.5lf, %.5lf %.5lf, %.5lf %.5lf ))",x1,y1 ,x2,y1 ,x2,y2 ,x1,y2 ,x1,y1);
+        MgWktReaderWriter wktReader;
+        filterGeometry = wktReader.Read(geomstr);
+      }
+      STRING geometryname = ClassDef->GetDefaultGeometryPropertyName();
+
+
+      if( geometryname.length() >0 )
+      {
+        //STRING geomstr = m_DataFilter.substr(5,m_DataFilter.length()-6);
+        MgWktReaderWriter wktReader;
+        STRING fgeomstr = wktReader.Write(filterGeometry);
+        //filterGeometry->ToAwkt()
+
+        if( filterGeometry.p != NULL )
+        {
+          //GEOMETRY ENVELOPEINTERSECTS GeomFromText(' POLYGON(())')
+          FilterStr = geometryname + L" ENVELOPEINTERSECTS GeomFromText('" + fgeomstr + L"')";
+          //FilterStr = geometryname + L" INTERSECTS GeomFromText('" + fgeomstr + L"')";
+          INT32 selectionVariant = MgFeatureSpatialOperations::EnvelopeIntersects;
+          if( qryOptions ) qryOptions->SetSpatialFilter(geometryname,filterGeometry,selectionVariant);
+        }
+      }
+    }
+
+  }
+  
+  return isbbox;
+}//end of c_RestHandler_Data::CreateFilter_BBOX
+
+
 void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr)
 {
   Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
@@ -485,88 +579,8 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
   
   if( query_params ->ContainsParameter(L"bbox") )
   {
-    bool isbbox=false;
-    Ptr<MgGeometry> buffergeom;
-    double x1,y1,x2,y2;
     STRING paramval = query_params->GetParameterValue(L"BBOX");
-    if( swscanf(paramval.c_str(),L"%lf,%lf,%lf,%lf",&x1,&y1,&x2,&y2) == 4 )
-    {
-      isbbox=true;
-     
-    }
-    else
-    {
-    // check if it is http url , then fetch that data and take those envelope as bbox
-      
-      if( wcsicmp(paramval.substr(0,7).c_str(),L"buffer(") == 0 )
-      {
-        paramval = paramval.substr(7,paramval.length()-8); // minus last ')'
-        
-        STRING::size_type iColon = paramval.find(',');
-        if(iColon != STRING::npos) 
-        {
-          STRING::size_type len = paramval.length();
-          STRING diststr = paramval.substr(0,iColon);
-          double dist;
-          if( swscanf(diststr.c_str(),L"%lf",&dist) == 1 )
-          {
-          
-            
-            STRING httpparamval = paramval.substr(iColon+1,len-iColon);
-            
-            if( wcsicmp(httpparamval.substr(0,5).c_str(),L"http:") == 0 )
-            {
-              buffergeom = c_RestFetchSource::FetchBuffer(httpparamval.c_str(),dist);
-              isbbox=true;
-            }
-          }
-        }
-      }
-      else
-      { 
-        if( wcsicmp(paramval.substr(0,5).c_str(),L"http:") == 0 )
-        {
-          c_RestFetchSource::FetchEnvelope(paramval.c_str(),x1,y1,x2,y2);
-          isbbox=true;
-        }
-      }
-    }
-    if( isbbox )
-    {
-       // create geometry spatial filter
-      Ptr<MgGeometry> filterGeometry;
-      if( buffergeom.p )
-      {
-        filterGeometry = buffergeom;
-      }
-      else
-      {
-        // geomstr = POLYGON(x1 y1, x2 y1, x2 y2, x1 y2, x1 y1)
-        wchar_t geomstr[1024];
-        swprintf(geomstr,L"POLYGON((%.5lf %.5lf, %.5lf %.5lf, %.5lf %.5lf, %.5lf %.5lf, %.5lf %.5lf ))",x1,y1 ,x2,y1 ,x2,y2 ,x1,y2 ,x1,y1);
-        MgWktReaderWriter wktReader;
-        filterGeometry = wktReader.Read(geomstr);
-      }
-      STRING geometryname = ClassDef->GetDefaultGeometryPropertyName();
-      
-      
-      if( geometryname.length() >0 )
-      {
-        //STRING geomstr = m_DataFilter.substr(5,m_DataFilter.length()-6);
-        MgWktReaderWriter wktReader;
-        STRING fgeomstr = wktReader.Write(filterGeometry);
-        //filterGeometry->ToAwkt()
-         
-        if( filterGeometry.p != NULL )
-        {
-          //GEOMETRY ENVELOPEINTERSECTS GeomFromText(' POLYGON(())')
-          FilterStr = geometryname + L" ENVELOPEINTERSECTS GeomFromText('" + fgeomstr + L"')";
-          //FilterStr = geometryname + L" INTERSECTS GeomFromText('" + fgeomstr + L"')";
-          INT32 selectionVariant = MgFeatureSpatialOperations::EnvelopeIntersects;
-          if( qryOptions ) qryOptions->SetSpatialFilter(geometryname,filterGeometry,selectionVariant);
-        }
-      }
-    }
+    CreateFilter_BBOX(paramval,ClassDef,qryOptions,FilterStr);    
     
   }
   if( query_params ->ContainsParameter(L"ibox") )

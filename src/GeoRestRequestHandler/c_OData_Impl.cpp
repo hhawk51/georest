@@ -64,6 +64,10 @@ using Poco::XML::Element;
 #define D_XMLTAG_L_ATOM_URI "uri"
 #define D_XMLTAG_L_ATOM_EMAIL "email"
 #define D_XMLTAG_L_ATOM_CONTENT "content"
+#define D_XMLTAG_L_ATOM_CATEGORY "category"
+
+#define D_XMLTAG_L_ATOM_CATEGORY_TERM "term"
+#define D_XMLTAG_L_ATOM_CATEGORY_SCHEME "scheme"
 
 #define D_XMLTAG_L_APP_SERVICE "service"
 #define D_XMLTAG_L_APP_WORKSPACE "workspace"
@@ -73,7 +77,7 @@ using Poco::XML::Element;
 #define D_XMLTAG_L_ODATA_METADATA_PROPERTIES "properties"
 #define D_XMLTAG_Q_ODATA_METADATA_PROPERTIES "m:properties"
 
-#define D_XMLTAG_Q_GEODATA_GEOFORMAT D_XMLS_GEO_PREFIX"geoformat"
+#define D_XMLTAG_Q_GEODATA_GEOFORMAT "geo:format"
 
 #define D_GEODATA_GEOFORMAT_GML "Geo.GML"
 
@@ -533,6 +537,69 @@ void c_OData_Impl::Reader2AtomCollection(c_RestRequest* RestRequest,const c_CfgR
 void c_OData_Impl::Reader2AtomCollection_Atom(c_RestRequest* RestRequest,const c_CfgRepOdata* ODataRepresentation
                                               ,c_RestDataReader* Reader,std::ostream & OutStream)
 {
+/* ORIGINAL GeoREST
+  OutStream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    "<feed xml:base=\"http://localhost:99/REST/OData.svc/\" xmlns=\"http://www.w3.org/2005/Atom\" xmlns:d=\"http://schemas.microsoft.com/ado/2007/08/dataservices\" xmlns:geo=\"http://schemas.georest.org/geodata/2010/06/geo\" xmlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\">"
+    "<title type=\"text\">towns</title>"
+    "<id>http://localhost:99/REST/OData.svc/towns</id>"
+  "<updated>2010-09-06T20:16:20Z</updated>"
+    "<author>"
+    "<name/>"
+    "</author>"
+    "<entry>"
+    "<id>http://localhost:99/REST/OData.svc/towns(1)</id>"
+  "<title type=\"text\"/>"
+    "<author>"
+    "<name/>"
+    "</author>"
+    "<updated>2010-09-06T20:16:20Z</updated>"
+    "<category scheme=\"http://schemas.microsoft.com/ado/2007/08/dataservices/scheme\" term=\"Default.ET_towns\"/>"
+    "<content type=\"application/xml\">"
+    "<m:properties>"
+    "<d:PK_UID m:type=\"Edm.Int32\">1</d:PK_UID>"
+    "<d:Name>Brozolo</d:Name>"
+    "<d:Peoples m:type=\"Edm.Int32\">435</d:Peoples>"
+    "<d:LocalCounc m:type=\"Edm.Int32\">1</d:LocalCounc>"
+    "<d:County m:type=\"Edm.Int32\">0</d:County>"
+    "<d:Region m:type=\"Edm.Int32\">0</d:Region>"
+    "<d:Geometry geo:format=\"Geo.GML\">&lt;gml:Point&gt;&lt;gml:pos&gt;4996361.330000,427002.770000&lt;/gml:pos&gt;&lt;/gml:Point&gt;</d:Geometry>"
+    "</m:properties>"
+    "</content>"
+    "</entry></feed>";
+*/    
+
+
+/* ORIGINAL NETFLIX
+  
+  OutStream <<  "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>"
+   " <feed xml:base=\"http://odata.netflix.com/Catalog/\" xmlns:d=\"http://schemas.microsoft.com/ado/2007/08/dataservices\" xmlns:m=\"http://schemas.microsoft.com/ado/2007/08/dataservices/metadata\" xmlns=\"http://www.w3.org/2005/Atom\">"
+    "<title type=\"text\">Genres</title>"
+    "<id>http://odata.netflix.com/Catalog/Genres/</id>"
+  "<updated>2010-09-06T20:23:55Z</updated>"
+   " <link rel=\"self\" title=\"Genres\" href=\"Genres\" />"
+    "<m:count>500</m:count>"
+    "<entry>"
+    "<id>http://odata.netflix.com/Catalog/Genres('20th%20Century%20Period%20Pieces')</id>"
+  "<title type=\"text\">20th Century Period Pieces</title>"
+   "<updated>2010-09-06T20:23:55Z</updated>"
+    "<author>"
+    "<name />"
+    "</author>"
+    "<link rel=\"edit\" title=\"Genre\" href=\"Genres('20th%20Century%20Period%20Pieces')\" />"
+    "<link rel=\"http://schemas.microsoft.com/ado/2007/08/dataservices/related/Titles\" type=\"application/atom+xml;type=feed\" title=\"Titles\" href=\"Genres('20th%20Century%20Period%20Pieces')/Titles\" />"
+    "<category term=\"NetflixModel.Genre\" scheme=\"http://schemas.microsoft.com/ado/2007/08/dataservices/scheme\" />"
+    "<content type=\"application/xml\">"
+    "<m:properties>"
+    "<d:Name>20th Century Period Pieces</d:Name>"
+    "</m:properties>"
+    "</content>"
+    "</entry>"
+    "</feed>";
+ */ 
+ 
+//    return;
+  
+
   Poco::XML::AttributesImpl attrs;
   
   //std::string baseuri = RestRequest->GetBaseUri();
@@ -576,6 +643,7 @@ void c_OData_Impl::Reader2AtomCollection_Atom(c_RestRequest* RestRequest,const c
   writer.startElement("",D_XMLTAG_L_ATOM_UPDATED,"");
   writer.characters(atom_updated);
   writer.endElement("",D_XMLTAG_L_ATOM_UPDATED,"");
+  
   
   // feed author
   writer.startElement("",D_XMLTAG_L_ATOM_AUTHOR,"");
@@ -984,6 +1052,7 @@ void c_OData_Impl::GetOdataKeyValues(c_RestDataReader* Reader,MgClassDefinition*
     int ind=0;
     Ptr<MgPropertyDefinition> prop = keyprops->GetItem(ind);
     GetPropertyValueAsOdataLiteral_URI(Reader,prop->GetName(),KeysVal);
+    
   }
   else
   {
@@ -996,6 +1065,7 @@ void c_OData_Impl::GetOdataKeyValues(c_RestDataReader* Reader,MgClassDefinition*
       Poco::UnicodeConverter::toUTF8(prop->GetName(),tempstr);
       KeysVal.append(tempstr);
       GetPropertyValueAsOdataLiteral_URI(Reader,prop->GetName(),tempstr);
+      
       KeysVal.append(tempstr);
       if( ind < count ) KeysVal.append(",");
     }
@@ -1024,6 +1094,7 @@ void c_OData_Impl::GetOdataKeyValues(c_RestDataReader* Reader,MgClassDefinition*
 // </entry>
 void c_OData_Impl::WriteProperty_Atom(Poco::XML::XMLWriter& writer,c_RestDataReader* Reader,MgPropertyDefinition* prop)
 {
+  
   Poco::XML::AttributesImpl attrs;
   std::string xtag_name,nameutf8,prop_val;
   std::wstring prop_name = prop->GetName();
@@ -1037,6 +1108,46 @@ void c_OData_Impl::WriteProperty_Atom(Poco::XML::XMLWriter& writer,c_RestDataRea
   { 
     attrs.addAttribute("",D_XMLTAG_Q_GEODATA_GEOFORMAT,"","",D_GEODATA_GEOFORMAT_GML); 
 
+  }
+  if( prop->GetPropertyType() == MgFeaturePropertyType::DataProperty )
+  {
+    MgDataPropertyDefinition* dataprop = (MgDataPropertyDefinition*)prop;
+    std::string m_type;
+    
+    switch(dataprop->GetDataType())
+    {
+      case MgPropertyType::Int32:
+        m_type = "Edm.Int32";
+      break;
+      case MgPropertyType::Int16:
+        m_type = "Edm.Int16";
+      break;
+      case MgPropertyType::Int64:
+        m_type = "Edm.Int64";
+        break;
+      case MgPropertyType::String:
+        //m_type = "Edm.String";
+        break;
+      case MgPropertyType::DateTime:
+        m_type = "Edm.DateTime";
+        break;
+      case MgPropertyType::Double:
+        m_type = "Edm.Double";
+        break;
+      case MgPropertyType::Single:
+        m_type = "Edm.Single";
+        break;
+      case MgPropertyType::Boolean:
+        m_type = "Edm.Boolean";
+        break;
+      case MgPropertyType::Byte:
+        m_type = "Edm.Byte";
+        break;
+    }
+    if( m_type.length() > 0 )
+    {
+      attrs.addAttribute("","m:type","","",m_type); 
+    }
   }
   writer.startElement("","",xtag_name,attrs);
   writer.characters(prop_val);
@@ -1073,7 +1184,7 @@ void c_OData_Impl::WriteEntry_Atom(Poco::XML::XMLWriter& writer
   attrs.clear(); 
   writer.startElement("",D_XMLTAG_L_ATOM_ID,"");
   writer.characters(RestRequest->GetServiceURI());
-  writer.characters("/");
+  //writer.characters("/");
   writer.characters(RestRequest->m_CfgDataResource->GetUriTag());
   writer.characters("(");  
   GetOdataKeyValues(Reader,RestRequest->m_DataClassDef,tempstr);
@@ -1104,6 +1215,7 @@ void c_OData_Impl::WriteEntry_Atom(Poco::XML::XMLWriter& writer
   writer.endElement("",D_XMLTAG_L_ATOM_TITLE,"");
   
   // entry author
+  
   writer.startElement("",D_XMLTAG_L_ATOM_AUTHOR,"");
   writer.startElement("",D_XMLTAG_L_ATOM_NAME,"");
   if( !ODataRepresentation->m_EntryAuthor.m_AuthorName.IsValueEmpty() )
@@ -1148,12 +1260,21 @@ void c_OData_Impl::WriteEntry_Atom(Poco::XML::XMLWriter& writer
     writer.endElement("",D_XMLTAG_L_ATOM_EMAIL,"");
   }
   writer.endElement("",D_XMLTAG_L_ATOM_AUTHOR,"");
+
   
   writer.startElement("",D_XMLTAG_L_ATOM_UPDATED,"");
   writer.characters(Updated);
   writer.endElement("",D_XMLTAG_L_ATOM_UPDATED,"");
   
   // write category of entry
+  attrs.clear(); 
+  std::string entitytype_name;
+  GetOdataFullEntityName(RestRequest->m_CfgDataResource,entitytype_name);
+  attrs.addAttribute("","","term","",entitytype_name); // setValue("xml:base",BaseURI);
+  attrs.addAttribute("","","scheme","","http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"); // setValue("xml:base",BaseURI);
+  
+  writer.startElement("",D_XMLTAG_L_ATOM_CATEGORY,"",attrs);
+  writer.endElement("",D_XMLTAG_L_ATOM_CATEGORY,"");
   
   // Content
   attrs.clear(); 
@@ -1161,6 +1282,7 @@ void c_OData_Impl::WriteEntry_Atom(Poco::XML::XMLWriter& writer
   writer.startElement("",D_XMLTAG_L_ATOM_CONTENT,"",attrs);
   
   // properties in content
+  attrs.clear(); 
   writer.startElement("","",D_XMLTAG_Q_ODATA_METADATA_PROPERTIES,attrs);
   Ptr<MgPropertyDefinitionCollection> props = RestRequest->m_DataClassDef->GetProperties();
   int count = props->GetCount();

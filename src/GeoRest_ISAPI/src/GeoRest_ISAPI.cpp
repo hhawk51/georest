@@ -261,8 +261,11 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
   if (NULL != serverName && NULL != serverPort && NULL != httpuri_buff)
   {
     url.append(serverName);
-    url += ':';
-    url.append(serverPort);
+    if( strcmp(serverPort,"80") != 0 )
+    {
+      url += ':';
+      url.append(serverPort);
+    }    
     url.append(httpfulluri);
   }
   agent_uri = url;
@@ -303,6 +306,7 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
     uri_base = agent_uri;
     uri_rest = "";
   }
+  /*
   // create uribase with full server name
   std::string serveruri = MapAgentStrings::Http;
   serveruri = serveruri + serverName;
@@ -314,7 +318,8 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
     uri_base =  serveruri + uri_base;
   else
     uri_base =  serveruri + "/"  + uri_base;
-
+  */
+  
 //------------------------------------------------------
 // Create Rest Request
 // wUrl is for existing HttpRequest to keep exisitn functionality

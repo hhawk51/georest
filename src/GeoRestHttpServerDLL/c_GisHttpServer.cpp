@@ -252,7 +252,10 @@ public:
     {
       restrequest->SetHeaderValue("DataServiceVersion",request.get("DataServiceVersion").c_str());
     }
-    catch(...){}
+    catch(...)
+    {
+      
+    }
     try
     {
       restrequest->SetHeaderValue("MaxDataServiceVersion",request.get("MaxDataServiceVersion").c_str());
@@ -279,6 +282,7 @@ public:
     //headers.operator []
     sprintf(temphead,"%d OK",http_data->GetStatus());
     response.set("Status",temphead);
+    response.set("DataServiceVersion","2.0;");
         
     Ptr<MgByteReader> bytereader = http_data->GetContentByteReader();
     
@@ -320,6 +324,7 @@ public:
 
     response.setChunkedTransferEncoding(true);
     response.setContentType("text/html");
+    
 
     std::ostream& ostr = response.send();
     ostr << "<html><head><title>GIS Web Services </title>";
