@@ -391,7 +391,7 @@ void c_FeatureReaderToXML::ToFeatureXML(c_RestDataReader* FeatureReader,std::str
 void c_FeatureReaderToXML::ToXml(c_RestDataReader* FeatureReader, std::string& XmlStr,int StartIndex,int MaxCount)
 {
   
-    if(MaxCount > 500 ) MaxCount=500;
+    //if(MaxCount > 500 ) MaxCount=500;
     
     Ptr<MgClassDefinition> classDef = FeatureReader->GetClassDefinition();
 

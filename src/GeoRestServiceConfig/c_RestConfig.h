@@ -21,6 +21,10 @@
 
 #include "c_CfgDataResource.h"
 #include "c_CfgDataSource.h"
+#include "c_CfgService.h"
+#include "c_CfgEsriGS_Catalog.h"
+#include "c_CfgEsriGS_FeatureServer.h"
+#include "c_CfgEsriGS_MapServer.h"
 #include "Poco\Logger.h"
 namespace Poco
 {
@@ -40,6 +44,7 @@ class c_ExceptionRestConfig
     c_ExceptionRestConfig(const char* Desc);
     std::wstring m_Desc;
 };
+
 
 class REST_CONFIG_API c_RestConfig
 {
@@ -62,6 +67,9 @@ public:
   
   Poco::Logger& GetLogger();
 
+
+  c_CfgService * FindService(const std::wstring& UriTag);
+
 protected:
   c_RestConfig(Poco::Logger* Log=NULL);
   ~c_RestConfig(void);
@@ -83,6 +91,14 @@ protected:
   void Read( Poco::XML::Document* PocoDoc, const char* TemplateFolder );
   void GetOData(Poco::XML::Element* XmlRepresentation,c_CfgRepOdata* Rep);
   void GetOData_ElemOverride(Poco::XML::Element* XmlElemOverride,c_AtomElementOverride* ElemOverride);
+  c_CfgService* ParseService( Poco::XML::Element* XmlResource);
+  void ParseEsriRest( Poco::XML::Element* XmlResource);
+  c_CfgEsriGS_Folder* ParseEsriFolder(c_CfgEsriGS_Catalog* esri_catalog,Poco::XML::Element* XmlResource);
+  c_CfgEsriGS_FeatureServer* ParseEsriServer_FeatureServer( Poco::XML::Element* XmlResource );
+  c_CfgEsriGS_FServer_Layer* ParseEsriServer_FServer_Layer( Poco::XML::Element* node_rep );
+  void ParseEsriServers(Poco::XML::Element* XmlResource,c_CfgEsriGS_Folder* ParentFolder);
+  c_CfgEsriGS_MapServer* ParseEsriServer_MapServer( Poco::XML::Element* XmlResource );
+  c_CfgEsriGS_MS_Layer* ParseEsriServer_MS_Layer( Poco::XML::Element* XmlResource );
   Poco::Logger* m_Logger;
   std::string m_LogFileName; // if logger is not set in constructor than in constructor name for log file is created and logger itself
   
@@ -90,6 +106,8 @@ protected:
   std::string m_RestUriSeparator;
   
   c_CfgDataResourceVector m_DataResourceVector;
+  
+  c_CfgServiceVector m_ServiceVector;
 };
 
 #endif

@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2004-2008 by SL-King d.o.o.
+//  Copyright (C) 2006-2010 by SL-King d.o.o.
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -35,6 +35,7 @@
 #include "Poco/DOM/Text.h"
 #include "Poco/DOM/Node.h"
 #include "Poco/DOM/DomWriter.h"
+#include "RestRequestHandler.h"
 
 
 
@@ -145,26 +146,22 @@ void c_CfgTest::TestReadCfg()
 {
 try
 { 
-  std::string s1;
-  Poco::UnicodeConverter::toUTF8(g_AppFileName,s1);
-  Poco::Path cfgpath(s1);  
-  cfgpath.setFileName("restcfg.xml");
-  std::string fname_cfg = cfgpath.toString();
-  
-  
-  //WriteTestCfgXml(fname_cfg.c_str());
-  
-  //c_RestConfig restcfg;
-  //restcfg.ReadFromXML(fname_cfg.c_str()); 
-  //restcfg.ReadFromXML();
+  c_RestConfig::DeleteInstance();
   c_RestConfig * cfg_rest = c_RestConfig ::GetInstance();
   
-  std::wstring parcel = L"parcel";
-  if( !cfg_rest->FindUriTag(parcel) )
+  
+  const c_CfgDataResource* res = cfg_rest->FindUriTag(L"building");
+    if( !res ) CPPUNIT_FAIL("No building resource!");
+    
+  const c_CfgRepresentation* rep = res->FindRepresentation(L".XML");
+  if( !rep ) CPPUNIT_FAIL("No XML representation!");
+  
+  e_REST_AccessCodes isaccess = rep->IsAccess(L"PUT",NULL,NULL);
+  if( isaccess != e_AccessOK )
   {
-    c_RestConfig::DeleteInstance();
-    CPPUNIT_FAIL("Unable to find resource 'parcel' in config!");
+    CPPUNIT_FAIL("PUT is not allowed!");
   }
+  
   c_RestConfig::DeleteInstance();
 }
 catch (c_ExceptionRestConfig& e)

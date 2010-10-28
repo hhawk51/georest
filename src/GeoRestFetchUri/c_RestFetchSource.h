@@ -94,7 +94,7 @@ protected:
   MgService* CreateMapguideService(const std::wstring& UserName,const std::wstring& Password,INT16 serviceType);
   MgFeatureReader* FetchMgFeatureSource(const c_CfgDataSource_MgFeatureSource* DataSource);
   //void CreateFilterString(MgClassDefinition* ClassDef,MgRestUriPathParam*PathParam,MgHttpRequestParam* RequestParam,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr);
-  static void CreateFilterString(MgClassDefinition* ClassDef,c_RestUriPathParam*PathParam,c_RestUriRequestParam* RequestParam ,const wstring& UriPathFilter ,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr);
+  static void CreateFilterString(MgClassDefinition* ClassDef,c_RestUriPathSegment*PathParam,c_RestUriRequestParam* RequestParam ,const wstring& UriPathFilter ,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr);
   static bool ParseFilterQueryParam(const wstring& Param,int& Level,e_BoolOper& BoolOper,e_CompOper& CompOper,wstring& PropertyName);
   
  

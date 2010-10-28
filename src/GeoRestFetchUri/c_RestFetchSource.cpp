@@ -278,7 +278,7 @@ bool c_RestFetchSource::ParseFilterQueryParam(const wstring& Param,int& Level,e_
 }
 
 
-void c_RestFetchSource::CreateFilterString(MgClassDefinition* ClassDef,c_RestUriPathParam*PathParam,c_RestUriRequestParam* RequestParam
+void c_RestFetchSource::CreateFilterString(MgClassDefinition* ClassDef,c_RestUriPathSegment*PathParam,c_RestUriRequestParam* RequestParam
                                           ,const wstring& UriPathFilter
                                           ,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr)
 {

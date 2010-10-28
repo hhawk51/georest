@@ -52,7 +52,7 @@
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -126,7 +126,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(FDO_PATH)\Utilities\ExpressionEngine\Inc&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;..\GeoRestCommon;..\GeoRestServiceConfig"
-				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
+				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTFETCHURI_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

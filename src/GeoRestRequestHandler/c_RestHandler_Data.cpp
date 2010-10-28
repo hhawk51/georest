@@ -57,19 +57,19 @@ c_RestHandler_Data::c_RestHandler_Data(c_RestRequest *Request)
     InitializeCommonParameters(Request);
     
         
-    Ptr<c_RestUriPathParam> path_params = Request->GetUriPathParameters();
+    Ptr<c_RestUriPathSegment> path_params = Request->GetUriPathParameters();
     
     
     //m_FormatType = L"";
     STRING  datatagname;
     
     
-    if( path_params->NextParameter() )
+    if( path_params->NextSegment() )
     {
-      datatagname = path_params->GetCurrentParameterName();
-      if( path_params->NextParameter() )
+      datatagname = path_params->GetCurrentSegmentName();
+      if( path_params->NextSegment() )
       {
-        m_UriParam_DataFilter = path_params->GetCurrentParameterName();            
+        m_UriParam_DataFilter = path_params->GetCurrentSegmentName();            
       }
     }
     
@@ -166,7 +166,7 @@ MG_TRY()
 // 
 
   // Current Index should be on Map path parameter
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
   
   switch( m_RestRequest->GetHttpMethod() )
   {
@@ -427,7 +427,7 @@ bool c_RestHandler_Data::CreateFilter_BBOX(CREFSTRING BBoxParamValue,MgClassDefi
 
 void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatureQueryOptions*qryOptions,REFSTRING FilterStr)
 {
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
   
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest->GetRequestParam();
   if( query_params ->ContainsParameter(L"filter") )
@@ -852,7 +852,7 @@ void c_RestHandler_Data::Execute_Get_Feature_FDO(c_RestResponse& HttpResponse)
   Ptr<MgFeatureQueryOptions> qryOptions = new MgFeatureQueryOptions();
   
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest-> GetRequestParam();
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
   
   MG_TRY()
   
@@ -1057,7 +1057,7 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
   }
 
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest-> GetRequestParam();
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
 
   MG_TRY()
 
@@ -1389,7 +1389,7 @@ void MgRestData::Execute_Get_Image_Png(MgHttpResponse& HttpResponse,MgEnvelope* 
 void c_RestHandler_Data::Execute_Get_Image_Png(c_RestResponse& HttpResponse,MgEnvelope* ZoomTo,MgFeatureQueryOptions *QueryOptions)
 {
   
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest-> GetRequestParam();
   
   
@@ -1646,7 +1646,7 @@ void c_RestHandler_Data::Execute_Put_Class_Feature(c_RestResponse& HttpResponse)
       Ptr<c_RestResult> hResult = HttpResponse.GetResult();
       
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest-> GetRequestParam();
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
 
   c_CfgDataSource_MgFeatureSource *mg_fsource;
   if( m_RestRequest->m_CfgDataResource->m_DataSource->GetSourceType() !=  c_CfgDataSource::e_MgFeatureSource )
@@ -1720,7 +1720,7 @@ void c_RestHandler_Data::Execute_Put_Class_Feature(c_RestResponse& HttpResponse)
   
   Ptr<MgFeatureCommandCollection> commands = new MgFeatureCommandCollection();
   commands->Add(upd_cmd);
-  service->UpdateFeatures(&resId, commands,false);
+  Ptr<MgPropertyCollection> up_ret = service->UpdateFeatures(&resId, commands,false);
   
   //Ptr<MgFeatureReader> featureReader = service->SelectFeatures(&resId, m_RestRequest->m_DataClassName, qryOptions);
   //hResult->SetResultObject(featureReader, MgMimeType::Xml);
@@ -1739,7 +1739,7 @@ void c_RestHandler_Data::Execute_Post_Class_Feature(c_RestResponse& HttpResponse
       Ptr<c_RestResult> hResult = HttpResponse.GetResult();
       
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest-> GetRequestParam();
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
 
   c_CfgDataSource_MgFeatureSource *mg_fsource;
   if( m_RestRequest->m_CfgDataResource->m_DataSource->GetSourceType() !=  c_CfgDataSource::e_MgFeatureSource )
@@ -1813,15 +1813,55 @@ void c_RestHandler_Data::Execute_Post_Class_Feature(c_RestResponse& HttpResponse
   
   Ptr<MgFeatureCommandCollection> commands = new MgFeatureCommandCollection();
   commands->Add(ins_cmd);
-  service->UpdateFeatures(&resId, commands,false);
+  Ptr<MgPropertyCollection> ret_prop = service->UpdateFeatures(&resId, commands,false);
   
   //Ptr<MgFeatureReader> featureReader = service->SelectFeatures(&resId, m_RestRequest->m_DataClassName, qryOptions);
   //hResult->SetResultObject(featureReader, MgMimeType::Xml);
   
-  STRING str = L"Insert Done";
-  Ptr<c_RestPrimitiveValue> value = new c_RestPrimitiveValue(str);
-  hResult->SetResultObject(value, MgMimeType::Text);
+  if( ret_prop->GetCount() == 1 )
+  {
+    int index=0;
+    Ptr<MgProperty> mgprop = ret_prop->GetItem(index);
+    if( mgprop->GetPropertyType()==MgPropertyType::Feature)
+    {
+      MgFeatureProperty* ptrProp = (MgFeatureProperty*)mgprop.p;
+      Ptr<MgFeatureReader> freader = ptrProp->GetValue();
+      if( freader.p )
+      {      
+        
+        MgProxyFeatureReader* proxy_reader = dynamic_cast<MgProxyFeatureReader*>(freader.p);
+        proxy_reader->ToXml();
+        
+        //m_RestRequest->m_DataClassDef
+        Ptr<MgClassDefinition> newclassdeff = new MgClassDefinition();
+        newclassdeff->SetName(m_RestRequest->m_DataClassDef->GetName());
+        newclassdeff->SetDefaultGeometryPropertyName(newclassdeff->GetDefaultGeometryPropertyName());
+        Ptr<MgPropertyDefinitionCollection> keyprops = m_RestRequest->m_DataClassDef->GetIdentityProperties();
+        Ptr<MgPropertyDefinitionCollection> newprops = newclassdeff->GetProperties();
+        Ptr<MgPropertyDefinitionCollection> newkeyprops = newclassdeff->GetIdentityProperties();
+        
+        for(int ind=0;ind<keyprops->GetCount();ind++)
+        {
+          Ptr<MgPropertyDefinition> prop = keyprops->GetItem(ind);
+          newprops->Add(prop);
+          newkeyprops->Add(prop);
+        }
 
+        Ptr<c_RestDataReader> restreader = new c_RestDataReader_MgFeatureReader(proxy_reader,newclassdeff);
+        
+        hResult->SetResultObject(restreader, m_RestRequest->m_CfgRepresentation->m_MimeType);
+      }
+    }
+    else
+    {
+      throw new MgRuntimeException(L"Execute_POST_Class_Feature",__LINE__, __WFILE__, NULL, L"Error: 'MgPropertyType::Feature' is not returned after insert.", NULL);
+    }
+    
+  }
+  else
+  {  
+    throw new MgRuntimeException(L"Execute_POST_Class_Feature",__LINE__, __WFILE__, NULL, L"Error: 'MgPropertyType::Feature' is not returned after insert.", NULL);
+  }
   MG_CATCH_AND_THROW(L"Execute_Post_Class_Feature")  
 
 }//end of c_RestHandler_Data::Execute_Post_Class_Feature
@@ -1836,7 +1876,7 @@ void c_RestHandler_Data::Execute_Delete_Class_Feature(c_RestResponse& HttpRespon
       Ptr<c_RestResult> hResult = HttpResponse.GetResult();
       
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest-> GetRequestParam();
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest-> GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
 
   c_CfgDataSource_MgFeatureSource *mg_fsource;
   if( m_RestRequest->m_CfgDataResource->m_DataSource->GetSourceType() !=  c_CfgDataSource::e_MgFeatureSource )
@@ -1887,7 +1927,7 @@ void c_RestHandler_Data::Execute_Delete_Class_Feature(c_RestResponse& HttpRespon
   
   Ptr<MgFeatureCommandCollection> commands = new MgFeatureCommandCollection();
   commands->Add(upd_cmd);
-  service->UpdateFeatures(&resId, commands,false);
+  Ptr<MgPropertyCollection> up_ret = service->UpdateFeatures(&resId, commands,false);
   
   //Ptr<MgFeatureReader> featureReader = service->SelectFeatures(&resId, m_RestRequest->m_DataClassName, qryOptions);
   //hResult->SetResultObject(featureReader, MgMimeType::Xml);

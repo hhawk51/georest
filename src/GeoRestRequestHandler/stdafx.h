@@ -37,7 +37,9 @@
 #include "Fdo.h"
 
 #include "RestCommonInclude.h"
+#include "RestCommonInclude.h"
 #include "RestFetchUriInclude.h"
+#include "RestConfigInclude.h"
 
 
 #include "RestStatusCodes.h"

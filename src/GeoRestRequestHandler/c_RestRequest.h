@@ -77,7 +77,7 @@ public:
         /// </summary>
         virtual ~c_RestRequest();
         
-        c_RestUriPathParam* GetUriPathParameters();
+        c_RestUriPathSegment* GetUriPathParameters();
         
         const std::string& GetHttpMethodString() { return m_RestUri.GetHttpMethodString(); }
         void SetHttpMethod(const std::string& HttpMethod) { m_RestUri.SetHttpMethod(HttpMethod); }

@@ -55,7 +55,7 @@
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -131,7 +131,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;$(FDO_PATH)\Fdo\Unmanaged\Inc;&quot;D:\Development\ctemplate\ctemplate-0.95\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;D:\Development\libKML\libkml-1.0.1\src&quot;;&quot;D:\Development\libKML\libkml-1.0.1\third_party\boost_1_34_1&quot;;&quot;D:\Development\libKML\libkml-1.0.1\third_party\uriparser-0.7.1\include&quot;;D:\Development\zlib123;D:\Development\zlib123\contrib"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -240,7 +240,7 @@
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers\lib;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;..\..\lib\release;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;D:\Development\libKML\libkml-1.0.1\msvc\Release&quot;;D:\Development\zlib123\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers\lib;&quot;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\dbxml-2.3.10\lib&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\jsoncpp\lib;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;D:\Development\ctemplate\ctemplate-0.95\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;D:\Development\libKML\libkml-1.0.1\msvc\Release&quot;;D:\Development\zlib123\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"

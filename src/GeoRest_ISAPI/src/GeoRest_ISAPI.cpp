@@ -332,7 +332,7 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
   request = new c_RestRequest(agent_uri,uri_base,uri_rest,httpmethod,xmlpostdata); 
   
   Ptr<c_RestUriRequestParam> query_params = request->GetRequestParam();
-  Ptr<c_RestUriPathParam> path_params = request->GetUriPathParameters();
+  Ptr<c_RestUriPathSegment> path_params = request->GetUriPathParameters();
 
 //------------------------------------------------------
 // Parse input GET/POST Query Parameters

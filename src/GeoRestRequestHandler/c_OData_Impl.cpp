@@ -354,7 +354,7 @@ void c_OData_Impl::CreateServiceMetadata( c_RestConfig* CfgRest,std::ostream& Ou
   writer.endDocument();
 }
 
-void XmlWriteEntityType(Poco::XML::XMLWriter* Writer,const c_CfgDataResource* Resource)
+static void XmlWriteEntityType(Poco::XML::XMLWriter* Writer,const c_CfgDataResource* Resource)
 {
   MgClassDefinition * classdef=NULL;
   try
@@ -1438,7 +1438,7 @@ void c_OData_Impl::WriteEntry_Json( std::ostream & OutStream, const c_RestReques
 
 
 
-void FindPartEnd(const wchar_t* startcp,const wchar_t*& endcp,bool& IsDoubleQuote)
+static void FindPartEnd(const wchar_t* startcp,const wchar_t*& endcp,bool& IsDoubleQuote)
 {
   IsDoubleQuote = false;
   bool instring=false;
@@ -1478,7 +1478,7 @@ void FindPartEnd(const wchar_t* startcp,const wchar_t*& endcp,bool& IsDoubleQuot
   }
 
 }
-bool GetNextKeyValuePair(const wchar_t*& cp,std::wstring& key,std::wstring& val)
+static bool GetNextKeyValuePair(const wchar_t*& cp,std::wstring& key,std::wstring& val)
 {
   if( !cp || !*cp ) return false;
   

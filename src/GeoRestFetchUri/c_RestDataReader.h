@@ -398,7 +398,7 @@ protected:
 class REST_FETCHURI_API c_RestDataReader_MgFeatureReader : public c_RestDataReader
 {
 public:
-  c_RestDataReader_MgFeatureReader(MgProxyFeatureReader* MgReader);
+  c_RestDataReader_MgFeatureReader(MgProxyFeatureReader* MgReader,MgClassDefinition* ClassDef=NULL);
   
 public:
   virtual bool ReadNext();  
@@ -440,6 +440,7 @@ public:
   
 protected:
   Ptr<MgProxyFeatureReader> m_FeatureReader;
+  Ptr<MgClassDefinition> m_ClassDef;
 };
 
 class REST_FETCHURI_API c_RestDataReader_FdoFeatureReader : public c_RestDataReader

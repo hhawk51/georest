@@ -52,7 +52,7 @@
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="4"
+				DebugInformationFormat="3"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -125,7 +125,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;"
-				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
+				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTCOMMON_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

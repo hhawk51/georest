@@ -50,7 +50,7 @@
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
@@ -126,7 +126,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -226,7 +226,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -285,7 +285,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
+				PreprocessorDefinitions="_WIN64;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -669,6 +669,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\c_EsriGS.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\c_GmlTest.cpp"
 				>
 			</File>
@@ -689,12 +693,28 @@
 				>
 			</File>
 			<File
+				RelativePath=".\c_TestEsri_FServer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\c_TestEsri_MapServer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\c_TestOdata_TopSkip.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\stdafx.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\UnitTest.cpp"
@@ -708,6 +728,10 @@
 			>
 			<File
 				RelativePath=".\c_CfgTest.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_EsriGS.h"
 				>
 			</File>
 			<File
@@ -728,6 +752,14 @@
 			</File>
 			<File
 				RelativePath=".\c_SpeedTest.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_TestEsri_FServer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_TestEsri_MapServer.h"
 				>
 			</File>
 			<File

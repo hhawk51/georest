@@ -46,6 +46,10 @@
 #include "Poco/DOM/AutoPtr.h"
 #include <sstream>
 #include "Poco/String.h"
+#include "c_CfgEsriGS_Catalog.h"
+#include "Poco/NumberParser.h"
+#include "value.h"
+#include "reader.h"
 
 
 using Poco::XML::Text;
@@ -136,6 +140,7 @@ c_RestConfig::~c_RestConfig(void)
 void c_RestConfig::Clear()
 {
   m_DataResourceVector.Clear();
+  m_ServiceVector.Clear();
 }
 
 void c_RestConfig::CreateLogger( const char* FileName )
@@ -181,10 +186,13 @@ void c_RestConfig::Read( Poco::XML::Document* PocoDoc, const char* TemplateFolde
     {
       m_Logger->warning("c_RestConfig::ReadFromXML : More then one 'Data' element in configuration file! Only first one will be used.");
     }
-    Poco::XML::Element* node_data = (Poco::XML::Element*)nlist->item(0);
+    Poco::XML::Element* node_data=NULL;
+    
+     node_data = nlist->length() >= 1 ? (Poco::XML::Element*)nlist->item(0) : NULL;
 
 
     // Read Resources
+    if( node_data )
     {
       nlist = node_data->getElementsByTagName("Resource");
       for(int ind=0;ind<nlist->length();ind++)
@@ -198,13 +206,14 @@ void c_RestConfig::Read( Poco::XML::Document* PocoDoc, const char* TemplateFolde
           errmsg = "c_RestConfig::ReadFromXML : Duplicated UriTag '";
           errmsg.append(datalayer->GetUriTag());
           errmsg.append("'. Resource will not be added.");
-          m_Logger->warning();
+          m_Logger->warning(errmsg);
           delete datalayer;
         }
       }
     }
 
     // Read old version of config "Data"
+    if( node_data )
     {
       Poco::Path tempfolders(TemplateFolder);
       tempfolders.pushDirectory("HtmlTemplates");
@@ -220,6 +229,37 @@ void c_RestConfig::Read( Poco::XML::Document* PocoDoc, const char* TemplateFolde
           delete datalayer;
         }
       }
+    }
+    //
+    // Read Services
+    //
+    Poco::XML::Element* node_services = node_restconfig->getChildElement("Services");
+    if( node_services )
+    {
+      Poco::XML::Element* node_esrirest = node_services->getChildElement("EsriRest");
+      if( node_esrirest )
+      {
+        ParseEsriRest(node_esrirest);
+        
+      }
+      /*
+      nlist = node_restconfig->getElementsByTagName("Service");
+      for(int ind=0;ind<nlist->length();ind++)
+      {
+        Poco::XML::Element* node_service = (Poco::XML::Element*)nlist->item(ind);
+        c_CfgService* service = ParseService(node_service);
+        if( service && !m_ServiceVector.Add(service) )
+        {
+
+          std::string errmsg;errmsg.reserve(512);
+          errmsg = "c_RestConfig::ReadFromXML : Duplicated UriTag '";
+          errmsg.append(service->GetUriTag());
+          errmsg.append("'. Resource will not be added.");
+          m_Logger->warning();
+          delete service;
+        }
+      }
+      */
     }
   }
   catch (Poco::Exception& exc)
@@ -374,12 +414,25 @@ void GetElementTextValue(Poco::XML::Element* ParentNode,const char* ElemName,std
     Poco::UnicodeConverter::toUTF16(uritag,TextValue);
   }
 }
+void GetElementTextValue(Poco::XML::Element* ParentNode,const char* ElemName,std::string& TextValue)
+{
+  Poco::XML::Element* node_uritag = ParentNode->getChildElement(ElemName);  
+  if( node_uritag ) 
+  {
+    TextValue = node_uritag->innerText();
+    
+  }
+}
 
 void GetElementAttribute(Poco::XML::Element* Elem,const char* Attribute,std::wstring& TextValue)
 {
   //XMLString attr = ;
   
   Poco::UnicodeConverter::toUTF16(Elem->getAttribute(Attribute),TextValue);
+}
+void GetElementAttribute(Poco::XML::Element* Elem,const char* Attribute,std::string& TextValue)
+{
+  TextValue = Elem->getAttribute(Attribute);
 }
 
 void GetHtmlTemplateData_v1(Poco::XML::Element* node_html,c_CfgRepTemplate* RepTemplate)
@@ -871,9 +924,395 @@ c_CfgDataResource* c_RestConfig::ParseResource_v1( Poco::XML::Element* Layer ,co
   return resource;
 }//end of c_RestConfig::ParseResource_v1
 
+c_CfgEsriGS_Folder* c_RestConfig::ParseEsriFolder(c_CfgEsriGS_Catalog* esri_catalog,Poco::XML::Element* XmlResource)
+{
+  c_CfgEsriGS_Folder* folder = NULL;
+  
+  
+  std::wstring name;
+  GetElementAttribute(XmlResource,"name",name);
+  
+  std::wstring parent;
+  GetElementAttribute(XmlResource,"parent",parent);
+  
+  
+  c_CfgEsriGS_Folder* parentfolder = esri_catalog->FindFolder(parent);
+  
+  folder = new c_CfgEsriGS_Folder(name);
+  //folder = esri_catalog->AddFolder(name,parentfolder);
+  
+  // folder can contain subfolders
+  {
+    AutoPtr<Poco::XML::NodeList>  nlist = XmlResource->getElementsByTagName("Folder");
+    for(int ind=0;ind<nlist->length();ind++)
+    {
+      Poco::XML::Element* node_rep = (Poco::XML::Element*)nlist->item(ind);
+      if( node_rep->parentNode() == XmlResource )
+      {
+        c_CfgEsriGS_Folder* subfolder = ParseEsriFolder(esri_catalog,node_rep);
+        if( subfolder ) folder->AddSubFolder(subfolder);
+      }
+    }
+  }
+  
+  // Read Esri Servers
+  {
+    ParseEsriServers(XmlResource,folder);
+        
+  }
+  
+  return folder;
+}
+
+void c_RestConfig::ParseEsriServers(Poco::XML::Element* XmlResource,c_CfgEsriGS_Folder* ParentFolder)
+{
+
+// Parse Feature Servers
+{
+
+  AutoPtr<Poco::XML::NodeList>  nlist = XmlResource->getElementsByTagName("FeatureServer");
+  for(int ind=0;ind<nlist->length();ind++)
+  {
+    Poco::XML::Element* node_rep = (Poco::XML::Element*)nlist->item(ind);
+    if( node_rep->parentNode() == XmlResource )
+    {
+      c_CfgEsriGS_FeatureServer* fserver = ParseEsriServer_FeatureServer(node_rep);
+      if( fserver ) 
+      {
+        ParentFolder->AddServer(fserver);        
+      }
+    }
+  }
+}
+// Parse Map Servers
+{
+
+  AutoPtr<Poco::XML::NodeList>  nlist = XmlResource->getElementsByTagName("MapServer");
+  for(int ind=0;ind<nlist->length();ind++)
+  {
+    Poco::XML::Element* node_rep = (Poco::XML::Element*)nlist->item(ind);
+    if( node_rep->parentNode() == XmlResource )
+    {
+      c_CfgEsriGS_MapServer* fserver = ParseEsriServer_MapServer(node_rep);
+      if( fserver ) 
+      {
+        ParentFolder->AddServer(fserver);        
+      }
+    }
+  }
+}
+
+// Parse Map Servers
+
+
+}//end of c_RestConfig::ParseEsriServers
+
+
+c_CfgEsriGS_MapServer* c_RestConfig::ParseEsriServer_MapServer( Poco::XML::Element* XmlResource )
+{
+  c_CfgEsriGS_MapServer* mserver = NULL;
+
+  // read name
+  std::wstring name;
+  GetElementAttribute(XmlResource,"name",name);
+
+  mserver = new c_CfgEsriGS_MapServer(name);
+  
+  
+  
+  Poco::XML::Element* node_mg =  XmlResource->getChildElement("MapGuide");
+  
+  if( node_mg )
+  {
+   
+    GetElementTextValue(node_mg,"MapDefinition",mserver->m_MapGuideMapDef);
+    
+    // Read other MapGuide source attributes
+    std::wstring serverip,serverport;
+    GetElementTextValue(node_mg,D_XMLTAG_MG_SERVERIP,serverip);
+    if( serverip.length() != 0 ) mserver->m_MapGuideServerIP = serverip;
+    GetElementTextValue(node_mg,D_XMLTAG_MG_SERVERPORT,serverport);
+    if( serverport.length() != 0 ) 
+    {
+      wchar_t* errpt;
+      long sport;
+      sport = wcstol(serverport.c_str(),&errpt,10);
+      if( !*errpt ) mserver->m_MapGuideServerPort = sport;
+
+
+    }
+
+    std::wstring username,password;
+    if( ElementExists(node_mg,D_XMLTAG_MG_USERNAME) )
+    {
+      GetElementTextValue(node_mg,D_XMLTAG_MG_USERNAME,username);
+      mserver->m_MapGuideUsername = username;
+    }
+
+    if( ElementExists(node_mg,D_XMLTAG_MG_PASSWORD) )
+    {
+      GetElementTextValue(node_mg,D_XMLTAG_MG_PASSWORD,password);
+      mserver->m_MapGuidePassword = password;
+    }
+    
+    Poco::XML::Element* node_layers =  node_mg->getChildElement("Layers");
+    if( node_layers )
+    {
+      AutoPtr<Poco::XML::NodeList>  nlist = node_layers->getElementsByTagName("Layer");
+      for(int ind=0;ind<nlist->length();ind++)
+      {
+        Poco::XML::Element* node_rep = (Poco::XML::Element*)nlist->item(ind);
+        c_CfgEsriGS_MS_Layer* layer = ParseEsriServer_MS_Layer(node_rep);
+        if( layer ) 
+        {
+          if( !mserver->AddLayer(layer) )
+          {
+            delete layer;
+          }
+        }
+      }
+    }
+  }
+
+  // Read Layers
+  /*
+  {
+
+    AutoPtr<Poco::XML::NodeList>  nlist = XmlResource->getElementsByTagName("Layer");
+    for(int ind=0;ind<nlist->length();ind++)
+    {
+      Poco::XML::Element* node_rep = (Poco::XML::Element*)nlist->item(ind);
+      c_CfgEsriGS_FServer_Layer* layer = ParseEsriServer_FServer_Layer(node_rep);
+      if( layer ) 
+      {
+        if( !mserver->AddLayer(layer) )
+        {
+          delete layer;
+        }
+      }
+    }
+  }
+  */
+  return mserver;
+}//end of c_RestConfig::ParseEsriServer_MapServer
+
+c_CfgEsriGS_MS_Layer* c_RestConfig::ParseEsriServer_MS_Layer( Poco::XML::Element* XmlResource )
+{
+  c_CfgEsriGS_MS_Layer* newlayer=NULL;
+
+
+  // layer has name and id
+  std::wstring attr_name;
+  std::string attr_id;
+  int layerid=-1;
+
+  GetElementAttribute(XmlResource,"name",attr_name);
+  if( attr_name.length()==0 )
+  {
+    m_Logger->error("c_RestConfig::ParseEsriServer_MS_Layer : No attribute 'name' defined for Layer.");
+    return newlayer;
+  }
+
+  GetElementAttribute(XmlResource,"id",attr_id);
+  if( attr_id.length()==0 )
+  {
+    layerid = -1;
+  }
+  else
+  {
+    if( !Poco::NumberParser::tryParse(attr_id,layerid) )
+    {
+      m_Logger->error("c_RestConfig::ParseEsriServer_MS_Layer : Invalid value for Layer ID.");
+      return newlayer;
+    }
+  }
+
+  
+
+
+  newlayer = new c_CfgEsriGS_MS_Layer(layerid,attr_name,true);
+  
+  
+
+
+  return newlayer;  
+}//end of c_RestConfig::ParseEsriServer_MS_Layer
+
+c_CfgEsriGS_FeatureServer* c_RestConfig::ParseEsriServer_FeatureServer( Poco::XML::Element* XmlResource )
+{
+  c_CfgEsriGS_FeatureServer* fserver = NULL;
+  
+  // read name
+  std::wstring name;
+  GetElementAttribute(XmlResource,"name",name);
+  
+  fserver = new c_CfgEsriGS_FeatureServer(name);
+     
+  // Read Layers
+  {
+
+    AutoPtr<Poco::XML::NodeList>  nlist = XmlResource->getElementsByTagName("Layer");
+    for(int ind=0;ind<nlist->length();ind++)
+    {
+      Poco::XML::Element* node_rep = (Poco::XML::Element*)nlist->item(ind);
+      c_CfgEsriGS_FServer_Layer* layer = ParseEsriServer_FServer_Layer(node_rep);
+      if( layer ) 
+      {
+        if( !fserver->AddLayer(layer) )
+        {
+          delete layer;
+        }
+      }
+    }
+  }
+  
+  return fserver;
+}//end of c_RestConfig::ParseEsriServer_FeatureServer
 
 
 
+c_CfgEsriGS_FServer_Layer* c_RestConfig::ParseEsriServer_FServer_Layer( Poco::XML::Element* XmlResource )
+{
+  c_CfgEsriGS_FServer_Layer* newlayer=NULL;
+  
+  
+  // layer has name and id
+  std::wstring attr_name;
+  std::string attr_id;
+  int layerid=-1;
+  
+  GetElementAttribute(XmlResource,"name",attr_name);
+  if( attr_name.length()==0 )
+  {
+    m_Logger->error("c_RestConfig::ParseEsriServer_FServer_Layer : No attribute 'name' defined for Layer.");
+    return newlayer;
+  }
+  
+  GetElementAttribute(XmlResource,"id",attr_id);
+  if( attr_id.length()==0 )
+  {
+    layerid = -1;
+  }
+  else
+  {
+    if( !Poco::NumberParser::tryParse(attr_id,layerid) )
+    {
+      m_Logger->error("c_RestConfig::ParseEsriServer_FServer_Layer : Invalid value for Layer ID.");
+      return newlayer;
+    }
+  }
+  
+  // Read Data
+  std::wstring uripart;
+  {
+  
+  AutoPtr<Poco::XML::NodeList> nlist = XmlResource->getElementsByTagName("Data");
+  if( nlist->length() == 0 )
+  {
+    m_Logger->warning("c_RestConfig::ParseEsriServer_FeatureServer : Missing 'Data' element in Feature Server definition!");
+    return newlayer;
+  }
+  if( nlist->length() > 1 )
+  {
+    m_Logger->warning("c_RestConfig::ParseEsriServer_FeatureServer : More then one 'Data' element in configuration file! Only first one will be used.");
+  }
+  Poco::XML::Element* node_data = (Poco::XML::Element*)nlist->item(0);
+
+  
+  GetElementAttribute(node_data,"uripart",uripart);
+  if( uripart.length()==0 )
+  {
+    m_Logger->error("c_RestConfig::ParseEsriServer_FeatureServer : No attribute 'uripart' defined for Feature Server.");
+    return newlayer;
+  }
+  }
+  
+  
+  newlayer = new c_CfgEsriGS_FServer_Layer(attr_name);
+  newlayer->m_Id = layerid;
+  newlayer->m_DataUripart = uripart;
+  
+  // Read Json
+  {
+    std::string json;
+    GetElementTextValue(XmlResource,"Json",json);
+    if( json.length() > 0 )
+    {
+      newlayer->m_Json = json;
+      Json::Value root_val;
+      Json::Reader reader;
+      if( !reader.parse(json,root_val,false)  )
+      {
+        std::string errmsg = reader.getFormatedErrorMessages();
+        throw c_ExceptionRestConfig(errmsg.c_str());
+      }
+    }
+  }
+  
+
+  return newlayer;  
+}//end of c_RestConfig::ParseEsriServer_FServer_Layer
+
+/*
+const c_CfgDataResource* c_RestConfig::FindClassName( const std::wstring& ClassName )
+{
+return m_DataResourceVector.FindClassName(ClassName);
+}
+*/
+void c_RestConfig::ParseEsriRest( Poco::XML::Element* XmlResource)
+{
+  c_CfgEsriGS_Catalog* esri_catalog = NULL;
+  
+  // get uripart
+  std::wstring uripart;
+  GetElementAttribute(XmlResource,"uripart",uripart);
+  if( uripart.length()==0 )
+  {
+    m_Logger->error("c_RestConfig::ParseEsriRest : No attribute 'uripart' defined for Service.");
+    return;
+  }
+  
+  c_CfgService* service = m_ServiceVector.FindUriTag(uripart);
+  
+  if( !service )
+  {
+    esri_catalog = new c_CfgEsriGS_Catalog(uripart.c_str());
+    m_ServiceVector.Add(esri_catalog);
+  }
+  else
+  {
+  
+    if( service->m_Type == c_CfgService::e_EsriGS_Catalog )
+      esri_catalog = (c_CfgEsriGS_Catalog*)service;  
+    else
+    {
+      m_Logger->error("c_RestConfig::ParseEsriRest : Service with 'uripart' allready exist and it is not of same type.");
+      return;
+    }
+  }
+  
+  
+  // Read Folders
+  {
+
+    AutoPtr<Poco::XML::NodeList>  nlist = XmlResource->getElementsByTagName("Folder");
+    for(int ind=0;ind<nlist->length();ind++)
+    {
+      Poco::XML::Element* node_rep = (Poco::XML::Element*)nlist->item(ind);
+      if( node_rep->parentNode() == XmlResource )
+      {
+        c_CfgEsriGS_Folder* cfgfolder = ParseEsriFolder(esri_catalog,node_rep);
+        if( cfgfolder ) esri_catalog->AddFolder(cfgfolder);
+      }
+    }
+  }
+  // Read Esri Servers
+  {
+    ParseEsriServers(XmlResource,esri_catalog->GetRootFolder());
+    
+  }
+  return ;
+}
 c_CfgDataSource* c_RestConfig::ParseSource( Poco::XML::Element* XmlSource)
 {
   c_CfgDataSource* source=NULL;
@@ -1082,11 +1521,7 @@ const c_CfgDataResource* c_RestConfig::GetResource( int Index )
   return m_DataResourceVector.GetResource(Index);
 }
 
-
-
-/*
-const c_CfgDataResource* c_RestConfig::FindClassName( const std::wstring& ClassName )
+c_CfgService * c_RestConfig::FindService( const std::wstring& UriTag )
 {
-  return m_DataResourceVector.FindClassName(ClassName);
+  return m_ServiceVector.FindUriTag(UriTag);
 }
-*/

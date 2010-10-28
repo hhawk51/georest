@@ -43,7 +43,7 @@ using namespace std;
 c_RestUri::c_RestUri(const std::string& FullUri,const std::string& BaseUri,const std::string& RestUri,const std::string& HttpMethod,const std::string& XmlPostData)
   
 {
-  m_UriPathParameters = new c_RestUriPathParam();
+  m_UriPathParameters = new c_RestUriPathSegment();
   m_RestRequestParam = new c_RestUriRequestParam();
   
   m_OriginalFullUri = FullUri;
@@ -82,7 +82,7 @@ c_RestUri::c_RestUri(const std::string& FullUri,const std::string& BaseUri,const
 /// </summary>
 c_RestUri::c_RestUri()
 {
-  m_UriPathParameters = new c_RestUriPathParam();
+  m_UriPathParameters = new c_RestUriPathSegment();
   m_RestRequestParam = new c_RestUriRequestParam();
 }
 
@@ -107,9 +107,9 @@ void c_RestUri::GetFullUri( std::string& Uri,MgStringCollection* RemoveParams,Mg
 }
 
 
-c_RestUriPathParam* c_RestUri::GetUriPathParameters()
+c_RestUriPathSegment* c_RestUri::GetUriPathParameters()
 {
-  return SAFE_ADDREF((c_RestUriPathParam*)m_UriPathParameters);
+  return SAFE_ADDREF((c_RestUriPathSegment*)m_UriPathParameters);
 }
 
 
@@ -242,7 +242,7 @@ inline char AsHex(char ch)
   return 0;
 }
 
-void c_RestUri::ParsePath(const std::string& Uri, c_RestUriPathParam* Params)
+void c_RestUri::ParsePath(const std::string& Uri, c_RestUriPathSegment* Params)
 {
   //std::vector < std::string > segments;
   MG_TRY()

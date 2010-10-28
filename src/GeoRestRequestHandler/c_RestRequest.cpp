@@ -23,11 +23,12 @@
 #include "c_RestHandler.h"
 #include "c_RestHandler_Data.h"
 #include "c_RestHandler_OData.h"
-
+#include "c_RestHandler_EsriGS.h"
 //#include "RestDefs.h"
 
 #include <algorithm>
 #include "Poco\UnicodeConverter.h"
+
 
 using namespace std;
 
@@ -66,7 +67,7 @@ c_RestRequest::c_RestRequest()
 
 
 
-c_RestUriPathParam* c_RestRequest::GetUriPathParameters()
+c_RestUriPathSegment* c_RestRequest::GetUriPathParameters()
 {
   //return SAFE_ADDREF((c_RestUriPathParam*)m_UriPathParameters);
   
@@ -168,30 +169,30 @@ c_RestResponse* c_RestRequest::Execute()
     }
     
     bool isrest = false;
-    Ptr<c_RestUriPathParam> path_params = GetUriPathParameters();
+    Ptr<c_RestUriPathSegment> path_params = GetUriPathParameters();
     //MgStringPropertyCollection* paramlist = uri_params->GetParameters();
-    int count = path_params->GetParametersCount();
+    int count = path_params->GetSegmentsCount();
     
-    path_params->ResetParameterCurrentIndex();
+    path_params->ResetSegmentCurrentIndex();
     
     
-    while( path_params->NextParameter() )
+    while( path_params->NextSegment() )
     {
-      if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_REST)==0 )
+      if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_REST)==0 )
       {
         break;
       }      
     }
     
     //int ind_param = ind_reststart;
-    if( !path_params->IsEndOfParameters() )
+    if( !path_params->IsEndOfSegments() )
     {
       
       {
         isrest = true;
-        if( path_params->NextParameter() )
+        if( path_params->NextSegment() )
         {
-          if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_DATA)==0 )
+          if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_DATA)==0 )
           {       
             m_ServiceURI = m_RestUri.GetBaseUri();
             m_ServiceURI.append("/");
@@ -205,7 +206,7 @@ c_RestResponse* c_RestRequest::Execute()
             if(exechandler != NULL)
               exechandler->Execute(*response);
           }
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_ODATA)==0 )
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_ODATA)==0 )
           {       
             m_ServiceURI = m_RestUri.GetBaseUri();
             m_ServiceURI.append("/");
@@ -219,7 +220,21 @@ c_RestResponse* c_RestRequest::Execute()
             if(exechandler != NULL)
               exechandler->Execute(*response);
           }
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_HELLO)==0 )
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_ESRIGS)==0 )
+          {       
+            m_ServiceURI = m_RestUri.GetBaseUri();
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_REST_UTF8);
+            m_ServiceURI.append("/");
+            m_ServiceURI.append(D_REST_URI_SEGMENT_ESRIGS_UTF8);
+            m_ServiceURI.append("/");
+
+            Ptr<c_RestHandler> exechandler = c_RestHandler_EsriGS::CreateObject(this);               
+            // Execute request
+            if(exechandler != NULL)
+              exechandler->Execute(*response);
+          }
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_HELLO)==0 )
           {
             m_ServiceURI = m_RestUri.GetBaseUri();
             m_ServiceURI.append("/");
@@ -230,11 +245,11 @@ c_RestResponse* c_RestRequest::Execute()
             
             REST_Request_Hello(this,*response);
           }
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_SESSSION)==0 )
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_SESSSION)==0 )
           {              
-            if( path_params->NextParameter() )
+            if( path_params->NextSegment() )
             {
-              if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_MAP)==0 )
+              if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_MAP)==0 )
               {
                 // Get handler to requested function
                 //Ptr<c_RestHandler> exechandler = MgRestSessionMap::CreateObject(this);
@@ -249,7 +264,7 @@ c_RestResponse* c_RestRequest::Execute()
               //REST_Request_CreateSession(this,*response);
             }
           }
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_TASK)==0 )
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_TASK)==0 )
           {
             // Get handler to requested function
             //Ptr<c_RestHandler> exechandler = MgRestTask::CreateObject(this);
@@ -258,15 +273,15 @@ c_RestResponse* c_RestRequest::Execute()
             //if(exechandler != NULL)
             //  exechandler->Execute(*response);
           } 
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_FDO)==0 )
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_FDO)==0 )
           {
-            if( path_params->NextParameter() )
+            if( path_params->NextSegment() )
             {
-              if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_FDO_DATASOURCE)==0 )
+              if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_FDO_DATASOURCE)==0 )
               {
-                if( path_params->NextParameter() )
+                if( path_params->NextSegment() )
                 {
-                  if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_FDO_DATASOURCE_CLASS)==0 )
+                  if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_FDO_DATASOURCE_CLASS)==0 )
                   {
                     // Get handler to requested function
                     //Ptr<c_RestHandler> exechandler = MgRestFDO_DataSource_Class::CreateObject(this);
@@ -280,7 +295,7 @@ c_RestResponse* c_RestRequest::Execute()
             }
             
           } 
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_LAYERDEFINITION)==0 )
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_LAYERDEFINITION)==0 )
           {
             // Get handler to requested function
             //Ptr<c_RestHandler> exechandler = MgRestLayerDefinition::CreateObject(this);
@@ -289,7 +304,7 @@ c_RestResponse* c_RestRequest::Execute()
             //if(exechandler != NULL)
             //  exechandler->Execute(*response);
           }
-          else if( wcsicmp(path_params->GetCurrentParameterName().c_str(),D_REST_URI_SEGMENT_WEBLAYOUT)==0 )
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_WEBLAYOUT)==0 )
           {
             
             // Get handler to requested function

@@ -41,6 +41,7 @@
 #include "c_RestRequest.h"
 #include "c_RestConfig.h"
 
+
 using Poco::Net::ServerSocket;
 using Poco::Net::HTTPRequestHandler;
 using Poco::Net::HTTPRequestHandlerFactory;
@@ -65,6 +66,9 @@ using Poco::Util::HelpFormatter;
 #include <sstream>
 #include <string>
 using namespace std;
+
+
+#define D_SHOWINFO_CMD
 
 extern Poco::Path g_AppFolder;
 extern Poco::Path g_WWWFolder;
@@ -102,7 +106,7 @@ public:
     else
     if( file_ext == "xml" )
     {
-      content_type = "text/xml";
+      content_type = "application/xml";
     }
     else
     if( file_ext == "css" )
@@ -193,8 +197,8 @@ public:
     std::string agenturi = "http://" + host + request.getURI();
     g_UriCount++;
     
-    #ifdef _DEBUG
-      std::cout << "\nURI(" << g_UriCount << "): " << agenturi;
+    #ifdef D_SHOWINFO_CMD      
+      std::cout << "\n" << request.getMethod() << "(" << g_UriCount << "): " << agenturi;
     #endif
     
     const std::string& httpmethod = request.getMethod();
@@ -239,6 +243,9 @@ public:
         post_data += (char) ch;
         ch = istr.get();
       }
+      #ifdef D_SHOWINFO_CMD      
+        std::cout << "\nPost Data..." << post_data << "..." ;
+      #endif
     }
     Ptr<c_RestRequest> restrequest = new c_RestRequest(agenturi,uri_base,uri_rest,httpmethod,post_data);
     
@@ -282,7 +289,7 @@ public:
     //headers.operator []
     sprintf(temphead,"%d OK",http_data->GetStatus());
     response.set("Status",temphead);
-    response.set("DataServiceVersion","2.0;");
+    
         
     Ptr<MgByteReader> bytereader = http_data->GetContentByteReader();
     
@@ -309,6 +316,10 @@ public:
       
       outstr << http_data->GetContentString();
     }
+    
+    #ifdef D_SHOWINFO_CMD      
+      std::cout << "\n" << http_data->GetStatus() << "(" << g_UriCount << ") ";
+    #endif
     return ;
     
     //response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_NOT_IMPLEMENTED);

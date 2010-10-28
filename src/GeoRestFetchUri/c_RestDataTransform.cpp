@@ -139,11 +139,16 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
     XERCES_CPP_NAMESPACE::DOMElement* el_name  = XmlUtil.GetElementNode(el_prop,"Name",false);
     XERCES_CPP_NAMESPACE::DOMElement* el_val  = XmlUtil.GetElementNode(el_prop,"Value",false);
     
-    if( !el_name || !el_val ) return propcoll;
+    if( el_name ) 
+    {
     
     
     XmlUtil.GetTextFromElement(el_name,str_name);
-    XmlUtil.GetTextFromElement(el_val,str_val);
+    
+    if( el_val )
+      XmlUtil.GetTextFromElement(el_val,str_val);
+    else
+      str_val = L"";
     
     
     Ptr<MgPropertyDefinition> propdef = coll_propdef->GetItem(str_name);
@@ -160,13 +165,18 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
             case MgPropertyType::String:
             {
               Ptr<MgStringProperty> prop = new MgStringProperty(str_name,str_val);
+              if( str_val.length() == 0 ) prop->SetNull(true);
+              
               propcoll->Add(prop);
+              
             }
             break;
             case MgPropertyType::Int32:
             {
               long val = _wtol(str_val.c_str());
               Ptr<MgInt32Property> prop = new MgInt32Property(str_name,val);
+              if( str_val.length() == 0 ) prop->SetNull(true);
+              
               propcoll->Add(prop);
             }
             break;
@@ -174,6 +184,8 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
             {
               int val = _wtoi(str_val.c_str());
               Ptr<MgInt16Property> prop = new MgInt16Property(str_name,val);
+              if( str_val.length() == 0 ) prop->SetNull(true);
+              
               propcoll->Add(prop);
             }
             break;
@@ -181,6 +193,8 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
               {
                 double val = _wtof(str_val.c_str());
                 Ptr<MgDoubleProperty> prop = new MgDoubleProperty(str_name,val);
+                if( str_val.length() == 0 ) prop->SetNull(true);
+                
                 propcoll->Add(prop);
               }
               break;
@@ -188,15 +202,26 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
               {
                 double val = _wtof(str_val.c_str());
                 Ptr<MgSingleProperty> prop = new MgSingleProperty(str_name,val);
+                if( str_val.length() == 0 ) prop->SetNull(true);
+                
                 propcoll->Add(prop);
               }
               break;
             case MgPropertyType::DateTime:
               {
+                Ptr<MgDateTimeProperty> prop;
+                if( str_val.length() > 0 )
+                {
+                
+                  MgDateTime val(str_val);
 
-                MgDateTime val(str_val);
-
-                Ptr<MgDateTimeProperty> prop = new MgDateTimeProperty(str_name,&val);
+                  prop = new MgDateTimeProperty(str_name,&val);
+                }
+                else
+                {
+                  prop = new MgDateTimeProperty(str_name,NULL);
+                  prop->SetNull(true);
+                }
                 propcoll->Add(prop);
               }
               break;
@@ -204,13 +229,21 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
               {
                 int val = _wtoi(str_val.c_str());
                 Ptr<MgByteProperty> prop = new MgByteProperty(str_name,val);
+                if( str_val.length() == 0 ) prop->SetNull(true);
+                
                 propcoll->Add(prop);
               }
               break;
             case MgPropertyType::Boolean:
               {
-                int val = _wtoi(str_val.c_str());
+                bool val = false;
+                if( str_val.compare(L"true") == 0 || str_val.compare(L"1") == 0)
+                  val = true;
+                
+                
                 Ptr<MgBooleanProperty> prop = new MgBooleanProperty(str_name,val);
+                if( str_val.length() == 0 ) prop->SetNull(true);
+                
                 propcoll->Add(prop);
               }
               break;
@@ -220,24 +253,36 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
         case  MgFeaturePropertyType::GeometricProperty:
         {
           
-          MgGeometricPropertyDefinition* geomprop  = dynamic_cast<MgGeometricPropertyDefinition*>(propdef.p);
+          //MgGeometricPropertyDefinition* geomprop  = dynamic_cast<MgGeometricPropertyDefinition*>(propdef.p);
           
           MG_TRY()
-          MgWktReaderWriter wktReader;
-          Ptr<MgGeometry> geomval;
-          geomval = wktReader.Read(str_val);
-          
-          if( geomval.p != NULL )
+          if( str_val.length() == 0 ) 
           {
-            MgAgfReaderWriter agfrw;
-            Ptr<MgByteReader> bytes = agfrw.Write(geomval);
-            Ptr<MgGeometryProperty> geom = new MgGeometryProperty(str_name,bytes);
+            Ptr<MgGeometryProperty> geom = new MgGeometryProperty(str_name,NULL);
+            geom->SetNull(true);
             propcoll->Add(geom);
+          }
+          else
+          {
+          
+            MgWktReaderWriter wktReader;
+            Ptr<MgGeometry> geomval;
+            geomval = wktReader.Read(str_val);
+            
+            if( geomval.p != NULL )
+            {
+              MgAgfReaderWriter agfrw;
+              Ptr<MgByteReader> bytes = agfrw.Write(geomval);
+              Ptr<MgGeometryProperty> geom = new MgGeometryProperty(str_name,bytes);
+              propcoll->Add(geom);
+            }
           }
           MG_CATCH_AND_RELEASE()
         }
         break;
       }
+    }
+    
     }
     
     DOMNode* nextnode = XmlUtil.GetNextSibling(el_prop);

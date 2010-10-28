@@ -22,33 +22,33 @@
 /// <summary>
 /// Constructor. Initialize string property collection.
 /// </summary>
-c_RestUriPathParam::c_RestUriPathParam()
+c_RestUriPathSegment::c_RestUriPathSegment()
 {
-    m_CurrentParamInd=-1;
+    m_CurrentSegmentInd=-1;
 }
-c_RestUriPathParam::~c_RestUriPathParam()
+c_RestUriPathSegment::~c_RestUriPathSegment()
 {
 }
 
-int c_RestUriPathParam::GetParametersCount()
+int c_RestUriPathSegment::GetSegmentsCount()
 {
   return m_reqParamCollection->GetCount();
 }
 
-STRING c_RestUriPathParam::GetCurrentParameterName() const
+STRING c_RestUriPathSegment::GetCurrentSegmentName() const
 {
-  return m_reqParamCollection->GetName(m_CurrentParamInd);
+  return m_reqParamCollection->GetName(m_CurrentSegmentInd);
 }
 
-STRING c_RestUriPathParam::GetCurrentParameterValue() const
+STRING c_RestUriPathSegment::GetCurrentSegmentValue() const
 {
-  return m_reqParamCollection->GetValue(m_CurrentParamInd);
+  return m_reqParamCollection->GetValue(m_CurrentSegmentInd);
 }
 
-bool c_RestUriPathParam::NextParameter()
+bool c_RestUriPathSegment::NextSegment()
 {
-  m_CurrentParamInd++;
-  if( m_CurrentParamInd<GetParametersCount() )
+  m_CurrentSegmentInd++;
+  if( m_CurrentSegmentInd<GetSegmentsCount() )
   {
     return true;
   }
@@ -56,11 +56,20 @@ bool c_RestUriPathParam::NextParameter()
   return false;
 }
 
-bool c_RestUriPathParam::IsEndOfParameters()
+bool c_RestUriPathSegment::IsNextSegment()
 {
-  if( !GetParametersCount() ) return true;
+  if( !GetSegmentsCount() ) return false;
+
+  if( (m_CurrentSegmentInd+1) < GetSegmentsCount() ) return true;
+
+  return false;  
+}
+
+bool c_RestUriPathSegment::IsEndOfSegments()
+{
+  if( !GetSegmentsCount() ) return true;
   
-  if( m_CurrentParamInd < GetParametersCount() ) return false;
+  if( m_CurrentSegmentInd < GetSegmentsCount() ) return false;
   
   return true;  
 }
@@ -76,25 +85,25 @@ bool c_RestUriPathParam::IsLastParameter()
 }
 */
 
-void c_RestUriPathParam::ResetParameterCurrentIndex()
+void c_RestUriPathSegment::ResetSegmentCurrentIndex()
 {
-  m_CurrentParamInd=-1;  
+  m_CurrentSegmentInd=-1;  
 }
-int c_RestUriPathParam::GetCurrentParameterIndex()
+int c_RestUriPathSegment::GetCurrentSegmentIndex()
 {
-  return m_CurrentParamInd;  
+  return m_CurrentSegmentInd;  
 }
-void c_RestUriPathParam::SetCurrentParameterIndex(int Index)
+void c_RestUriPathSegment::SetCurrentSegmentIndex(int Index)
 {
-  m_CurrentParamInd = Index;  
+  m_CurrentSegmentInd = Index;  
 }
 
-void c_RestUriPathParam::Dispose()
+void c_RestUriPathSegment::Dispose()
 {
     delete this;
 }
 
-INT32 c_RestUriPathParam::GetClassId()
+INT32 c_RestUriPathSegment::GetClassId()
 {
     return 0;
 }

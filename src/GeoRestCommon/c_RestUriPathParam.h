@@ -15,34 +15,35 @@
 //  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
 
-#ifndef _c_RestUriPathParam_H
-#define _c_RestUriPathParam_H
+#ifndef _c_RestUriPathSegment_h
+#define _c_RestUriPathSegment_h
 
 #include "c_RestUriRequestParam.h"
-class c_RestUriPathParam;
-template class REST_COMMON_API Ptr<c_RestUriPathParam>;
+class c_RestUriPathSegment;
+template class REST_COMMON_API Ptr<c_RestUriPathSegment>;
 
 /// <summary>
 /// Purpose of this class is to package request parameters into a collection.
 /// Users can add/remove/modify parameters received from the actual request
 /// for execution.
 /// </summary>
-class REST_COMMON_API c_RestUriPathParam : public c_RestUriRequestParam
+class REST_COMMON_API c_RestUriPathSegment : public c_RestUriRequestParam
 {
     public:
-      c_RestUriPathParam();
-      ~c_RestUriPathParam();
+      c_RestUriPathSegment();
+      ~c_RestUriPathSegment();
       
 public: 
-    int GetParametersCount();
-    STRING GetCurrentParameterName() const;
-    STRING GetCurrentParameterValue() const;
+    int GetSegmentsCount();
+    STRING GetCurrentSegmentName() const;
+    STRING GetCurrentSegmentValue() const;
 
-    void SetCurrentParameterIndex(int Index);
-    int GetCurrentParameterIndex();
-    void ResetParameterCurrentIndex();
-    bool NextParameter();
-    bool IsEndOfParameters();
+    void SetCurrentSegmentIndex(int Index);
+    int GetCurrentSegmentIndex();
+    void ResetSegmentCurrentIndex();
+    bool NextSegment();
+    bool IsNextSegment(); // check if next parameter exist
+    bool IsEndOfSegments(); // true .. if current index is on the end of parameters
     //bool IsLastParameter();
 
     protected:
@@ -61,13 +62,14 @@ public:
         /// </returns>
         INT32 GetClassId();
         
+
         
         
         
         
         
     protected:
-      int m_CurrentParamInd;
+      int m_CurrentSegmentInd;
        
 
 

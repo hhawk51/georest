@@ -95,7 +95,7 @@ void c_ODataTest::tearDown()
 #define D_MY_FEED_AUTHOR_URI "My Feed Author Uri"
 #define D_MY_FEED_AUTHOR_EMAIL "My Feed Author Email"
 
-char ODataSample[]="<RestConfig>\
+static char ODataSample[]="<RestConfig>\
 <Data>\
 <Resource uripart=\"ODataParcels\" >\
 <Source type=\"FDO\">\

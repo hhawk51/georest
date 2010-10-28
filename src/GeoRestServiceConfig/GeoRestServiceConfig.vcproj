@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include\json&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,10 +65,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ACEd.lib mgfoundationd.lib PocoFoundationd.lib PocoXMLd.lib"
+				AdditionalDependencies="ACEd.lib mgfoundationd.lib PocoFoundationd.lib PocoXMLd.lib lib_jsond.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\Common\lib\debug;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\debug&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -124,8 +124,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
-				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include\json&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
+				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -145,10 +145,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ACEd.lib mgfoundationd.lib PocoFoundationd.lib PocoXMLd.lib"
+				AdditionalDependencies="ACEd.lib mgfoundationd.lib PocoFoundationd.lib PocoXMLd.lib lib_jsond.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib64&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -203,7 +203,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include\json&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -222,10 +222,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib"
+				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib lib_json.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\Common\lib\release;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -283,8 +283,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
-				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include\json&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
+				PreprocessorDefinitions="_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -302,10 +302,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib"
+				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib lib_json.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib64&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -919,7 +919,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2011)\Common\Foundation;$(MG_PATH_ENT_2011)\Common\Geometry;$(MG_PATH_ENT_2011)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2011)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include\json&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -938,10 +938,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib"
+				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib lib_json.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\release64&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1078,7 +1078,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2010)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2010)\Common\MapGuideCommon&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include\json&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1097,10 +1097,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib"
+				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib lib_json.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_ENT_2010)\Common\lib\release;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_ENT_2010)\Common\lib\release&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib64&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1237,7 +1237,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include\json&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTSERVICECONFIG_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1256,7 +1256,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib"
+				AdditionalDependencies="ACE.lib mgfoundation.lib PocoFoundation.lib PocoXML.lib lib_json.lib"
 				OutputFile="$(OutDir)\$(ProjectName).dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;$(MG_PATH_OS_2_1)\Common\lib\release;&quot;$(POCO_PATH)\lib&quot;"
@@ -1309,7 +1309,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\c_CfgEsriGS_Catalog.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\c_CfgEsriGS_FeatureServer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\c_CfgEsriGS_MapServer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\c_CfgRepresentation.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\c_CfgService.cpp"
 				>
 			</File>
 			<File
@@ -1467,7 +1483,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\c_CfgEsriGS_Catalog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_CfgEsriGS_FeatureServer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_CfgEsriGS_MapServer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\c_CfgRepresentation.h"
+				>
+			</File>
+			<File
+				RelativePath=".\c_CfgService.h"
 				>
 			</File>
 			<File

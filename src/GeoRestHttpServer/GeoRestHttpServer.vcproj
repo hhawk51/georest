@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\GeoRestHttpServerDll;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;"
-				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_CONSOLE"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -277,8 +277,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\GeoRestHttpServerDll;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;"
-				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;..\GeoRestHttpServerDll"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -296,9 +296,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="GeoRestHttpServerDll.lib"
+				AdditionalDependencies="GeoRestHttpServerDll.lib PocoUtil.lib PocoFoundation.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(POCO_PATH)\lib\x64&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"

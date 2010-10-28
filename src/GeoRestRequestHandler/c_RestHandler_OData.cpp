@@ -84,8 +84,8 @@ void c_RestHandler_OData::Execute(c_RestResponse& HttpResponse)
 
    
   // Now parse resource path part of URI to see which resource is requested
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest->GetUriPathParameters();
-  if( !path_params->NextParameter() )
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest->GetUriPathParameters();
+  if( !path_params->NextSegment() )
   {
     
     return Execute_ServiceDocument(HttpResponse);
@@ -94,7 +94,7 @@ void c_RestHandler_OData::Execute(c_RestResponse& HttpResponse)
   // there is resource path
   // it could be $metadata or could be name of some recource from config
   // http://GeoREST.org/OData.svc/$metadata?$format=json or http://GeoREST.org/OData.svc/Parcel?$format=json
-  STRING nextparam = path_params->GetCurrentParameterName();
+  STRING nextparam = path_params->GetCurrentSegmentName();
   if( wcscmp(nextparam.c_str(),L"$metadata") == 0 )
   {
     return Execute_ServiceMetadata(HttpResponse);
@@ -106,7 +106,7 @@ void c_RestHandler_OData::Execute(c_RestResponse& HttpResponse)
   STRING keys_string;
   // check if there is "(" in tag
   
-  keys_string = path_params->GetCurrentParameterValue();
+  keys_string = path_params->GetCurrentSegmentValue();
   resource_uritag = nextparam;
   
   
@@ -227,10 +227,10 @@ void c_RestHandler_OData::Execute_GET_OData(c_RestResponse& HttpResponse,const s
   
   
   STRING nextparam;
-  Ptr<c_RestUriPathParam> path_params = m_RestRequest->GetUriPathParameters();
-  if( path_params->NextParameter() )
+  Ptr<c_RestUriPathSegment> path_params = m_RestRequest->GetUriPathParameters();
+  if( path_params->NextSegment() )
   {
-    nextparam = path_params->GetCurrentParameterName();
+    nextparam = path_params->GetCurrentSegmentName();
   }
   
   
@@ -267,9 +267,9 @@ void c_RestHandler_OData::Execute_GET_OData(c_RestResponse& HttpResponse,const s
       else
       {
       // now it can be $value
-        if( path_params->NextParameter() )
+        if( path_params->NextSegment() )
         {
-          nextparam = path_params->GetCurrentParameterName();
+          nextparam = path_params->GetCurrentSegmentName();
           //it can be $links
           if( Poco::icompare(nextparam,L"$value") )
           {

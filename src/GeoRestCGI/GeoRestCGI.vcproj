@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;D:\Development\fastcgi\fcgi-2.4.0\include&quot;"
-				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_CONSOLE"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

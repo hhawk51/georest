@@ -30,6 +30,7 @@ class c_SpeedTest : public CppUnit::TestFixture
   CPPUNIT_TEST_SUITE( c_SpeedTest );
     CPPUNIT_TEST( Test1 );   
     CPPUNIT_TEST( TestMgStringPropertCollection ); 
+     
     
   CPPUNIT_TEST_SUITE_END();
   
@@ -46,7 +47,7 @@ public:
   void Test1();   
   
   void TestMgStringPropertCollection(); // compares speed of MgStringPropertyCollection with std::vector<std::wstring>
-  
+ 
 
 protected:
   c_GisHttpServer* m_GisHttpServer;  

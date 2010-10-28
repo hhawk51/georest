@@ -16,7 +16,7 @@
 //
 
 
-
+#include "stdafx.h"
 #include "c_RestTestSuite.h"
 
 

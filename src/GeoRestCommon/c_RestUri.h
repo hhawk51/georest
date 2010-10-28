@@ -82,7 +82,7 @@ public:
         /// </summary>
         virtual ~c_RestUri();
         
-        c_RestUriPathParam* GetUriPathParameters();
+        c_RestUriPathSegment* GetUriPathParameters();
         
         const std::string& GetHttpMethodString() { return m_HttpMethod; }
         void SetHttpMethod(const std::string& HttpMethod) { m_HttpMethod = HttpMethod; }
@@ -108,7 +108,7 @@ public:
         
         static void ParseUri(const std::string& Uri, std::vector < std::string > & UriSegments);
         static void ParseQuery(const char* pszQuery, c_RestUriRequestParam* params);
-        static void ParsePath(const std::string& Uri, c_RestUriPathParam* Params);
+        static void ParsePath(const std::string& Uri, c_RestUriPathSegment* Params);
         
     protected:
         /// <summary>
@@ -143,7 +143,7 @@ protected:
       
       
       std::string m_HttpMethod;
-      Ptr<c_RestUriPathParam> m_UriPathParameters;
+      Ptr<c_RestUriPathSegment> m_UriPathParameters;
       
      
     public: 

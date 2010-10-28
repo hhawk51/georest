@@ -27,9 +27,10 @@ c_RestDataReader_FdoFeatureReader::c_RestDataReader_FdoFeatureReader( FdoIConnec
 }
 
 
-c_RestDataReader_MgFeatureReader::c_RestDataReader_MgFeatureReader( MgProxyFeatureReader* Reader)
+c_RestDataReader_MgFeatureReader::c_RestDataReader_MgFeatureReader( MgProxyFeatureReader* Reader,MgClassDefinition* ClassDef)
 {
   m_FeatureReader = SAFE_ADDREF(Reader);
+  m_ClassDef = SAFE_ADDREF(ClassDef);
 }
 
 
@@ -39,7 +40,9 @@ bool c_RestDataReader_MgFeatureReader::ReadNext()
   return m_FeatureReader->ReadNext();
 }
 MgClassDefinition* c_RestDataReader_MgFeatureReader::GetClassDefinition()
-{
+{ 
+  if( m_ClassDef.p ) return SAFE_ADDREF(m_ClassDef.p);
+  
   return m_FeatureReader->GetClassDefinition();
 }
 
@@ -115,16 +118,64 @@ MgRaster* c_RestDataReader_MgFeatureReader::GetRaster( CREFSTRING propertyName )
 
 INT32 c_RestDataReader_MgFeatureReader::GetPropertyCount()
 {
+  if( m_ClassDef.p ) 
+  {
+    Ptr<MgPropertyDefinitionCollection> propDefCol = m_ClassDef->GetProperties();
+    return propDefCol->GetCount();
+  }
   return m_FeatureReader->GetPropertyCount();
 }
 
 STRING c_RestDataReader_MgFeatureReader::GetPropertyName( INT32 index )
 {
+  if( m_ClassDef.p ) 
+  {
+    Ptr<MgPropertyDefinitionCollection> propDefCol = m_ClassDef->GetProperties();
+    Ptr<MgPropertyDefinition> propDef = propDefCol->GetItem(index);
+    return propDef->GetName();
+  }
   return m_FeatureReader->GetPropertyName(index);
 }
 
 INT32 c_RestDataReader_MgFeatureReader::GetPropertyType( CREFSTRING propertyName )
 {
+  if( m_ClassDef.p ) 
+  {
+    Ptr<MgPropertyDefinitionCollection> propDefCol = m_ClassDef->GetProperties();
+    Ptr<MgPropertyDefinition> propDef = propDefCol->GetItem(propertyName);
+    INT32 mgPropType = 0;
+
+    // Whether it is data,geometry,raster,object or association property
+    INT16 type = propDef->GetPropertyType();
+    switch(type)
+    {
+    case MgFeaturePropertyType::DataProperty:
+      {
+        mgPropType = ((MgDataPropertyDefinition*)propDef.p)->GetDataType();
+        break;
+      }
+    case MgFeaturePropertyType::GeometricProperty:
+      {
+        mgPropType = MgPropertyType::Geometry;
+        break;
+      }
+    case MgFeaturePropertyType::RasterProperty:
+      {
+        mgPropType = MgPropertyType::Raster;
+        break;
+      }
+    case MgFeaturePropertyType::ObjectProperty:
+      {
+        break;
+      }
+    case MgFeaturePropertyType::AssociationProperty:
+      {
+        break;
+      }
+    }
+    return ((INT16)mgPropType);
+    
+  }
   return m_FeatureReader->GetPropertyType(propertyName);
 }
 

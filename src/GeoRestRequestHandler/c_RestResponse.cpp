@@ -166,14 +166,28 @@ try
     if (response_contentType.length() > 0)
     {
       // If we are returning text, state that it is utf-8.
+      
+      STRING mime = response_contentType;
+      if( response_contentType == RestMimeType::JsonP )
+      {
+        mime = L"text/plain";
+      }
+      else
+      { 
+        if( response_contentType == RestMimeType::Json )
+        {
+          mime = L"text/plain";
+        }
+      } 
+      
       string charSet = "";
-      if (response_contentType.find(L"text") != response_contentType.npos)  //NOXLATE
+      if (mime.find(L"text") != mime.npos)  //NOXLATE
       {
         charSet = MapAgentStrings::Utf8Text;
       }
       //sprintf(tempHeader, MapAgentStrings::ContentTypeHeader, MG_WCHAR_TO_CHAR(response_contentType), charSet.c_str());
       //sResponseHeader.append(tempHeader);
-      sprintf(tempHeader, "%s%s", MG_WCHAR_TO_CHAR(response_contentType), charSet.c_str());
+      sprintf(tempHeader, "%s%s", MG_WCHAR_TO_CHAR(mime), charSet.c_str());
       m_HttpData.AddHeader(MapAgentStrings::ContentTypeKey,tempHeader);
     }
     else
@@ -387,16 +401,17 @@ void c_RestResponse::CreateJsonpCallbackString(const std::string& CallbackFuncNa
 
   std::string::const_iterator iter;
 
-  JsonP = CallbackFuncName + "( \'";
+  JsonP.reserve(CallbackFuncName.length() + JsonP.length() + 128);
+  
+  JsonP = CallbackFuncName;
+  //JsonP.append("(\'");
+  JsonP.append("(");
   for(iter=JsonValue.begin();iter!=JsonValue.end();iter++)
   {
     // replace ' with \' so it will again be evaluated to ' when apperas in html as parameter to fucntion call
     if( *iter == '\'' )
     {
-     
-      JsonP += '\\'; 
-      JsonP += '\'';  
-
+      JsonP.append("\\\'");
     }
     else
     {
@@ -404,7 +419,8 @@ void c_RestResponse::CreateJsonpCallbackString(const std::string& CallbackFuncNa
     }
   }
 
-  JsonP.append( "\' )" );
+  //JsonP.append( "\');" );
+  JsonP.append( ");" );
 }
 
 

@@ -32,12 +32,13 @@ public:
   
 public:
   static MgByteReader* GetDynamicMapOverlayImage_ViewCommands(c_RestMgSiteConnection* MgSiteConn,CREFSTRING mapName, CREFSTRING format, bool bKeepSelection,MgPropertyCollection* mapViewCommands);
+  static void ApplyMapViewCommands(MgMap* map, MgPropertyCollection* mapViewCommands);
   
 protected:    
   static MgByteReader* FetchImage(c_RestUri* HttpRequest,c_CfgDataSource_MapGuide* MapGuideSource , const std::wstring& MapDefId,MgEnvelope* ZoomTo, const std::wstring& ZoomFactor , const std::wstring& MapSelectionLayer, const std::wstring& FeatureSource, const std::wstring& FdoClassName , MgFeatureQueryOptions *QueryOptions );
   static void ShowLayers(MgMap* map, CREFSTRING strLayers, bool show);
   static void ShowGroups(MgMap* map, CREFSTRING strGroups, bool show);
-  static void ApplyMapViewCommands(MgMap* map, MgPropertyCollection* mapViewCommands);
+  
 
 protected:
 	static const STRING     m_mapCmdSetViewCenterX;
