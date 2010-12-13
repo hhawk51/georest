@@ -32,6 +32,8 @@
 
 // TODO: reference additional headers your program requires here
 #include <stdlib.h>
+#include <sstream>
+#include <iosfwd>
 //#include "PlatformBase.h"
 //#include "MapGuideCommon.h"
 #include "Fdo.h"

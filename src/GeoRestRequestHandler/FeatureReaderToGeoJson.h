@@ -19,16 +19,19 @@
 #define _C_FEATUREREADERTOGEOJSON_H
 
 // This class parsers REST URI requests in form/url-encoded format
-class c_FeatureReaderToGeoJson
+class REST_REQUEST_HANDLER_API c_FeatureReaderToGeoJson
 {
 public:
     c_FeatureReaderToGeoJson(void);
     ~c_FeatureReaderToGeoJson(void);
     static void ToGeoJson(c_RestDataReader* FeatureReader, string& GJsonStr,int StartIndex,int MaxCount);
     
+    static void ToGeoJson(MgGeometry* Geometry,std::string& str);
+    
+    
 protected:    
     //static void ToGeoJson(MgGeometry* Geom,string &str,bool includeType);
-    static void ToGeoJson(MgGeometryProperty* Geom,string &str,bool includeType);
+    
     static void ToGeoJson(MgInt64Property* Prop,string &str, bool includeType, string rootElmName);
     static void ToGeoJson(MgInt32Property* Prop,string &str, bool includeType, string rootElmName);
     static void ToGeoJson(MgInt16Property *Prop,string &str, bool includeType, string rootElmName);
@@ -39,7 +42,7 @@ protected:
     static void ToGeoJson(MgSingleProperty*Prop,string &str, bool includeType, string rootElmName);
     static void ToGeoJson(MgDateTimeProperty*Prop,string &str, bool includeType, string rootElmName);
     static void ToGeoJson(MgCoordinate* Coordinate,std::string& str);
-    static void ToGeoJson(MgGeometry* Geometry,std::string& str);
+    static void ToGeoJson(MgGeometryProperty* Geom,string &str,bool includeType);
     static void ToGeoJson(MgCoordinateIterator* CoordIterator,std::string& str);
     
     

@@ -29,6 +29,8 @@
 
 #include <stdlib.h>
 #include <sstream>
+#include "../c_IsapiOstream.h"
+#include "Poco/StreamCopier.h"
 
 // AgentUri is full URI, like http://localhost/mgrest/rest/data/parcel/.html?filter_1_and_likeright_NAME=u
 // UriBase is just part of URI without REST partand query
@@ -89,20 +91,60 @@ void IsapiResponseHandler::SendResponse(c_RestResponse* response,c_RestRequest* 
   */
  
 
-  char temphead[512];
-  sprintf(temphead,"Status: %d %s",http_data->GetStatus(),http_data->GetStatusReason());
-  //std::string temphead = "Status: 200 OK\r\n";
-  string sheader = temphead;
-  sheader = sheader + "\r\n";
-  sheader = sheader + s2;
-  sheader = sheader + "\r\n";
-  //WriteHeader(sheader.c_str());
-  DWORD dwSize = (DWORD)sheader.length();
-  m_pECB->ServerSupportFunction(m_pECB->ConnID, HSE_REQ_SEND_RESPONSE_HEADER, (LPVOID)NULL, &dwSize, (LPDWORD)sheader.c_str()); 
+  
 
   //std::istringstream istr(http_data->GetHeader());
   //response.read(istr);
 
+  Ptr<c_StreamResponse> streamrep = http_data->GetStreamResponse();
+  if( streamrep.p )
+  {
+    //std::stringstream strstream;
+    //streamrep->StreamOut(&strstream);    
+    //std::streamsize ssize = strstream.rdbuf()->in_avail();
+    
+    char temphead[512];
+    sprintf(temphead,"HTTP/1.1 %d %s",http_data->GetStatus(),http_data->GetStatusReason());
+    //std::string temphead = "Status: 200 OK\r\n";
+    string sheader = temphead;
+    sheader = sheader.append("\r\n");
+    sheader = sheader.append(s2);
+    //sprintf(temphead,"Content-Length: %ld\r\n",(long)ssize);
+    sheader.append("Connection: Keep-Alive\r\n");
+    sprintf(temphead,"Transfer-Encoding: chunked\r\n");
+    sheader = sheader.append(temphead);
+    sheader = sheader.append("\r\n");
+    
+    //WriteHeader(sheader.c_str());
+    DWORD dwsize = (DWORD)sheader.length();
+    //m_pECB->ServerSupportFunction(m_pECB->ConnID, HSE_REQ_SEND_RESPONSE_HEADER, (LPVOID)NULL, &dwSize, (LPDWORD)sheader.c_str()); 
+    m_pECB->WriteClient(m_pECB->ConnID, (void*)sheader.data(),&dwsize,0); 
+    
+    c_IsapiOstream ostream(m_pECB,true);
+    streamrep->StreamOut(&ostream);    
+    
+    //Poco::StreamCopier::copyStream(strstream,ostream);
+    
+    //ostream << strstream;
+      
+    ostream.Close(); // will end chunked transfer if used
+    
+
+  }
+  else {   
+  
+  
+    char temphead[512];
+    sprintf(temphead,"Status: %d %s",http_data->GetStatus(),http_data->GetStatusReason());
+    //std::string temphead = "Status: 200 OK\r\n";
+    string sheader = temphead;
+    sheader = sheader + "\r\n";
+    sheader = sheader + s2;
+    sheader = sheader + "\r\n";
+    //WriteHeader(sheader.c_str());
+    DWORD dwSize = (DWORD)sheader.length();
+    m_pECB->ServerSupportFunction(m_pECB->ConnID, HSE_REQ_SEND_RESPONSE_HEADER, (LPVOID)NULL, &dwSize, (LPDWORD)sheader.c_str()); 
+    
   Ptr<MgByteReader> bytereader = http_data->GetContentByteReader();
 
   if( bytereader.p )
@@ -136,7 +178,7 @@ void IsapiResponseHandler::SendResponse(c_RestResponse* response,c_RestRequest* 
     m_pECB->WriteClient(m_pECB->ConnID, (LPVOID)http_data->GetContentString().c_str(), &dwBufLen, 0);
   }
   
-  
+  }
 
   // Tell IIS to keep the connection open 
   DWORD dwState = HSE_STATUS_SUCCESS_AND_KEEP_CONN;

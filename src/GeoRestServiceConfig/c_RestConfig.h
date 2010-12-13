@@ -99,6 +99,9 @@ protected:
   void ParseEsriServers(Poco::XML::Element* XmlResource,c_CfgEsriGS_Folder* ParentFolder);
   c_CfgEsriGS_MapServer* ParseEsriServer_MapServer( Poco::XML::Element* XmlResource );
   c_CfgEsriGS_MS_Layer* ParseEsriServer_MS_Layer( Poco::XML::Element* XmlResource );
+  void ReadServicesFromXML( const char* FileName);
+  void ReadCustomServices( Poco::XML::Document* PocoDoc );
+  c_CfgService* ParseCustomService( Poco::XML::Element* XmlResource);
   Poco::Logger* m_Logger;
   std::string m_LogFileName; // if logger is not set in constructor than in constructor name for log file is created and logger itself
   

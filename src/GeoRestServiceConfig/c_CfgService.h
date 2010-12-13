@@ -28,7 +28,9 @@ class REST_CONFIG_API c_CfgService
 {
 public:
   enum e_ServiceType  {
+    e_Custom_Service,
     e_EsriGS_Catalog
+    
   };
 
 protected:
@@ -41,11 +43,12 @@ public:
   e_ServiceType m_Type;
   std::wstring m_UriTag; // name to be used in Uri like parcel e.g. "..\rest\data\parcel"
   std::wstring m_RestUriPart; // if defined this uri will be used as base uri when generating links for html,xml. 
-                              // This is usefull in case of redirections.
+                              // This is useful in case of redirections.
                               // default is /rest/data/
                               
   
   
+    
 public:
   const std::string& GetUriTag() const;  
   
@@ -53,11 +56,25 @@ protected:
   mutable std::string m_UriTagUtf8; // utf 8 copy of m_UriTag string
   
 
-public:
   
   
 public:  
   
+};
+
+typedef void*(*t_CreateRequestHandler)(void*);
+
+class REST_CONFIG_API c_CfgCustomService : public c_CfgService 
+{
+public:
+  c_CfgCustomService(const wchar_t* UriTag,const wchar_t* Library);
+  
+public:  
+  std::wstring m_Library; // .dll library to be used for service handler
+  
+  int m_LibraryLoaded; // 0.. not tried; -1 tried but no success ; 1 loaded
+  
+  t_CreateRequestHandler m_CreateRequestHandler;
 };
 
 typedef std::vector<c_CfgService*> t_CfgServiceVector;

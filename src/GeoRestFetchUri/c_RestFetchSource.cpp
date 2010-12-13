@@ -1006,6 +1006,7 @@ MgByteReader* c_RestFetchSource::Fetch_FdoSourceSchema( c_CfgDataSource_FDO* Fdo
 
     if( !conn.p ) return NULL;
 
+    
     conn->SetConnectionString(FdoSource->GetConnString().c_str());
     if( conn->Open() != FdoConnectionState_Open )
     {

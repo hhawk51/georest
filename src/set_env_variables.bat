@@ -7,4 +7,5 @@ SET FDO_PATH=$(FDO_PATH_3_5)
 SET MG_PATH_OS_2_1=D:/Development/MapGuideSVN/branches/2.1/MgDev
 SET MG_PATH_ENT_2010=D:/Development/MapGuideSVN/sandbox/adsk/2.1
 SET MG_PATH_ENT_2011=D:/Development/MapGuideSVN/sandbox/adsk/2.2gp
+SET MG_PATH_ENT_2012=D:/Development/MapGuideSVN/trunk/MgDev
 SET MG_PATH=$(MG_PATH_OS_2_1)

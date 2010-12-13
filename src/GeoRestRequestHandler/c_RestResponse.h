@@ -20,6 +20,7 @@
 
 #include "Poco/Net/MessageHeader.h"
 #include "c_RestResult.h"
+#include "c_StreamResponse.h"
 
 
 
@@ -33,6 +34,8 @@ public:
     m_ContentLength=0;
     m_Status = 200;
     m_StatusReason = "OK";
+    
+    m_StreamResponse = NULL;
   }
 protected:
   //std::string m_Header;
@@ -63,6 +66,14 @@ public:
     m_ContentLength = m_Content_OutputReader.p ? m_Content_OutputReader->GetLength() : 0;
     m_Content_String = "";
   };
+  void SetContent(c_StreamResponse* StreamResponse)
+  {
+    m_StreamResponse = SAFE_ADDREF(StreamResponse);
+    m_Content_OutputReader = NULL;
+    //m_Content_OutputReader = SAFE_ADDREF(Content);
+    //m_ContentLength = m_Content_OutputReader.p ? m_Content_OutputReader->GetLength() : 0;
+    //m_Content_String = "";
+  };
   
   void SetStatusAndReason(int Status,const char* Reason)
   {
@@ -84,9 +95,14 @@ public:
   
   Poco::Net::MessageHeader& GetMsgHeaders() { return m_MsgHeaders; }
   
+  c_StreamResponse* GetStreamResponse() { return SAFE_ADDREF(m_StreamResponse.p); }
+  
   std::string& GetContentString() { return m_Content_String ; }
   
   MgByteReader* GetContentByteReader() { return SAFE_ADDREF(m_Content_OutputReader.p); }
+  
+  Ptr<c_StreamResponse> m_StreamResponse;
+  
 };
 
 

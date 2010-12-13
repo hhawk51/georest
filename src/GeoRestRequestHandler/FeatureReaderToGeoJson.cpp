@@ -102,7 +102,7 @@ STRING ReplaceEscapeCharInJSON(CREFSTRING str)
 */
 void c_FeatureReaderToGeoJson::ToGeoJson(c_RestDataReader* FeatureReader, string& GJsonStr,int StartIndex,int MaxCount)
 {
-  if(MaxCount > 500 ) MaxCount=500;
+  //if(MaxCount > 500 ) MaxCount=500;
   
   Ptr<MgClassDefinition> classDef = FeatureReader->GetClassDefinition();
 
@@ -777,7 +777,12 @@ void c_FeatureReaderToGeoJson::ToGeoJson(MgGeometry* Geometry,std::string& str)
           ToGeoJson(cords,coord_str);
           str += "{ \"type\":\"Polygon\", \"coordinates\": [" + coord_str + "] }";
         }
-
+        int incount = poly->GetInteriorRingCount();
+        if( incount > 0 )
+        {
+        
+          Ptr<MgLinearRing> extring = poly->GetInteriorRing(0);
+        }
         break;
       }
       case MgGeometryType::MultiLineString:

@@ -134,7 +134,8 @@ typedef std::vector<c_CfgAccessFormat*> t_CfgAccessFormatVector;
 
 
 
-
+typedef void(*FuncHeader2Stream)(void* , void*);
+typedef void(*FuncContent2Stream)(void*, void*);
 
 class REST_CONFIG_API c_CfgRepresentation
 {
@@ -148,6 +149,7 @@ public:
     e_FDO_Schema,
     e_Sitemap,
     e_OData,
+    e_Custom,
   };
   
   enum e_OrderDirection {
@@ -167,8 +169,8 @@ public:
   void AddMethod(c_CfgAccessMethod* Method);
   e_REST_AccessCodes IsAccess( const wchar_t*Method,const wchar_t*UserName,const wchar_t* Password ) const;
 
-  long GetDefaultCount( ) const; // return deafult number of features to be returned 
-  long GetMaxCount() const; // return maximum number of features allowed to be retruned
+  long GetDefaultCount( ) const; // return default number of features to be returned 
+  long GetMaxCount() const; // return maximum number of features allowed to be returned
 
   bool IsBBoxHeightLimitSet() const;
   bool IsBBoxWidthLimitSet() const;
@@ -203,6 +205,9 @@ public:
   
   
   c_CfgAccessMethod* m_Cached_GET; // cached pointer to GET method
+  
+  FuncHeader2Stream m_FuncHeader2Stream;
+  FuncContent2Stream m_FuncContent2Stream;
   
 protected:  
   t_CfgAccessMethodVector m_CfgAccessMethodVector;
@@ -388,6 +393,23 @@ public:
   ~c_CfgRepresentation_FeaturesJSON(void);
 
 public:
+
+};
+
+class c_CustomRenderer;
+
+class REST_CONFIG_API c_CfgRepresentation_Custom : public c_CfgRepresentation
+{
+public:
+  c_CfgRepresentation_Custom(const c_CustomRenderer* Renderer,const wchar_t* Pattern,const wchar_t* Mime) : c_CfgRepresentation(c_CfgRepresentation::e_Custom,Pattern,Mime) 
+  {
+    m_CustomRenderer = Renderer;
+  }
+public:
+  ~c_CfgRepresentation_Custom(void);
+
+public:
+  const c_CustomRenderer* m_CustomRenderer;
 
 };
 

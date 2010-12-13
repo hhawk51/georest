@@ -430,6 +430,20 @@ void c_RestHandler_Data::CreateFilterString(MgClassDefinition* ClassDef,MgFeatur
   Ptr<c_RestUriPathSegment> path_params = m_RestRequest-> GetUriPathParameters();
   
   Ptr<c_RestUriRequestParam> query_params = m_RestRequest->GetRequestParam();
+  
+  if( query_params ->ContainsParameter(L"select") )
+  {
+    STRING paramval = query_params->GetParameterValue(L"select");
+    Ptr<MgStringCollection> ofields = MgStringCollection::ParseCollection(paramval,L",");
+
+    int count = ofields->GetCount();
+    for(int ind=0;ind<count;ind++)
+    {
+      qryOptions->AddFeatureProperty(ofields->GetItem(ind));
+    }
+  }
+  
+  
   if( query_params ->ContainsParameter(L"filter") )
   {
     STRING paramval = query_params->GetParameterValue(L"filter");
@@ -1159,19 +1173,32 @@ void c_RestHandler_Data::Execute_Get_Feature_MapGuide(c_RestResponse& HttpRespon
   {
     Ptr<MgEnvelope> extent;
 
-    if( query_params->ContainsParameter(L"SETVIEWSCALE" ) && query_params->ContainsParameter(L"SETVIEWCENTERX" ) && query_params->ContainsParameter(L"SETVIEWCENTERY" ) )
-    {    
-      // if all view parameters are defined then don't calculate etxent               
-    }  
-    else
-    {    
-      extent = GetFeatureExtent(featureReader);
-      if( !extent.p )
+    if( query_params->ContainsParameter(L"ZOOMTO" ) )
+    {
+      bool isbbox=false;
+      double x1,y1,x2,y2;
+      STRING paramval = query_params->GetParameterValue(L"ZOOMTO");
+      if( swscanf(paramval.c_str(),L"%lf,%lf,%lf,%lf",&x1,&y1,&x2,&y2) == 4 )
       {
-        throw new MgRuntimeException(L"c_RestHandler_Data::Execute_Get_Class_Feature",__LINE__, __WFILE__, NULL, L"No geomtry extent!", NULL);
+        
+        extent = new MgEnvelope(x1,y1,x2,y2);
       }
     }
-
+    else
+    {    
+      if( query_params->ContainsParameter(L"SETVIEWSCALE" ) && query_params->ContainsParameter(L"SETVIEWCENTERX" ) && query_params->ContainsParameter(L"SETVIEWCENTERY" ) )
+      {    
+        // if all view parameters are defined then don't calculate etxent               
+      }  
+      else
+      {    
+        extent = GetFeatureExtent(featureReader);
+        if( !extent.p )
+        {
+          throw new MgRuntimeException(L"c_RestHandler_Data::Execute_Get_Class_Feature",__LINE__, __WFILE__, NULL, L"No geomtry extent!", NULL);
+        }
+      }
+    }
 
 
     Execute_Get_Image_Png(HttpResponse,extent.p,qryOptions);

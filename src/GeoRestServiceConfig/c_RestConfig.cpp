@@ -22,6 +22,8 @@
 
 #include "c_CfgDataSource.h"
 
+#define D_DEFAULT_CONFIG_FNAME "config.xml"
+
 #define D_DEFAULT_CFG_FILENAME "restcfg.xml"
 
 #include "Poco/Foundation.h"
@@ -50,6 +52,7 @@
 #include "Poco/NumberParser.h"
 #include "value.h"
 #include "reader.h"
+#include "c_CustomRenderer.h"
 
 
 using Poco::XML::Text;
@@ -134,6 +137,8 @@ Poco::Logger& c_RestConfig::GetLogger()
 
 c_RestConfig::~c_RestConfig(void)
 {
+  Poco::Logger::shutdown();
+  Clear();
 }
 
 
@@ -271,6 +276,60 @@ void c_RestConfig::Read( Poco::XML::Document* PocoDoc, const char* TemplateFolde
   
 }
 
+void c_RestConfig::ReadCustomServices( Poco::XML::Document* PocoDoc )
+{
+  try
+  {
+    
+    AutoPtr<Poco::XML::NodeList>  nlist = PocoDoc->getElementsByTagName("RestConfig");
+    if( nlist->length() == 0 )
+    {
+      m_Logger->warning("c_RestConfig::ReadFromXML : There is no 'RestConfig' element in configuration file! No data will be read from config file.");
+      return;
+    }
+    if( nlist->length() > 1 )
+    {
+      m_Logger->warning("c_RestConfig::ReadFromXML : More then one 'RestConfig' element in configuration file! Only first one will be used.");
+    }
+
+    Poco::XML::Element* node_restconfig = (Poco::XML::Element*)nlist->item(0);
+
+  
+    //
+    // Read Services
+    //
+    Poco::XML::Element* node_services = node_restconfig->getChildElement("Services");
+    if( node_services )
+    {
+      
+      nlist = node_restconfig->getElementsByTagName("Service");
+      for(int ind=0;ind<nlist->length();ind++)
+      {
+        Poco::XML::Element* node_service = (Poco::XML::Element*)nlist->item(ind);
+        c_CfgService* service = ParseCustomService(node_service);
+        if( service && !m_ServiceVector.Add(service) )
+        {
+
+          std::string errmsg;errmsg.reserve(512);
+          errmsg = "c_RestConfig::ReadCustomServices : Duplicated UriTag '";
+          errmsg.append(service->GetUriTag());
+          errmsg.append("'. Resource will not be added.");
+          m_Logger->warning();
+          delete service;
+        }
+      }
+      
+    }
+  }
+  catch (Poco::Exception& exc)
+  {	  
+    m_Logger->error(exc.message().c_str());
+    throw c_ExceptionRestConfig(exc.message().c_str());
+
+  }
+  
+}//end of c_RestConfig::ReadServices
+
 void c_RestConfig::ReadFromXML( const char* FileName, const char* TemplateFolder )
 {
   // Parse an XML document from standard input
@@ -360,6 +419,48 @@ void c_RestConfig::ReadXMLFromFolder(const char * Folder)
   }
 }
 
+void c_RestConfig::ReadServicesFromXML( const char* FileName)
+{
+  // Parse an XML document from standard input
+  // and use a NodeIterator to print out all nodes.
+  Poco::File xmlfile(FileName);
+  if( !xmlfile.exists() || !xmlfile.isFile() ) return;
+
+  std::string noticemsg;
+  noticemsg.reserve(512);
+  noticemsg = "c_RestConfig::ReadServicesFromXML : Reading File:'";
+  noticemsg.append(FileName);
+  noticemsg.append("'");
+  m_Logger->notice(noticemsg);
+  std::ifstream file;
+
+  file.open(FileName);
+  if( !file.is_open() )
+  {
+    std::string errmsg = "c_RestConfig::ReadServicesFromXML : unable to open file '";
+    errmsg = errmsg + FileName;
+    errmsg = errmsg + "'";
+    m_Logger->error(errmsg);
+    throw c_ExceptionRestConfig(L"Unable to open config file!");
+  }
+  Poco::XML::InputSource src(file);
+  try
+  {
+    Poco::XML::DOMParser parser;
+    AutoPtr<Poco::XML::Document> pdoc = parser.parse(&src);
+    ReadCustomServices(pdoc);
+
+  }
+  catch (Poco::Exception& exc)
+  {	  
+    file.close();
+    m_Logger->error(exc.message().c_str());
+    throw c_ExceptionRestConfig(exc.message().c_str());
+
+  }
+  file.close();
+}//end of ReadServicesFromXML
+
 void c_RestConfig::ReadFromXML()
 {
   
@@ -396,6 +497,26 @@ void c_RestConfig::ReadFromXML()
   }
   
   
+  // read services
+{  
+  std::string s1;
+  Poco::UnicodeConverter::toUTF8(g_AppFileName,s1);
+  Poco::Path cfgpath(s1);  
+  cfgpath.setFileName("");
+  string folder = cfgpath.toString();
+  cfgpath.setFileName(D_DEFAULT_CONFIG_FNAME);
+  std::string fname_cfg = cfgpath.toString();  
+
+  // Check cfg file in binary folder (only for older version compability)
+  try
+  {  
+    ReadServicesFromXML(fname_cfg.c_str());
+  }
+  catch(...) // just ignore erros - if there is no file
+  {
+
+  }
+}
 }
 
 bool ElementExists(Poco::XML::Element* ParentNode,const char* ElemName)
@@ -722,13 +843,17 @@ c_CfgRepresentation* c_RestConfig::ParseRepresentation_v2( Poco::XML::Element* X
   std::wstring renderer;
   GetElementAttribute(XmlRepresentation,"renderer",renderer);
   
+  
+  std::wstring library;
+  GetElementAttribute(XmlRepresentation,"library",library);
+  
   std::wstring pattern;
   GetElementAttribute(XmlRepresentation,"pattern",pattern);
   
   std::wstring mimetype;
   GetElementAttribute(XmlRepresentation,"mimetype",mimetype);
   
-  // if rendere is not odata then pattern has to be set
+  // if renderer is not OData then pattern has to be set
   if( ( pattern.length()==0) &&  wcsicmp( renderer.c_str(),L"OData") ) return NULL;
   
   
@@ -765,6 +890,7 @@ c_CfgRepresentation* c_RestConfig::ParseRepresentation_v2( Poco::XML::Element* X
   {
     representaion = new c_CfgRepresentation_FeaturesXML();   
   }
+  
   if( wcsicmp( renderer.c_str(),L"JSON")==0 ) // built-in JSON representation of data
   {
     representaion = new c_CfgRepresentation_FeaturesJSON();
@@ -783,6 +909,34 @@ c_CfgRepresentation* c_RestConfig::ParseRepresentation_v2( Poco::XML::Element* X
     representaion = new c_CfgRepOdata();
     
     GetOData(XmlRepresentation,(c_CfgRepOdata*)representaion);
+  }
+  
+  if( !representaion )
+  {
+    // it means custom renderer
+    c_CustomRenderer* customrenderer = c_CustomRendererVector::GetInstance()->FindName(renderer);
+    
+    if( customrenderer )
+    {
+    // perhaps could check if it same library but do nothing for now  
+    }
+    else
+    {
+      customrenderer = new c_CustomRenderer(renderer.c_str());
+      try
+      {
+        customrenderer->LoadLibrary(library.c_str());
+        c_CustomRendererVector::GetInstance()->Add(customrenderer);
+      }
+      catch(...)
+      {
+        delete customrenderer;
+        return NULL;
+      }
+      
+    }
+    
+    representaion = new c_CfgRepresentation_Custom(customrenderer,pattern.c_str(),mimetype.c_str());
   }
   
  
@@ -1313,6 +1467,43 @@ void c_RestConfig::ParseEsriRest( Poco::XML::Element* XmlResource)
   }
   return ;
 }
+
+c_CfgService* c_RestConfig::ParseCustomService( Poco::XML::Element* XmlResource)
+{
+  c_CfgEsriGS_Catalog* esri_catalog = NULL;
+
+  // get uripart
+  std::wstring uripart;
+  GetElementAttribute(XmlResource,"uripart",uripart);
+  if( uripart.length()==0 )
+  {
+    m_Logger->error("c_RestConfig::ParseCustomService : No attribute 'uripart' defined for Service.");
+    return NULL;
+  }
+  
+  std::wstring library;
+  GetElementAttribute(XmlResource,"library",library);
+  if( library.length()==0 )
+  {
+    m_Logger->error("c_RestConfig::ParseCustomService : No attribute 'library' defined for Service.");
+    return NULL;
+  }
+
+  c_CfgService* service = m_ServiceVector.FindUriTag(uripart);
+  
+  if( service )
+  {
+    m_Logger->error("c_RestConfig::ParseCustomService : Service with 'uripart' allready exists.");
+    return NULL;
+  }
+
+  
+  c_CfgCustomService * newservice = new c_CfgCustomService(uripart.c_str(),library.c_str());
+  
+  
+  return newservice;
+}//end of ParseCustomService
+
 c_CfgDataSource* c_RestConfig::ParseSource( Poco::XML::Element* XmlSource)
 {
   c_CfgDataSource* source=NULL;

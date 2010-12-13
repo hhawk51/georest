@@ -239,6 +239,8 @@ EXTERNAL_API:
     /// \exception MgInvalidArgumentException if the property type is not geometry
     ///
     virtual MgByteReader* GetGeometry(CREFSTRING propertyName) = 0;
+    
+    virtual char* GetGeometry(CREFSTRING propertyName,int* Length) = 0;
 
   
     
@@ -399,6 +401,7 @@ class REST_FETCHURI_API c_RestDataReader_MgFeatureReader : public c_RestDataRead
 {
 public:
   c_RestDataReader_MgFeatureReader(MgProxyFeatureReader* MgReader,MgClassDefinition* ClassDef=NULL);
+  ~c_RestDataReader_MgFeatureReader();
   
 public:
   virtual bool ReadNext();  
@@ -427,6 +430,7 @@ public:
 
   virtual MgByteReader* GetCLOB(CREFSTRING propertyName);
   virtual MgByteReader* GetGeometry(CREFSTRING propertyName);
+  virtual char* GetGeometry( CREFSTRING propertyName,int* Count );
 
   virtual MgRaster* GetRaster(CREFSTRING propertyName);
 
@@ -441,6 +445,8 @@ public:
 protected:
   Ptr<MgProxyFeatureReader> m_FeatureReader;
   Ptr<MgClassDefinition> m_ClassDef;
+  char* m_Gbuf;
+  int m_GbufSize;
 };
 
 class REST_FETCHURI_API c_RestDataReader_FdoFeatureReader : public c_RestDataReader
@@ -472,6 +478,7 @@ public:
 
  
   virtual MgByteReader* GetGeometry(CREFSTRING propertyName);
+  virtual char* GetGeometry( CREFSTRING propertyName,int* Count );
 
 
 

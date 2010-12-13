@@ -28,6 +28,7 @@
 
 #include <algorithm>
 #include "Poco\UnicodeConverter.h"
+#include "c_CustomService.h"
 
 
 using namespace std;
@@ -192,7 +193,12 @@ c_RestResponse* c_RestRequest::Execute()
         isrest = true;
         if( path_params->NextSegment() )
         {
-          if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_DATA)==0 )
+          Ptr<c_RestHandler> exechandler = c_CustomService::CreateRequestHandler(path_params->GetCurrentSegmentName().c_str(),this);
+          if( exechandler.p )
+          {
+            exechandler->Execute(*response);
+          }
+          else if( wcsicmp(path_params->GetCurrentSegmentName().c_str(),D_REST_URI_SEGMENT_DATA)==0 )
           {       
             m_ServiceURI = m_RestUri.GetBaseUri();
             m_ServiceURI.append("/");

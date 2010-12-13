@@ -22,7 +22,7 @@
 #include "c_RestUriFactory.h"
 class c_RestRequest;
 
-class c_RestHandler : public MgDisposable
+class REST_REQUEST_HANDLER_API c_RestHandler : public MgDisposable
 {
 public:
     //////////////////////////////////////////////////////////////////

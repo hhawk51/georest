@@ -161,3 +161,10 @@ const c_CfgService* c_CfgServiceVector::FindClassName( const std::wstring& Class
 }
 */
 
+
+c_CfgCustomService::c_CfgCustomService( const wchar_t* UriTag,const wchar_t* Library ) : c_CfgService(UriTag,e_Custom_Service)
+{
+  m_Library = Library;
+  m_LibraryLoaded=0;
+  m_CreateRequestHandler=NULL;
+}

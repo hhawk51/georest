@@ -22,7 +22,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="obj\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			>
@@ -175,7 +175,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="obj\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
@@ -301,7 +301,7 @@
 				AdditionalDependencies="mgfoundation.lib GeoRestCommon.lib GeoRestServiceConfig.lib GeoRestRequestHandler.lib PocoFoundation.lib PocoXML.lib PocoNet.lib PocoUtil.lib libfcgi.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Common\lib\release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;D:\Development\fastcgi\fcgi-2.4.0\libfcgi\Release&quot;"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Common\lib\release&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;D:\Development\fastcgi\fcgi-2.4.0\libfcgi\Release&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -334,7 +334,7 @@
 		<Configuration
 			Name="Debug.Ent2011|Win32"
 			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			>
@@ -487,7 +487,7 @@
 		<Configuration
 			Name="Debug.Ent2010|Win32"
 			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			>
@@ -640,7 +640,7 @@
 		<Configuration
 			Name="Release.Ent2011|Win32"
 			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
@@ -799,7 +799,7 @@
 		<Configuration
 			Name="Release.Ent2010|Win32"
 			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
@@ -958,7 +958,7 @@
 		<Configuration
 			Name="Release.MgOs2.1|Win32"
 			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
@@ -1114,6 +1114,165 @@
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
+		<Configuration
+			Name="Release.Ent2012|Win32"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2012)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2012)\Common\MapGuideCommon&quot;;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;D:\Development\fastcgi\fcgi-2.4.0\include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="mgfoundation.lib GeoRestCommon.lib GeoRestServiceConfig.lib GeoRestRequestHandler.lib PocoFoundation.lib PocoXML.lib PocoNet.lib PocoUtil.lib libfcgi.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2012)\Common\lib\release&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;D:\Development\fastcgi\fcgi-2.4.0\libfcgi\Release&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release.Ent2012|x64"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2012)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2012)\Common\MapGuideCommon&quot;;..\GeoRestCommon;..\GeoRestRequestHandler;..\GeoRestServiceConfig;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Util\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;D:\Development\fastcgi\fcgi-2.4.0\include&quot;"
+				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_CONSOLE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="mgfoundation.lib GeoRestCommon.lib GeoRestServiceConfig.lib GeoRestRequestHandler.lib PocoFoundation.lib PocoXML.lib PocoNet.lib PocoUtil.lib libfcgi.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2012)\Common\lib\release64&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;D:\Development\fastcgi\fcgi-2.4.0\libfcgi\Release&quot;"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				ImportLibrary="..\..\lib\Win32\$(ConfigurationName)\$(TargetName).lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
 	</Configurations>
 	<References>
 	</References>
@@ -1240,6 +1399,22 @@
 				</FileConfiguration>
 				<FileConfiguration
 					Name="Release.MgOs2.1|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.Ent2012|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release.Ent2012|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"

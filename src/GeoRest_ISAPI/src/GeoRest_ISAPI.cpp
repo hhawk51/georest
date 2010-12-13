@@ -46,6 +46,7 @@ STRING gConfigPath;
 
 string g_HtmlTemplatePath;;
 
+DWORD proccess_id;
 
 BOOL WINAPI DllMain(IN HINSTANCE hinstDll, IN DWORD fdwReason, IN LPVOID lpvContext) 
 {
@@ -54,6 +55,7 @@ BOOL WINAPI DllMain(IN HINSTANCE hinstDll, IN DWORD fdwReason, IN LPVOID lpvCont
   switch (fdwReason) {
 
     case DLL_PROCESS_ATTACH :
+      proccess_id = GetCurrentProcessId();
 
       fReturn = InitThreadPool();
 

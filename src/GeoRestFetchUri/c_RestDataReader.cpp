@@ -20,6 +20,7 @@
 #include "c_MgServerFeatureUtil.h"
 
 
+
 c_RestDataReader_FdoFeatureReader::c_RestDataReader_FdoFeatureReader( FdoIConnection* FdoConnection,FdoIFeatureReader* FdoReader )
 {
   m_FdoConnection = FDO_SAFE_ADDREF(FdoConnection);
@@ -31,9 +32,14 @@ c_RestDataReader_MgFeatureReader::c_RestDataReader_MgFeatureReader( MgProxyFeatu
 {
   m_FeatureReader = SAFE_ADDREF(Reader);
   m_ClassDef = SAFE_ADDREF(ClassDef);
+  m_GbufSize = 4096;
+  m_Gbuf = new char[m_GbufSize];
 }
 
-
+c_RestDataReader_MgFeatureReader::~c_RestDataReader_MgFeatureReader()
+{
+  if( m_Gbuf ) delete []m_Gbuf;
+}
 
 bool c_RestDataReader_MgFeatureReader::ReadNext()
 {
@@ -110,6 +116,26 @@ MgByteReader* c_RestDataReader_MgFeatureReader::GetGeometry( CREFSTRING property
 {
   return m_FeatureReader->GetGeometry(propertyName);
 }
+char* c_RestDataReader_MgFeatureReader::GetGeometry( CREFSTRING propertyName,int* Count )
+{
+  
+  Ptr<MgByteReader> geom = GetGeometry( propertyName );
+  *Count = geom->GetLength();
+  
+  if( *Count > m_GbufSize )
+  {
+    delete [] m_Gbuf;
+    
+    m_GbufSize = 2*(*Count);
+    m_Gbuf = new char[m_GbufSize];
+    
+  }
+  
+  geom->Read((unsigned char*)m_Gbuf,*Count);
+  
+  return m_Gbuf;
+  
+}
 
 MgRaster* c_RestDataReader_MgFeatureReader::GetRaster( CREFSTRING propertyName )
 {
@@ -183,6 +209,7 @@ void c_RestDataReader_MgFeatureReader::Close()
 {
   m_FeatureReader->Close();
 }
+
 
 //*************************************************************
 //*
@@ -261,6 +288,13 @@ MgByteReader* c_RestDataReader_FdoFeatureReader::GetGeometry( CREFSTRING propert
   return byteSource->GetReader();
   
 }
+char* c_RestDataReader_FdoFeatureReader::GetGeometry( CREFSTRING propertyName,int* Count )
+{
+  return (char*)m_FdoReader->GetGeometry(propertyName.c_str(),Count);
+  
+
+}
+
 
 INT32 c_RestDataReader_FdoFeatureReader::GetPropertyCount()
 {
@@ -343,5 +377,5 @@ INT32 c_RestDataReader_FdoFeatureReader::GetPropertyType( CREFSTRING propertyNam
 void c_RestDataReader_FdoFeatureReader::Close()
 {
   m_FdoReader->Close();
-  m_FdoConnection->Close();
+  if( m_FdoConnection ) m_FdoConnection->Close();
 }

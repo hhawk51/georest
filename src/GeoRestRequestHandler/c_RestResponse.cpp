@@ -34,6 +34,10 @@
 #include "FeatureReaderToXml.h"
 #include "FeatureReaderToHtml.h"
 //#include <stdlib.h>
+#include "c_CfgRepresentation.h"
+#include "c_CustomRenderer.h"
+#include "c_StreamResponse_FReader2Custom.h"
+
 
 
 
@@ -266,6 +270,24 @@ try
       if( restreader.p )
       {
         c_FeatureReaderToGeoJson::ToGeoJson(restreader.p,stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);
+      }
+    }
+    if( RestRequest->m_CfgRepresentation && RestRequest->m_CfgRepresentation->GetType() == c_CfgRepresentation::e_Custom)
+    {
+      if( restreader.p )
+      {
+        //std::stringstream strs;
+        c_CfgRepresentation_Custom *customrep =  (c_CfgRepresentation_Custom *)RestRequest->m_CfgRepresentation;
+        
+        Ptr<c_StreamResponse_FReader2Custom> streamout = new c_StreamResponse_FReader2Custom(restreader.p,customrep);
+        m_HttpData.SetContent(streamout);
+        
+        return &m_HttpData;  // need to go out here - bellow is closing featuer reader - setting hhtp header for content length etc..
+         
+        ///(*(customrep->m_CustomRenderer->m_FuncContent2Stream))(restreader.p,&strs);
+        
+        //stringval_utf8 = strs.str();
+        //c_FeatureReaderToGeoJson::ToGeoJson(restreader.p,stringval_utf8,result->m_FeatureReader_StartIndex,result->m_FeatureReader_Count);
       }
     }
     if( restreader.p )

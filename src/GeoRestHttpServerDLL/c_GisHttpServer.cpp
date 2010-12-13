@@ -29,6 +29,7 @@
 #include "Poco/DateTimeFormatter.h"
 #include "Poco/DateTimeFormat.h"
 #include "Poco/Exception.h"
+#include "Poco/Timer.h"
 #include "Poco/ThreadPool.h"
 #include "Poco/Util/ServerApplication.h"
 #include "Poco/Util/Option.h"
@@ -40,6 +41,7 @@
 
 #include "c_RestRequest.h"
 #include "c_RestConfig.h"
+#include "Poco/Uri.h"
 
 
 using Poco::Net::ServerSocket;
@@ -147,7 +149,7 @@ public:
     {
       response.sendFile(fpath.toString(),content_type);
     }
-    catch (Poco::FileNotFoundException& ex)
+    catch (Poco::FileNotFoundException&)
     {
       response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_NOT_FOUND);
       response.setContentType("text/html");
@@ -168,11 +170,11 @@ public:
       
       ostr << resp_body.str();
     }
-    catch (Poco::OpenFileException& ex)
+    catch (Poco::OpenFileException& )
     {
       
     }
-    catch (Poco::Exception& ex)
+    catch (Poco::Exception& )
     {
       
     }
@@ -184,6 +186,104 @@ public:
   
   }
   
+
+  void handleTestIO(HTTPServerRequest& request,HTTPServerResponse& response)
+  {
+    
+    Poco::Path fpath = g_WWWFolder;
+    const std::string& agenturi = request.getURI();
+    std::string BaseUri,RestUri,HttpMethod,XmlPostData;
+    c_RestUri resturi(agenturi,BaseUri,RestUri,HttpMethod,XmlPostData);
+    
+    fpath.setFileName(agenturi);
+    
+    string file_ext = fpath.getExtension();
+    
+    string content_type="*/*";
+    
+    Poco::Timestamp time_requeststart;
+    
+    content_type = "application/octet-stream";
+    
+    unsigned long total_size=5000000;
+    Ptr<c_RestUriRequestParam> params = resturi.GetRequestParam();
+    if( params->ContainsParameter(L"size") )
+    {
+      STRING strsize = params->GetParameterValue(L"size");
+      long newsize = _wtol(strsize.c_str());
+      if( newsize > 0 ) total_size = newsize;
+    }
+   
+    try
+    {
+      response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_OK);
+      response.setContentType("application/octet-stream");
+      response.setChunkedTransferEncoding(true);
+      std::ostream& outstream = response.send();
+      
+      long tosend = 0;
+      long size_part = 8192;
+      char buff[8192];
+      long allready_send = 0;
+      while(allready_send<total_size)
+      {
+        tosend = total_size - allready_send;
+        if( tosend > size_part ) tosend = size_part;
+        
+        outstream.write(buff,tosend);
+        
+        allready_send += tosend;
+        
+      }
+      
+      Poco::Timestamp::TimeDiff time_diff = time_requeststart.elapsed(); 
+
+      double sec = ((double)time_diff/1000000);
+
+      #ifdef D_SHOWINFO_CMD      
+            std::cout << "\n" << 200 << "(" << g_UriCount << ") Time (" << sec << ") ";
+      #endif
+      
+      //outstream << "\r\n\r\n";
+    }
+    catch (Poco::FileNotFoundException& )
+    {
+      response.setStatusAndReason(Poco::Net::HTTPResponse::HTTP_NOT_FOUND);
+      response.setContentType("text/html");
+      response.setChunkedTransferEncoding(false);
+
+
+      stringstream resp_body;
+      resp_body << "<html><head><title>404 Not Found</title>";
+      resp_body << "</head>";
+      resp_body << "<body><p style=\"font-size: 24;\">GeoREST Web Service</p>";
+      resp_body << "<p style=\"font-size: 24;\"><H1>Not Found</H1></p><p style=\"font-size: 24;\">";
+      resp_body << "The requested URL " << request.getURI() << " was not found.";
+      resp_body << "</p></body></html>";
+
+      response.setContentLength(resp_body.str().length());
+
+      std::ostream& ostr = response.send();
+      
+      ostr << resp_body.str();
+    }
+    catch (Poco::OpenFileException& )
+    {
+      
+    }
+    catch (Poco::Exception& )
+    {
+      
+    }
+    catch (...)
+    {
+      
+    }
+    
+  
+  }
+
+
   
   void handleRequest(HTTPServerRequest& request,
     HTTPServerResponse& response)
@@ -200,6 +300,8 @@ public:
     #ifdef D_SHOWINFO_CMD      
       std::cout << "\n" << request.getMethod() << "(" << g_UriCount << "): " << agenturi;
     #endif
+    
+    Poco::Timestamp time_requeststart;
     
     const std::string& httpmethod = request.getMethod();
     
@@ -224,6 +326,11 @@ public:
     else
     {
       // it is not REST request
+      rpos = agenturi.find("/testio");
+      if( rpos != string::npos )
+      {
+        return handleTestIO(request,response);
+      }
       
       uri_base = uri_base;
       uri_rest = "";
@@ -290,35 +397,50 @@ public:
     sprintf(temphead,"%d OK",http_data->GetStatus());
     response.set("Status",temphead);
     
-        
-    Ptr<MgByteReader> bytereader = http_data->GetContentByteReader();
     
-    if( bytereader.p )
+    Ptr<c_StreamResponse> streamrep = http_data->GetStreamResponse();
+    if( streamrep )
     {
+      response.setChunkedTransferEncoding(true);
       std::ostream& outstr = response.send(); 
       
-      unsigned char buf[4096];
-      DWORD dwSize;
-      int nBytes = bytereader->Read(buf,4096);
-      while (nBytes > 0)
+      streamrep->StreamOut(&outstr);
+      
+    }
+    else {    
+      Ptr<MgByteReader> bytereader = http_data->GetContentByteReader();
+      
+      if( bytereader.p )
       {
-        dwSize = nBytes;
-        //response.sendBuffer(buf,nBytes); 
-        outstr.write((char*)&buf[0],nBytes);
-        nBytes = bytereader->Read(&buf[0],4096);                                
+        std::ostream& outstr = response.send(); 
+        
+        unsigned char buf[4096];
+        DWORD dwSize;
+        int nBytes = bytereader->Read(buf,4096);
+        while (nBytes > 0)
+        {
+          dwSize = nBytes;
+          //response.sendBuffer(buf,nBytes); 
+          outstr.write((char*)&buf[0],nBytes);
+          nBytes = bytereader->Read(&buf[0],4096);                                
+        }
+        
+        
       }
-      
-      
+      else
+      {    
+        std::ostream& outstr = response.send(); 
+        
+        outstr << http_data->GetContentString();
+      }
     }
-    else
-    {    
-      std::ostream& outstr = response.send(); 
-      
-      outstr << http_data->GetContentString();
-    }
+    
+    Poco::Timestamp::TimeDiff time_diff = time_requeststart.elapsed(); 
+
+    double sec = ((double)time_diff/1000000);
     
     #ifdef D_SHOWINFO_CMD      
-      std::cout << "\n" << http_data->GetStatus() << "(" << g_UriCount << ") ";
+      std::cout << "\n" << http_data->GetStatus() << "(" << g_UriCount << ") Time (" << sec << ") ";
     #endif
     return ;
     

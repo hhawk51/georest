@@ -20,7 +20,7 @@
 
 class c_RestRequest;
 // This class parsers REST URI requests in form/url-encoded format
-class c_FeatureReaderToXML
+class REST_REQUEST_HANDLER_API c_FeatureReaderToXML
 {
 public:
     c_FeatureReaderToXML(void);

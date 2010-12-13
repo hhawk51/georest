@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2009 by  Haris Kurtagic  www.sl-king.com
+//  Copyright (C) 2010 by  Haris Kurtagic  www.sl-king.com
 //
 //  This library is free software; you can redistribute it and/or
 //  modify it under the terms of version 2.1 of the GNU Lesser
@@ -14,20 +14,45 @@
 //  License along with this library; if not, write to the Free Software
 //  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 //
-// stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently, but
-// are changed infrequently
+
+#ifndef _c_RestDataStreamOut_h
+#define _c_RestDataStreamOut_h
+
+
 //
+// c_RestDataStreamOut 
+//
+//
+class REST_FETCHURI_API c_RestDataStreamOut : public MgDisposable
+{
 
-#pragma once
+public:
+  void Dispose()
+  {
+    delete this;
+  }
+
+  INT32 GetClassId()
+  {
+    return 0; // m_cls_id;
+  }      
+
+  c_RestDataStreamOut(c_RestDataReader* DataReader,);
+
+private:
+    static const INT32 m_cls_id = 0; // PlatformBase_FeatureService_DataReader;
+
+  
+public:
+  void HeaderOut();
+  void ContentOut(std::ostream* OutStream);
+  
+protected:
+  
+  
+ 
+  
+};
 
 
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-#include <stdio.h>
-#include <tchar.h>
-
-
-
-// TODO: reference additional headers your program requires here
-
-#include "GisServicesDllInclude.h"
+#endif
