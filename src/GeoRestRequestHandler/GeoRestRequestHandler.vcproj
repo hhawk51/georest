@@ -2212,26 +2212,6 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="miniLZO"
-			>
-			<File
-				RelativePath=".\minilzo.205\lzoconf.h"
-				>
-			</File>
-			<File
-				RelativePath=".\minilzo.205\lzodefs.h"
-				>
-			</File>
-			<File
-				RelativePath=".\minilzo.205\minilzo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\minilzo.205\minilzo.h"
-				>
-			</File>
-		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
