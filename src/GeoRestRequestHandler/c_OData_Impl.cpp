@@ -954,7 +954,7 @@ void c_OData_Impl::GetPropertyValueAsOdataLiteral_X(c_RestDataReader* Reader,con
         Ptr<MgByteReader> bytes = Reader->GetGeometry(PropName);
         MgAgfReaderWriter agfReader;                
         Ptr<MgGeometry> fgfgeom = agfReader.Read(bytes);
-        c_GmlUtil::ToGML(fgfgeom,StrVal);
+        c_GmlUtil::ToGML(fgfgeom,StrVal,c_GmlUtil::e_GmlFormat::GML311);
       }
       catch (MgException *ex) // just ignore in case of invalid geometries
       {

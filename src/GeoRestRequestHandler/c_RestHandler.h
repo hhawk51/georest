@@ -79,6 +79,7 @@ protected:
     Ptr<c_RestRequest> m_RestRequest;
     Ptr<c_RestUriFactory> m_RestUriFactory;
     
+
 };
 
 #endif // REQUEST_RESPONSE_HANDLER_H

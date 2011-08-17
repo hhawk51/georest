@@ -18,6 +18,10 @@
 #ifndef _c_FeatureReaderToHtml_H
 #define _c_FeatureReaderToHtml_H
 
+#include "minizip/unzip.h"
+#include "minizip/zip.h"
+#include "minizip/ioapi.h"
+
 class c_RestRequest;
 
 // c_FeatureReaderToHtml... Converts Feature Reader to HTML file
@@ -35,6 +39,9 @@ public:
     static void ToKml(c_RestDataReader* FeatureReader, c_RestRequest* RestRequest, const string& AgentUri,const string& UriBase,string& HtmlStr,int StartIndex,int MaxCount);
     static MgByteReader * ToKmz(c_RestDataReader* FeatureReader, c_RestRequest* RestRequest, const string& AgentUri,const string& UriBase,int StartIndex,int MaxCount);
     static void ToTemplate(bool IsKml,c_RestDataReader* FeatureReader, c_RestRequest* RestRequest, const string& AgentUri,const string& UriBase ,string& HtmlStr,int StartIndex,int MaxCount);
+    
+    
+    
 protected:    
     //static MgPropertyCollection* FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NamePrefix, c_RestDataReader* FeatureReader);
     //static void c_FeatureReaderToHtml::ToTemplate(bool IsKml,c_RestDataReader* FeatureReader, const string& AgentUri,const string& UriBase
@@ -45,4 +52,15 @@ protected:
 
 };
 
+
+ voidpf ZCALLBACK fopen_mem_func (voidpf opaque, const char*filename, int mode);
+ uLong ZCALLBACK fread_mem_func (voidpf opaque, voidpf stream, void* buf,uLong size);
+ uLong ZCALLBACK fwrite_mem_func (voidpf opaque, voidpf stream, const void*buf, uLong size);  
+ long ZCALLBACK ftell_mem_func (voidpf opaque, voidpf stream);
+ long ZCALLBACK fseek_mem_func (voidpf opaque, voidpf stream, uLong  offset, int origin);
+ int ZCALLBACK fclose_mem_func (voidpf opaque, voidpf stream);
+ int ZCALLBACK ferror_mem_func (voidpf opaque, voidpf stream);
+ void fill_memory_filefunc (zlib_filefunc_def* pzlib_filefunc_def);
+
 #endif
+

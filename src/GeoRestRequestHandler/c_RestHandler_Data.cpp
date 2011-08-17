@@ -1455,7 +1455,7 @@ void c_RestHandler_Data::Execute_Get_Image_Png(c_RestResponse& HttpResponse,MgEn
   STRING mapname;
   Ptr<MgMap> map;
   Ptr<MgSelection> selection;
-  STRING imageformat = MgImageFormats::Png8;
+  STRING imageformat = MgImageFormats::Png;//simon changed from png8
   Ptr<MgPropertyCollection> mapviewcommands = new MgPropertyCollection();
   {
     STRING sessionid;

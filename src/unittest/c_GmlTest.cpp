@@ -101,12 +101,12 @@ void c_GmlTest::MgGeometryToGML()
   coords->Add(coord);
   
   Ptr<MgLineString> line = new MgLineString(coords);
-  c_GmlUtil::ToGML(line,gmlstr);
+  c_GmlUtil::ToGML(line,gmlstr,c_GmlUtil::e_GmlFormat::GML311);
   
   
   coord = factory.CreateCoordinateXY(5, 6.0);  
   Ptr<MgPoint> point = new MgPoint(coord);
-  c_GmlUtil::ToGML(point,gmlstr);
+  c_GmlUtil::ToGML(point,gmlstr,c_GmlUtil::e_GmlFormat::GML311);
 }
 
 

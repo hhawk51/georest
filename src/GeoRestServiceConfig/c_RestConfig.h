@@ -93,12 +93,15 @@ protected:
   void GetOData_ElemOverride(Poco::XML::Element* XmlElemOverride,c_AtomElementOverride* ElemOverride);
   c_CfgService* ParseService( Poco::XML::Element* XmlResource);
   void ParseEsriRest( Poco::XML::Element* XmlResource);
+  
   c_CfgEsriGS_Folder* ParseEsriFolder(c_CfgEsriGS_Catalog* esri_catalog,Poco::XML::Element* XmlResource);
   c_CfgEsriGS_FeatureServer* ParseEsriServer_FeatureServer( Poco::XML::Element* XmlResource );
   c_CfgEsriGS_FServer_Layer* ParseEsriServer_FServer_Layer( Poco::XML::Element* node_rep );
   void ParseEsriServers(Poco::XML::Element* XmlResource,c_CfgEsriGS_Folder* ParentFolder);
   c_CfgEsriGS_MapServer* ParseEsriServer_MapServer( Poco::XML::Element* XmlResource );
   c_CfgEsriGS_MS_Layer* ParseEsriServer_MS_Layer( Poco::XML::Element* XmlResource );
+  
+ 
   void ReadServicesFromXML( const char* FileName);
   void ReadCustomServices( Poco::XML::Document* PocoDoc );
   c_CfgService* ParseCustomService( Poco::XML::Element* XmlResource);

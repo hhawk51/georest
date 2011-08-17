@@ -27,7 +27,7 @@ public:
 public:
   //static void ToKml(MgGeometry* Geometry,string& Kml);  
   //static void ToKml( MgGeometry* Geometry,std::string& Kml,std::string& KmlCentroid,std::string& KmlMultiPolygonAndCentroid );
-  static void ToGML( MgGeometry* Geometry,std::string& StrGml);
+  static void ToGML( MgGeometry* Geometry,std::string& StrGml,int Format);
   
 protected:
   /// <summary>Serializes the geometry object to OGC format.</summary>
@@ -35,62 +35,69 @@ protected:
   /// <param name="writer">An instance of FdoXmlWriter to serialize the geometry.</param>
   /// <param name="srsName">SRS name.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializeGeometry(MgGeometry* geometry, std::string& writer, std::string& srsName);
+  static void SerializeGeometry(MgGeometry* geometry, std::string& writer, std::string& srsName,int Format);
 
   /// <summary>Serialzies the point object to OGC format.</summary>
   /// <param name="point">An instance of the point type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the point.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializePoint(MgPoint* point, std::string& writer);
+  static void SerializePoint(MgPoint* point, std::string& writer,int Format);
 
   /// <summary>Serializes the line string object to OGC format.</summary>
   /// <param name="lineString">An instance of the line string type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the line string.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializeLineString(MgLineString* lineString, std::string& writer);
+  static void SerializeLineString(MgLineString* lineString, std::string& writer,int Format);
 
   /// <summary>Serializes the linear ring object to OGC format.</summary>
   /// <param name="linearRing">An instance of the linear ring type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the linear ring.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializeLinearRing(MgLinearRing* linearRing, std::string& writer);
+  static void SerializeLinearRing(MgLinearRing* linearRing, std::string& writer,int Format);
 
   /// <summary>Serializes the polygon object to OGC format.</summary>
   /// <param name="linearRing">An instance of the polygon type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the polygon.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializePolygon(MgPolygon* polygon, std::string& writer, std::string& srsName);
+  static void SerializePolygon(MgPolygon* polygon, std::string& writer, std::string& srsName,int Format);
 
   /// <summary>Serializes the multipoint object to OGC format.</summary>
   /// <param name="linearRing">An instance of the multipoint type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the multipoint.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializeMultiPoint(MgMultiPoint* multiPoint, std::string& writer, std::string& srsName);
+  static void SerializeMultiPoint(MgMultiPoint* multiPoint, std::string& writer, std::string& srsName,int Format);
 
   /// <summary>Serializes the multi line string object to OGC format.</summary>
   /// <param name="linearRing">An instance of the multi line string type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the multi line string.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializeMultiLineString(MgMultiLineString* mlString, std::string& writer);
+  static void SerializeMultiLineString(MgMultiLineString* mlString, std::string& writer,int Format);
 
   /// <summary>Serializes the multi polygon object to OGC format.</summary>
   /// <param name="linearRing">An instance of the multi polygon type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the multi polygon.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializeMultiPolygon(MgMultiPolygon*, std::string& writer, std::string& srsName);
+  static void SerializeMultiPolygon(MgMultiPolygon*, std::string& writer, std::string& srsName,int Format);
 
   /// <summary>Serializes the multi geometry object to OGC format.</summary>
   /// <param name="linearRing">An instance of the multi geometry type.</param>
   /// <param name="writer">An instance of FdoXmlWriter to serialize the multi geometry.</param>
   /// <returns>Returns nothing</returns>
-  static void SerializeMultiGeometry(MgMultiGeometry*, std::string& writer, std::string& srsName);
+  static void SerializeMultiGeometry(MgMultiGeometry*, std::string& writer, std::string& srsName,int Format);
 
 private:
   /// <summary>Gets the coordinates of the FdoIDirectPosition object.</summary>
   /// <param name="position">An instance of FdoIDirectPosition type.</param>
   /// <returns>Returns the corrdinates as string.</returns>
-  static void SerializeCoordinate( MgCoordinate* position,std::string& writer);
-  static void SerializeCoordinates(MgCoordinateIterator* coords, std::string& writer);
+  static void SerializeCoordinate( MgCoordinate* position,std::string& writer,int Format);
+  static void SerializeCoordinates(MgCoordinateIterator* coords, std::string& writer,int Format);
+
+public:     
+ enum e_GmlFormat {
+	  GML212,
+	  GML311,
+};  
+    
 
 };
 

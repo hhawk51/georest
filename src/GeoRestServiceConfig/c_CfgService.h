@@ -29,8 +29,7 @@ class REST_CONFIG_API c_CfgService
 public:
   enum e_ServiceType  {
     e_Custom_Service,
-    e_EsriGS_Catalog
-    
+    e_EsriGS_Catalog,    
   };
 
 protected:

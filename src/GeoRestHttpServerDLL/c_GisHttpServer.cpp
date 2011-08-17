@@ -292,8 +292,7 @@ public:
     
     std::string host = request.getHost();
      
-    
-    
+       
     std::string agenturi = "http://" + host + request.getURI();
     g_UriCount++;
     
@@ -376,7 +375,11 @@ public:
     }
     catch(...){}
     
-
+    try
+    {
+      restrequest->SetHeaderValue("Accept-Encoding",request.get("Accept-Encoding").c_str());
+    }
+    catch(...){}
         
     
     Ptr<c_RestResponse> restresponse = restrequest->Execute();

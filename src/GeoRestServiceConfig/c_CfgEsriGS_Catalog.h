@@ -104,4 +104,6 @@ public:
   c_CfgEsriGS_Folder m_RootFolder;  
 };
 
+
+
 #endif

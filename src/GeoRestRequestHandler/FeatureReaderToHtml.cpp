@@ -33,9 +33,7 @@
 #include "c_KmlUtil.h"
 //#include "zlib.h"
 //#include "deflate.h"
-#include "minizip/unzip.h"
-#include "minizip/zip.h"
-#include "minizip/ioapi.h"
+
 #include "c_GeoRssUtil.h"
 #include "c_GmlUtil.h"
 #include "Poco/DateTime.h"
@@ -43,8 +41,6 @@
 #include "Poco/DateTimeFormat.h"
 
 extern string g_HtmlTemplatePath;
-
-
 
 
 typedef struct ourmemory_s {
@@ -57,29 +53,7 @@ typedef struct ourmemory_s {
 voidpf ZCALLBACK fopen_mem_func (voidpf opaque, const char*filename, int mode)
    
 {
-/*
-    ourmemory_t *mem = (ourmemory_t *)malloc(sizeof(*mem));
-    if (mem==NULL)
-      return NULL; /// Can't allocate space, so failed 
 
-    // Filenames are specified in the form :
-    //     <hex base of zip file>+<hex size of zip file>
-    //  This may not work where memory addresses are longer than the
-    //  size of an int and therefore may need addressing for 64bit
-    //  architectures
-    // 
-    if (sscanf(filename,"%x+%x",&mem->base,&mem->size)!=2)
-      return NULL;
-
-    if (mode & ZLIB_FILEFUNC_MODE_CREATE)
-      mem->limit=0; // When writing we start with 0 bytes written 
-    else
-      mem->limit=mem->size;
-
-    mem->cur_offset = 0;
-
-    return mem;
-*/
   ourmemory_t *mem;
   if (sscanf(filename,"%p",&mem)!=1)
       return NULL;
@@ -241,8 +215,6 @@ MgByteReader * WriteKmz(const std::string& kml)
   free(mem);
   
   return breader;
- 
-  
  
 }
 
@@ -542,7 +514,7 @@ void FillDictionary(ctemplate::TemplateDictionary* Dict,const std::string& NameP
           Dict->SetValue(dictkey+"_GEORSS",georsssimple);
           
           string gml;
-          c_GmlUtil::ToGML(fgfgeom,gml);
+          c_GmlUtil::ToGML(fgfgeom,gml,c_GmlUtil::e_GmlFormat::GML311);
           Dict->SetValue(dictkey+"_GML",gml);
           
           

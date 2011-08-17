@@ -245,26 +245,7 @@ void c_RestConfig::Read( Poco::XML::Document* PocoDoc, const char* TemplateFolde
       if( node_esrirest )
       {
         ParseEsriRest(node_esrirest);
-        
       }
-      /*
-      nlist = node_restconfig->getElementsByTagName("Service");
-      for(int ind=0;ind<nlist->length();ind++)
-      {
-        Poco::XML::Element* node_service = (Poco::XML::Element*)nlist->item(ind);
-        c_CfgService* service = ParseService(node_service);
-        if( service && !m_ServiceVector.Add(service) )
-        {
-
-          std::string errmsg;errmsg.reserve(512);
-          errmsg = "c_RestConfig::ReadFromXML : Duplicated UriTag '";
-          errmsg.append(service->GetUriTag());
-          errmsg.append("'. Resource will not be added.");
-          m_Logger->warning();
-          delete service;
-        }
-      }
-      */
     }
   }
   catch (Poco::Exception& exc)
@@ -1467,6 +1448,11 @@ void c_RestConfig::ParseEsriRest( Poco::XML::Element* XmlResource)
   }
   return ;
 }
+
+
+
+
+
 
 c_CfgService* c_RestConfig::ParseCustomService( Poco::XML::Element* XmlResource)
 {

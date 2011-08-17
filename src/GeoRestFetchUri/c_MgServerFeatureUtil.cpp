@@ -1262,7 +1262,7 @@ MgGeometricPropertyDefinition* c_MgServerFeatureUtil::GetGeometricPropertyDefini
     FdoStringP qname = fdoPropDef->GetQualifiedName();
     bool isReadOnly = fdoPropDef->GetReadOnly();
     FdoString* spatialContextName = fdoPropDef->GetSpatialContextAssociation();
-
+   
     // Set it for MapGuide
     if (desc != NULL)
     {
