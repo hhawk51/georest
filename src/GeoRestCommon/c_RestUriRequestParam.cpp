@@ -301,6 +301,12 @@ void c_RestUriRequestParam::SetXmlPostData(const char* xmlData)
     m_xmlPostData = xmlData;
 }
 
+
+void c_RestUriRequestParam::SetPostData(string Data)
+{
+    m_PostData = Data;
+}
+
 /// <summary>
 /// Returns POSTed XML data as a string
 /// </summary>
@@ -310,4 +316,10 @@ void c_RestUriRequestParam::SetXmlPostData(const char* xmlData)
 string& c_RestUriRequestParam::GetXmlPostData()
 {
     return m_xmlPostData;
+}
+
+
+string& c_RestUriRequestParam::GetPostData()
+{
+    return m_PostData;
 }

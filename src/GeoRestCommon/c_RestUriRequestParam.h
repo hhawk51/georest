@@ -181,6 +181,7 @@ class REST_COMMON_API c_RestUriRequestParam : public MgDisposable
         /// </returns>
         string& GetXmlPostData();
 
+        string& GetPostData();
         /// <summary>
         /// Stores POSTed XML data as a string
         /// </summary>
@@ -188,7 +189,7 @@ class REST_COMMON_API c_RestUriRequestParam : public MgDisposable
         /// The XML data
         /// </param>
         void SetXmlPostData(const char* xmlData);
-
+        void SetPostData(std::string xmlData);
     protected:
         /// <summary>
         /// This method is responsible for releasing all
@@ -210,6 +211,7 @@ class REST_COMMON_API c_RestUriRequestParam : public MgDisposable
         Ptr<MgStringPropertyCollection> m_reqParamCollection;
         MgStringPropertyCollection m_paramTypeCollection;
         string m_xmlPostData;
+        string m_PostData;
 
 
 };

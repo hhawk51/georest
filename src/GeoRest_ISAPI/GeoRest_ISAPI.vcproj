@@ -65,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib"
+				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib WFSRequestHandler.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Common\lib\debug;..\..\lib\Win32\$(ConfigurationName);&quot;$(POCO_PATH)\lib&quot;"

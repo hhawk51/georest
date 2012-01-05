@@ -401,6 +401,11 @@ DWORD WINAPI Execute(EXTENSION_CONTROL_BLOCK *ECB)
     request->SetHeaderValue("MaxDataServiceVersion",buff);
   }
   
+  if( ECB->GetServerVariable(ECB->ConnID, "Authorization", buff, &size) )
+  {
+    request->SetHeaderValue("Authorization",buff);
+  }
+  
   IsapiResponseHandler responseHandler(request,agent_uri,uri_base,ECB);
   Ptr<c_RestResponse> response = request->Execute();
 
