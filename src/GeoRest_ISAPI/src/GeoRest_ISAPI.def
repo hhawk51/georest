@@ -1,0 +1,6 @@
+LIBRARY	     "MgWS_ISAPI"
+
+EXPORTS
+	GetExtensionVersion
+	HttpExtensionProc
+	TerminateExtension
