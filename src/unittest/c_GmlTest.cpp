@@ -90,7 +90,7 @@ void c_GmlTest::tearDown()
 
 void c_GmlTest::MgGeometryToGML()
 {
-  std:string gmlstr;
+  std::string gmlstr;
   Ptr<MgCoordinateCollection> coords = new MgCoordinateCollection();
   MgGeometryFactory factory;
   Ptr<MgCoordinate> coord = factory.CreateCoordinateXY(1.0, 2.0);
