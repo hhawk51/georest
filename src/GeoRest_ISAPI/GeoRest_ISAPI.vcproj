@@ -65,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib"
+				AdditionalDependencies="mgfoundationd.lib GeoRestCommond.lib GeoRestServiceConfigd.lib GeoRestRequestHandlerd.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib PocoUtild.lib WFSRequestHandler.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(MG_PATH)\Common\lib\debug&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(POCO_PATH)\lib&quot;"
@@ -1486,8 +1486,8 @@
 		</Configuration>
 		<Configuration
 			Name="Debug.MgOs2.2|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="0"
 			>
@@ -1568,7 +1568,7 @@
 		</Configuration>
 		<Configuration
 			Name="Debug.MgOs2.2|x64"
-			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="0"
@@ -1651,8 +1651,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release.MgOs2.2|Win32"
-			OutputDirectory="$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="0"
 			WholeProgramOptimization="1"
@@ -1731,7 +1731,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release.MgOs2.2|x64"
-			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="..\..\bin\$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
 			CharacterSet="0"

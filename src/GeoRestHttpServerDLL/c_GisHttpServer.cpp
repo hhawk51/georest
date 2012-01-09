@@ -380,6 +380,13 @@ public:
       restrequest->SetHeaderValue("Accept-Encoding",request.get("Accept-Encoding").c_str());
     }
     catch(...){}
+    
+    //simon
+    try
+    {
+      restrequest->SetHeaderValue("Authorization",request.get("Authorization").c_str());
+    }
+    catch(...){}
         
     
     Ptr<c_RestResponse> restresponse = restrequest->Execute();

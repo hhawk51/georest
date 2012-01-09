@@ -146,14 +146,20 @@ int main (int argc, char* argv[])
     restrequest->SetHeaderValue("Accept",header_accept);
   }
   char* header_dsv = getenv("HTTP_DataServiceVersion");
-  if( header_accept )
+  if( header_dsv )
   {
-    restrequest->SetHeaderValue("DataServiceVersion",header_accept);
+    restrequest->SetHeaderValue("DataServiceVersion",header_dsv);
   }
   char* header_max_dsvt = getenv("HTTP_MaxDataServiceVersion");
-  if( header_accept )
+  if( header_max_dsvt )
   {
-    restrequest->SetHeaderValue("MaxDataServiceVersion",header_accept);
+    restrequest->SetHeaderValue("MaxDataServiceVersion",header_max_dsvt);
+  }
+  
+  char* auth = getenv("Authorization");
+  if( auth )
+  {
+    restrequest->SetHeaderValue("Authorization",auth);
   }
   
   Ptr<c_RestResponse> restresponse = restrequest->Execute();
