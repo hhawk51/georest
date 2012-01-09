@@ -171,6 +171,15 @@ MgPropertyCollection* c_RestDataTransform::XmlToFeature(MgClassDefinition* Class
               
             }
             break;
+            case MgPropertyType::Int64:
+            {
+              long val = _wtol(str_val.c_str());
+              Ptr<MgInt64Property> prop = new MgInt64Property(str_name,val);
+              if( str_val.length() == 0 ) prop->SetNull(true);
+              
+              propcoll->Add(prop);
+            }
+            break;
             case MgPropertyType::Int32:
             {
               long val = _wtol(str_val.c_str());

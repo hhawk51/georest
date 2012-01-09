@@ -70,6 +70,9 @@ c_RestUri::c_RestUri(const std::string& FullUri,const std::string& BaseUri,const
   m_RestUri = RestUri;
   
   m_RestRequestParam->SetXmlPostData(XmlPostData.c_str());
+  
+  m_RestRequestParam->SetPostData(XmlPostData);
+  
   m_HttpMethod = HttpMethod;
   
     
