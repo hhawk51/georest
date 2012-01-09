@@ -20,7 +20,7 @@
 #include "c_JsonUtil.h"
 #include "Poco/UTF8Encoding.h"
 #include "c_ExceptionGeoREST.h"
-#include "../POCO/poco-1.3.5/Foundation/include/Poco/NumberFormatter.h"
+#include "Poco/NumberFormatter.h"
 
 
 
