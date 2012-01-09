@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="unittest"
 	ProjectGUID="{C77BBDCA-5000-47BF-A7B2-0633095A17F5}"
 	RootNamespace="unittest"
@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(CPPUNIT_PATH)\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -69,7 +69,7 @@
 				AdditionalDependencies="mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib cppunitd.lib testrunnerud.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib GeoRestServiceConfigd.lib GeoRestHttpServerDlld.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\lib\Win32\$(ConfigurationName);D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(MG_PATH)\Common\lib\debug&quot;;&quot;$(CPPUNIT_PATH)\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -125,7 +125,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(CPPUNIT_PATH)\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -149,7 +149,7 @@
 				AdditionalDependencies="mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib cppunit64.lib testrunnerud64.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib GeoRestServiceConfigd.lib GeoRestHttpServerDlld.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug64;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(MG_PATH)\Common\lib\debug64&quot;;&quot;$(CPPUNIT_PATH)\lib\&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -204,7 +204,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(CPPUNIT_PATH)\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -226,7 +226,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(MG_PATH)\Common\lib\release&quot;;&quot;$(CPPUNIT_PATH)\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -284,7 +284,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(CPPUNIT_PATH)\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="_WIN64;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -306,7 +306,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Release;&quot;$(MG_PATH)\Common\lib\release&quot;;&quot;$(CPPUNIT_PATH)\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -363,7 +363,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -385,7 +385,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Release;$(MG_PATH)\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -443,7 +443,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -465,7 +465,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Release;$(MG_PATH)\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -522,7 +522,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -544,7 +544,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Release;$(MG_PATH)\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -602,7 +602,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -624,7 +624,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Release;$(MG_PATH)\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -681,7 +681,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -705,7 +705,7 @@
 				AdditionalDependencies="mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib cppunitd.lib testrunnerud.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib GeoRestServiceConfigd.lib GeoRestHttpServerDlld.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\lib\Win32\$(ConfigurationName);D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Win32\$(ConfigurationName);$(MG_PATH)\Common\lib\debug;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -761,7 +761,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -785,7 +785,7 @@
 				AdditionalDependencies="mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib cppunit64.lib testrunnerud64.lib PocoFoundationd.lib PocoXMLd.lib PocoNetd.lib GeoRestServiceConfigd.lib GeoRestHttpServerDlld.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\debug64;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;$(MG_PATH)\Common\lib\debug64;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib\x64&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -840,7 +840,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -862,7 +862,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Release;$(MG_PATH)\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -920,7 +920,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="D:\Development\MapGuideSVN\branches\2.1\MgDev\Oem\ACE\ACE_wrappers;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Foundation;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\PlatformBase;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\Geometry;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
+				AdditionalIncludeDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers;$(MG_PATH)\Common\Foundation;$(MG_PATH)\Common\PlatformBase;$(MG_PATH)\Common\Geometry;$(MG_PATH)\Common\MapGuideCommon;&quot;D:\Development\CppUnit\cppunit-1.12.0\include\&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\xml\include&quot;;..\GeoRestServiceConfig;..\GeoRestHttpServerDLL;..\GeoRestRequestHandler"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -942,7 +942,7 @@
 				AdditionalDependencies="mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib cppunit.lib testrunneru.lib PocoFoundation.lib PocoXML.lib PocoNet.lib GeoRestServiceConfig.lib GeoRestHttpServerDll.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\Release;D:\Development\MapGuideSVN\branches\2.1\MgDev\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
+				AdditionalLibraryDirectories="..\..\lib\Release;$(MG_PATH)\Common\lib\release;&quot;D:\Development\CppUnit\cppunit-1.12.0\lib\&quot;;&quot;$(POCO_PATH)\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1020,10 +1020,6 @@
 			</File>
 			<File
 				RelativePath=".\c_TestOdata_TopSkip.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\c_WFS.cpp"
 				>
 			</File>
 			<File
@@ -1118,10 +1114,6 @@
 			</File>
 			<File
 				RelativePath=".\c_TestOdata_TopSkip.h"
-				>
-			</File>
-			<File
-				RelativePath=".\c_WFS.h"
 				>
 			</File>
 			<File

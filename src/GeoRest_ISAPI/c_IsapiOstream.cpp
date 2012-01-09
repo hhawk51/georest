@@ -1,5 +1,5 @@
 #include "c_IsapiOstream.h"
-#include "..\..\..\poco-1.3.5\Foundation\include\Poco\NumberFormatter.h"
+#include "Poco\NumberFormatter.h"
 
 
 
