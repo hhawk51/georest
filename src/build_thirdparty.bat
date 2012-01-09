@@ -31,8 +31,32 @@ pushd %ZLIB_PATH%\contrib\vstudio\vc9
 msbuild /p:Configuration=%BUILDCONFIG% /p:Platform=%PLATFORM% zlibvc.sln
 if "%errorlevel%"=="1" goto error
 popd
-goto quit
+goto copydlls
 :error
 echo [ERROR]: There was an error building the component
 exit /B 1
-:quit
+:copydlls
+echo [build]: Copying dlls
+SET OUTDIR=%CD%\..\bin\%PLATFORM%\%BUILDCONFIG%
+pushd %CTEMPLATE_PATH%\%BUILDCONFIG%
+copy /Y libctemplate.dll "%OUTDIR%"
+popd
+pushd %FASTCGI_PATH%\libfcgi\%BUILDCONFIG%
+copy /Y libfcgi.dll "%OUTDIR%"
+popd
+pushd %POCO_PATH%\bin
+if "%BUILDCONFIG%" == "Release" (
+copy /Y PocoFoundation.dll "%OUTDIR%"
+copy /Y PocoNet.dll "%OUTDIR%"
+copy /Y PocoUtil.dll "%OUTDIR%"
+copy /Y PocoXML.dll "%OUTDIR%"
+) else (
+copy /Y PocoFoundationd.* "%OUTDIR%"
+copy /Y PocoNetd.* "%OUTDIR%"
+copy /Y PocoUtild.* "%OUTDIR%"
+copy /Y PocoXMLd.* "%OUTDIR%"
+)
+popd
+pushd %ZLIB_PATH%\contrib\vstudio\vc9\x86\ZlibDll%BUILDCONFIG%
+copy /Y zlibwapi.dll "%OUTDIR%"
+popd
