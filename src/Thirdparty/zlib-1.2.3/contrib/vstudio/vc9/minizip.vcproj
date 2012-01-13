@@ -26,7 +26,6 @@
 			OutputDirectory="x86\MiniZip$(ConfigurationName)"
 			IntermediateDirectory="x86\MiniZip$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -108,7 +107,6 @@
 			OutputDirectory="x64\$(ConfigurationName)"
 			IntermediateDirectory="x64\$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -191,7 +189,6 @@
 			OutputDirectory="x86\MiniZip$(ConfigurationName)"
 			IntermediateDirectory="x86\MiniZip$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -277,7 +274,6 @@
 			OutputDirectory="x64\$(ConfigurationName)"
 			IntermediateDirectory="x64\$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -364,7 +360,6 @@
 			OutputDirectory="ia64\$(ConfigurationName)"
 			IntermediateDirectory="ia64\$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -448,7 +443,6 @@
 			OutputDirectory="ia64\$(ConfigurationName)"
 			IntermediateDirectory="ia64\$(ConfigurationName)"
 			ConfigurationType="1"
-			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
