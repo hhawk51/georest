@@ -26,7 +26,6 @@
 			OutputDirectory="x86\TestZlibDll$(ConfigurationName)"
 			IntermediateDirectory="x86\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -108,7 +107,6 @@
 			OutputDirectory="x64\TestZlibDll$(ConfigurationName)"
 			IntermediateDirectory="x64\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -191,7 +189,6 @@
 			OutputDirectory="x86\TestZlibDll$(ConfigurationName)"
 			IntermediateDirectory="x86\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -278,7 +275,6 @@
 			OutputDirectory="x64\TestZlibDll$(ConfigurationName)"
 			IntermediateDirectory="x64\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="C:\Program Files\Microsoft Visual Studio 9.0\VC\VCProjectDefaults\UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -366,7 +362,6 @@
 			OutputDirectory="ia64\TestZlibDll$(ConfigurationName)"
 			IntermediateDirectory="ia64\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -450,7 +445,6 @@
 			OutputDirectory="ia64\TestZlibDll$(ConfigurationName)"
 			IntermediateDirectory="ia64\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
-			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
