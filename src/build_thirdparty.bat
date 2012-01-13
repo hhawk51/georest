@@ -38,6 +38,7 @@ exit /B 1
 :copydlls
 echo [build]: Copying dlls
 SET OUTDIR=%CD%\..\bin\%PLATFORM%\%BUILDCONFIG%
+if not exist "%OUTDIR%" mkdir "%OUTDIR%"
 pushd %CTEMPLATE_PATH%\%BUILDCONFIG%
 copy /Y libctemplate.dll "%OUTDIR%"
 popd
