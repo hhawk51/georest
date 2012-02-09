@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -68,7 +68,7 @@
 				AdditionalDependencies="ACEd.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_jsond.lib GeoRestServiceConfigd.lib GeoRestCommond.lib GeoRestFetchUrid.lib libctemplate-debug.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH)\Oem\dbxml\lib&quot;;&quot;$(MG_PATH)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH)\Common\lib\debug&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Lib\Win32\Debug&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllDebug"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH)\Oem\dbxml\lib&quot;;&quot;$(MG_PATH)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH)\Common\lib\debug&quot;;&quot;$(FDO_LIB_PATH_DEBUG)&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllDebug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -125,7 +125,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
 				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -149,7 +149,7 @@
 				AdditionalDependencies="ACEd.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_jsond.lib GeoRestServiceConfigd.lib GeoRestCommond.lib GeoRestFetchUrid.lib libctemplate-debug.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH)\Oem\dbxml\lib64&quot;;&quot;$(MG_PATH)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH)\Common\lib\debug64&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Lib\Win64\Debug&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllDebug"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH)\Oem\dbxml\lib64&quot;;&quot;$(MG_PATH)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH)\Common\lib\debug64&quot;;&quot;$(FDO_LIB_PATH64_DEBUG)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllDebug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -205,7 +205,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -226,7 +226,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH)\Oem\dbxml\lib&quot;;$(MG_PATH)\Oem\jsoncpp\lib;$(MG_PATH)\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="$(MG_PATH)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH)\Oem\dbxml\lib&quot;;$(MG_PATH)\Oem\jsoncpp\lib;$(MG_PATH)\Common\lib\release;$(FDO_LIB_PATH);&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -284,7 +284,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH)\Common\Foundation&quot;;&quot;$(MG_PATH)\Common\Geometry&quot;;&quot;$(MG_PATH)\Common\PlatformBase&quot;;&quot;$(MG_PATH)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH)\Common\MdfModel&quot;;&quot;$(MG_PATH)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;&quot;$(ZLIB_PATH)&quot;;&quot;$(ZLIB_PATH)\contrib&quot;"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -305,7 +305,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH)\Oem\dbxml\lib64&quot;;&quot;$(MG_PATH)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH)\Common\lib\release64&quot;;&quot;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win64\Release&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH)\Oem\dbxml\lib64&quot;;&quot;$(MG_PATH)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH)\Common\lib\release64&quot;;&quot;$(FDO_LIB_PATH64)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -362,7 +362,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;$(FDO_PATH)\FDO\Unmanaged\Inc;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;$(FDO_INC_PATH);&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2010"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -442,7 +442,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;$(FDO_PATH)\FDO\Unmanaged\Inc;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers;$(MG_PATH_ENT_2010)\Common\Foundation;$(MG_PATH_ENT_2010)\Common\Geometry;$(MG_PATH_ENT_2010)\Common\PlatformBase;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_ENT_2010)\Common\MapGuideCommon;$(FDO_INC_PATH);&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2010"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -601,7 +601,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH_3_5)\Fdo\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH_3_5)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -625,7 +625,7 @@
 				AdditionalDependencies="ACEd.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_jsond.lib GeoRestServiceConfigd.lib GeoRestCommond.lib GeoRestFetchUrid.lib libctemplate-debug.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\debug64&quot;;&quot;$(FDO_PATH_3_5)\FDO\Unmanaged\Lib\Win64\Debug&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllDebug"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\debug64&quot;;&quot;$(FDO_LIB_PATH64_DEBUG_3_5)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllDebug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -680,7 +680,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH_3_5)\Fdo\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH_3_5)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -701,7 +701,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\release&quot;;&quot;$(FDO_PATH_3_5)\FDO\Unmanaged\Lib\Win32\Release&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\release&quot;;&quot;$(FDO_LIB_PATH_3_5)&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -759,7 +759,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH_3_5)\Fdo\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2011)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2011)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2011)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH_3_5)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -780,7 +780,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\release64&quot;;&quot;$(FDO_PATH_3_5)\FDO\Unmanaged\Lib\Win64\Release&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2011)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_ENT_2011)\Common\lib\release64&quot;;&quot;$(FDO_LIB_PATH64_3_5)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -837,7 +837,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2010)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2010)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2010)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2010)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2010"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -858,7 +858,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib;$(MG_PATH_ENT_2010)\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib;$(MG_PATH_ENT_2010)\Common\lib\release;$(FDO_LIB_PATH);&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -916,7 +916,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2010)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2010)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2010)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2010)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2010)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2010"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -937,7 +937,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib;$(MG_PATH_ENT_2010)\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="$(MG_PATH_ENT_2010)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_ENT_2010)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_ENT_2010)\Oem\jsoncpp\lib;$(MG_PATH_ENT_2010)\Common\lib\release;$(FDO_LIB_PATH);&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -994,7 +994,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_1)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_1)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_1)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1015,7 +1015,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib;$(MG_PATH_OS_2_1)\Common\lib\release;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\lib&quot;;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib;$(MG_PATH_OS_2_1)\Common\lib\release;$(FDO_LIB_PATH);&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1073,7 +1073,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;$(FDO_PATH)\FDO\Unmanaged\Inc;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers;$(MG_PATH_OS_2_1)\Common\Foundation;$(MG_PATH_OS_2_1)\Common\Geometry;$(MG_PATH_OS_2_1)\Common\PlatformBase;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;$(MG_PATH_OS_2_1)\Common\MapGuideCommon;$(FDO_INC_PATH);&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1094,7 +1094,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\release64&quot;;&quot;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win64\Release&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_1)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_OS_2_1)\Common\lib\release64&quot;;&quot;$(FDO_LIB_PATH64)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1151,7 +1151,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2012)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2012)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH_3_5)\Fdo\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2012)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2012)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH_3_5)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1172,7 +1172,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\lib&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_ENT_2012)\Common\lib\release&quot;;&quot;$(FDO_PATH_3_5)\FDO\Unmanaged\Lib\Win32\Release&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\lib&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_ENT_2012)\Common\lib\release&quot;;&quot;$(FDO_LIB_PATH_3_5)&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1230,7 +1230,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2012)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2012)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH_3_5)\Fdo\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Foundation&quot;;&quot;$(MG_PATH_ENT_2012)\Common\Geometry&quot;;&quot;$(MG_PATH_ENT_2012)\Common\PlatformBase&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\xerces-c-src\src&quot;;&quot;$(MG_PATH_ENT_2012)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH_3_5)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1251,7 +1251,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\lib64&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_ENT_2012)\Common\lib\release64&quot;;&quot;$(FDO_PATH_3_5)\FDO\Unmanaged\Lib\Win64\Release&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_ENT_2012)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\dbxml\lib64&quot;;&quot;$(MG_PATH_ENT_2012)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_ENT_2012)\Common\lib\release64&quot;;&quot;$(FDO_LIB_PATH64_3_5)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1308,7 +1308,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -1332,7 +1332,7 @@
 				AdditionalDependencies="ACEd.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_jsond.lib GeoRestServiceConfigd.lib GeoRestCommond.lib GeoRestFetchUrid.lib libctemplate-debug.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\debug&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Lib\Win32\Debug&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllDebug"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\debug&quot;;&quot;$(FDO_LIB_PATH_DEBUG)&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllDebug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -1388,7 +1388,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;..\..\..\..\Oem\jsoncpp\include;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="_WIN64;_DEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -1412,7 +1412,7 @@
 				AdditionalDependencies="ACEd.lib PocoFoundationd.lib PocoXMLd.lib mgfoundationd.lib mgmapguidecommond.lib mgplatformbased.lib mggeometryd.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_jsond.lib GeoRestServiceConfigd.lib GeoRestCommond.lib GeoRestFetchUrid.lib libctemplate-debug.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName)d.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\debug64&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Lib\Win64\Debug&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllDebug"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\debug64&quot;;&quot;$(FDO_LIB_PATH64_DEBUG)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\debug64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\debug&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllDebug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
@@ -1467,7 +1467,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_1)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1488,7 +1488,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\release&quot;;&quot;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win32\Release&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\release&quot;;&quot;$(FDO_LIB_PATH)&quot;;&quot;..\..\lib\Win32\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\Release&quot;;&quot;$(POCO_PATH)\lib&quot;;&quot;$(LIBKML_PATH)\msvc\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x86\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -1546,7 +1546,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_PATH)\FDO\Unmanaged\Inc&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
+				AdditionalIncludeDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Foundation&quot;;&quot;$(MG_PATH_OS_2_2)\Common\Geometry&quot;;&quot;$(MG_PATH_OS_2_2)\Common\PlatformBase&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\xerces-c-src\src&quot;;&quot;$(MG_PATH_OS_2_2)\Common\MapGuideCommon&quot;;&quot;$(FDO_INC_PATH)&quot;;&quot;$(CTEMPLATE_PATH)\src\windows&quot;;&quot;$(POCO_PATH)\Foundation\include&quot;;&quot;$(POCO_PATH)\Net\include&quot;;&quot;$(POCO_PATH)\XML\include&quot;;..\GeoRestServiceConfig;..\GeoRestFetchUri;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\include&quot;;..\GeoRestCommon;&quot;$(LIBKML_PATH)\src&quot;;&quot;$(LIBKML_PATH)\third_party\boost_1_34_1&quot;;&quot;$(LIBKML_PATH)\third_party\uriparser-0.7.1\include&quot;;$(ZLIB_PATH);$(ZLIB_PATH)\contrib"
 				PreprocessorDefinitions="WIN32;_WIN64;NDEBUG;_WINDOWS;_USRDLL;RESTREQUESTHANDLER_EXPORTS;ZLIB_WINAPI;_MG_ENT_2011"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -1567,7 +1567,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="ACE.lib PocoFoundation.lib PocoXML.lib mgfoundation.lib mgmapguidecommon.lib mgplatformbase.lib mggeometry.lib fdo.lib FdoCommon.lib FdoGeometry.lib FdoSpatial.lib lib_json.lib GeoRestServiceConfig.lib GeoRestCommon.lib GeoRestFetchUri.lib libctemplate.lib libkmlbase.lib libkmlengine.lib libkmldom.lib zlibwapi.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\release64&quot;;&quot;$(FDO_PATH)\Fdo\Unmanaged\Lib\Win64\Release&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
+				AdditionalLibraryDirectories="&quot;$(MG_PATH_OS_2_2)\Oem\ACE\ACE_wrappers\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\dbxml-2.3.10\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Oem\jsoncpp\lib64&quot;;&quot;$(MG_PATH_OS_2_2)\Common\lib\release64&quot;;&quot;$(FDO_LIB_PATH64)&quot;;&quot;..\..\lib\Win64\$(ConfigurationName)&quot;;&quot;$(CTEMPLATE_PATH)\release64&quot;;&quot;$(POCO_PATH)\lib\x64&quot;;&quot;$(LIBKML_PATH)\msvc\x64\Release&quot;;$(ZLIB_PATH)\contrib\vstudio\vc9\x64\ZlibDllRelease"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
