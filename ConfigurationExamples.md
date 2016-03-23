@@ -1,0 +1,1 @@
+  * [Property resource example](ConfigurationExamplesProperty.md)
